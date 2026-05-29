@@ -31,7 +31,7 @@ android {
         buildConfigField(
             "String",
             "BASE_URL",
-            "\"${localProperties.getProperty("BASE_URL") ?: ""}\""
+            "\"${localProperties.getProperty("BASE_URL") ?: "https://6d710e79-f4ca-4651-909f-7dd13bd29968.mock.pstmn.io/"}\""
         )
     }
 
@@ -58,7 +58,7 @@ android {
 }
 
 dependencies {
-    // Base de AndroidX y Compose (Del Catálogo BOM y Material 3)
+    // Base de AndroidX y Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,7 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime.livedata)
 
-    // Testing (Del Catálogo)
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -81,34 +81,34 @@ dependencies {
     // Material Components
     implementation(libs.android.material)
 
-    // Lifecycle ViewModel, LiveData & Navigation para Compose
+    // Lifecycle & Navigation
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.compose)
 
-    // Retrofit + Gson (APIs) + OkHttp Logging Interceptor
+    // Retrofit + Gson + OkHttp
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
 
-    // Coil (Carga de imágenes en Compose)
+    // Coil
     implementation(libs.coil.compose)
 
-    // Room (Persistencia Local con KSP)
+    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
-    // Hilt (Inyección de Dependencias con KSP)
+    // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler.ksp)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // Firebase (Conexión Remota vinculada al BOM)
+    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)
 
-    // Coroutines para complementar tareas con Firebase (.await())
+    // Coroutines para Firebase
     implementation(libs.kotlinx.coroutines.play.services)
 }
