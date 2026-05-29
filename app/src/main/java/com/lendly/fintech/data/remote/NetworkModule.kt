@@ -3,6 +3,11 @@ package com.lendly.fintech.data.remote
 import com.google.firebase.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.lendly.fintech.data.api.AuthApi
+import com.lendly.fintech.data.api.LoansApi
+import com.lendly.fintech.data.api.ProductsApi
+import com.lendly.fintech.data.api.TransactionsApi
+import com.lendly.fintech.data.api.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -80,4 +86,24 @@ object NetworkModule {
             .baseUrl("https://6d710e79-f4ca-4651-909f-7dd13bd29968.mock.pstmn.io/") // <-- PARCHE TEMPORAL EN STRING
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideLoansApi(retrofit: Retrofit): LoansApi = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideTransactionsApi(retrofit: Retrofit): TransactionsApi = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideProductsApi(retrofit: Retrofit): ProductsApi = retrofit.create()
 }
