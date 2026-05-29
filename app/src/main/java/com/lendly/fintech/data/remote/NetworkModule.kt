@@ -8,6 +8,7 @@ import com.lendly.fintech.data.api.LoansApi
 import com.lendly.fintech.data.api.ProductsApi
 import com.lendly.fintech.data.api.TransactionsApi
 import com.lendly.fintech.data.api.UserApi
+import com.lendly.fintech.core.SessionEventBus
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +46,13 @@ object NetworkModule {
         chain.proceed(request)
     }
 
+    /** Interceptor que detecta el 401 global y dispara la redirección a Login. */
+    @Provides
+    @Singleton
+    @AuthInterceptorQualifier
+    fun provideAuthInterceptor(sessionEventBus: SessionEventBus): okhttp3.Interceptor =
+        AuthInterceptor(sessionEventBus)
+
     /** Interceptor de logging, activo únicamente en debug. */
     @Provides
     @Singleton
@@ -61,10 +69,12 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         @ApiKeyInterceptor apiKeyInterceptor: okhttp3.Interceptor,
+        @AuthInterceptorQualifier authInterceptor: okhttp3.Interceptor,
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

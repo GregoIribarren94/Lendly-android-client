@@ -6,8 +6,8 @@ package com.lendly.fintech.data.common
  * - [Loading]: operación en curso (lo emite normalmente el ViewModel antes de
  *   invocar al repositorio).
  * - [Success]: la operación finalizó correctamente y trae los datos.
- * - [Error]: la operación falló; incluye un mensaje legible y, opcionalmente,
- *   la excepción original.
+ * - [Error]: la operación falló; incluye un mensaje legible, el [type] de error
+ *   (para que la UI decida cómo reaccionar) y, opcionalmente, la excepción original.
  */
 sealed class Resource<out T> {
 
@@ -17,6 +17,7 @@ sealed class Resource<out T> {
 
     data class Error(
         val message: String,
+        val type: NetworkErrorType = NetworkErrorType.UNKNOWN,
         val throwable: Throwable? = null,
     ) : Resource<Nothing>()
 }
