@@ -16,11 +16,11 @@ val localProperties = Properties().apply {
 }
 
 android {
-    namespace = "ort.tp3.modeloexamen"
+    namespace = "com.lendly.fintech"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ort.tp3.modeloexamen"
+        applicationId = "com.lendly.fintech"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
