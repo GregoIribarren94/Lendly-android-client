@@ -63,8 +63,12 @@ fun LendlyNavHost(
         composable(Routes.LOGIN) {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate(Routes.VERIFY_PHONE)
+                    navController.navigate(Routes.MAIN) {
+                        popUpTo(Routes.SPLASH) { inclusive = true }
+                    }
                 },
+                onNavigateToRegister = { navController.navigate(Routes.VERIFY_PHONE) },
+                onForgotPassword = { /* TODO: pantalla de recupero de contraseña aún no existe */ },
                 onBack = { navController.popBackStack() },
             )
         }
