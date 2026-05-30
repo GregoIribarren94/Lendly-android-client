@@ -3,14 +3,18 @@ package com.lendly.fintech.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.lendly.fintech.ui.auth.LoginScreen
-import com.lendly.fintech.ui.home.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.lendly.fintech.ui.screens.auth.*
+import com.lendly.fintech.ui.screens.onboarding.*
+import com.lendly.fintech.ui.screens.splash.SplashScreen
 
 /**
- * Grafo de navegación de la app. Arranca en Home (placeholder); la redirección a
- * [Routes.LOGIN] ante un 401 la maneja [com.lendly.fintech.ui.LendlyAppRoot].
+ * Root NavHost: maneja el flujo lineal sin BottomBar.
+ * Splash -> Onboarding -> Auth -> MainScreen (que internamente arma su propio NavHost).
  */
 @Composable
 fun LendlyNavHost(
@@ -19,21 +23,87 @@ fun LendlyNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.HOME,
+        startDestination = Routes.SPLASH,
         modifier = modifier,
     ) {
-        composable(Routes.HOME) {
-            HomeScreen()
-        }
-        composable(Routes.LOGIN) {
-            LoginScreen(
-                onLoginSuccess = {
-                    navController.navigate(Routes.HOME) {
-                        popUpTo(Routes.LOGIN) { inclusive = true }
-                        launchSingleTop = true
+        composable(Routes.SPLASH) {
+            SplashScreen(
+                onNavigateToOnboarding = {
+                    navController.navigate(Routes.ONBOARDING_1) {
+                        popUpTo(Routes.SPLASH) { inclusive = true }
+                    }
+                },
+                onNavigateToMain = {
+                    navController.navigate(Routes.MAIN) {
+                        popUpTo(Routes.SPLASH) { inclusive = true }
                     }
                 },
             )
+        }
+
+        composable(Routes.ONBOARDING_1) {
+            Onboarding1Screen(
+                onContinue = { navController.navigate(Routes.ONBOARDING_2) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.ONBOARDING_2) {
+            Onboarding2Screen(
+                onContinue = { navController.navigate(Routes.ONBOARDING_3) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.ONBOARDING_3) {
+            Onboarding3Screen(
+                onContinue = { navController.navigate(Routes.LOGIN) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        composable(Routes.LOGIN) {
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(Routes.VERIFY_PHONE)
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.VERIFY_PHONE) {
+            VerifyPhoneScreen(
+                onContinue = { navController.navigate(Routes.SMS_VERIFICATION) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.SMS_VERIFICATION) {
+            SmsVerificationScreen(
+                onContinue = { navController.navigate(Routes.PROFILE_FORM) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.PROFILE_FORM) {
+            ProfileFormScreen(
+                onContinue = { navController.navigate(Routes.CREATE_PASSWORD) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.CREATE_PASSWORD) {
+            CreatePasswordScreen(
+                onContinue = { navController.navigate(Routes.DONE) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.DONE) {
+            DoneScreen(
+                onContinue = {
+                    navController.navigate(Routes.MAIN) {
+                        popUpTo(Routes.SPLASH) { inclusive = true }
+                    }
+                },
+            )
+        }
+
+        composable(Routes.MAIN) {
+            MainScreen()
         }
     }
 }

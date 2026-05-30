@@ -94,6 +94,9 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
+    // Phone Number Library
+    implementation(libs.libphonenumber.android)
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
