@@ -12,8 +12,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.PrimaryButton
-import com.lendly.fintech.ui.components.StepIndicator
+import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.screens.onboarding.components.StepIndicator
 import com.lendly.fintech.ui.theme.*
 
 @Composable
