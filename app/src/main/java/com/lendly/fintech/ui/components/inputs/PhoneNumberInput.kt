@@ -1,5 +1,6 @@
 package com.lendly.fintech.ui.components.inputs
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,7 @@ fun PhoneNumberInput(
     selectedCountry: Country,
     onCountrySelected: (Country) -> Unit,
     modifier: Modifier = Modifier,
+    label: String = "Teléfono",
     isError: Boolean = false,
     errorMessage: String? = null,
 ) {
@@ -36,8 +38,10 @@ fun PhoneNumberInput(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth(),
     ) {
-        TextButton(onClick = { expanded = true }) {
-            Text(text = "${selectedCountry.flagEmoji} +${selectedCountry.dialCode}")
+        Box {
+            TextButton(onClick = { expanded = true }) {
+                Text(text = "${selectedCountry.flagEmoji} +${selectedCountry.dialCode}")
+            }
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
@@ -57,7 +61,7 @@ fun PhoneNumberInput(
         AppTextField(
             value = phoneNumber,
             onValueChange = onPhoneNumberChange,
-            label = "Teléfono",
+            label = label,
             keyboardType = KeyboardType.Phone,
             isError = isError,
             errorMessage = errorMessage,
