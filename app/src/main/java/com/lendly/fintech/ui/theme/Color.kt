@@ -36,3 +36,8 @@ val SentimentWarning = Color(0xFFEDC843)
 val BaseContrast = Color(0xFFFFFFFF)
 val BaseLight = Color(0xFFFFFFFF)
 val BaseDark = Color(0xFF121511)
+
+// Color home
+val ContentAmount = Color(0xFF102000)
+val ContentOnSurface = Color(0xFF171D1E)  // nombre, monto
+val BackgroundCard = Color(0xFFFCF8F8)    // fondo de la card
