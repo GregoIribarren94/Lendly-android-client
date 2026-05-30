@@ -1,26 +1,26 @@
-// HistoryTransactionRow.kt
-package com.lendly.fintech.ui.components
+// RecentLoanRow.kt
+package com.lendly.fintech.ui.screens.history.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.ui.theme.*
 
 @Composable
-fun HistoryTransactionRow(
-    icon: ImageVector,
-    time: String,
-    title: String,
+fun RecentLoanRow(
+    date: String,
     company: String,
-    amount: String,
+    productName: String,
+    status: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -30,7 +30,7 @@ fun HistoryTransactionRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        // Ícono
+        // Ícono check
         Box(
             modifier = Modifier
                 .size(40.dp)
@@ -41,7 +41,7 @@ fun HistoryTransactionRow(
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = icon,
+                imageVector = Icons.Default.Check,
                 contentDescription = null,
                 tint = ContentOnSurface
             )
@@ -49,16 +49,15 @@ fun HistoryTransactionRow(
 
         // Contenido
         Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(0.dp)
+            modifier = Modifier.weight(1f)
         ) {
-            // Fila superior: hora + empresa
+            // Fila superior: fecha + empresa
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = time,
+                    text = date,
                     style = CaptionMedium,
                     color = ContentTertiary
                 )
@@ -70,19 +69,19 @@ fun HistoryTransactionRow(
                 )
             }
 
-            // Fila inferior: título + monto
+            // Fila inferior: nombre producto + estado
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = title,
+                    text = productName,
                     style = Body,
                     color = ContentPrimary
                 )
                 Text(
-                    text = amount,
+                    text = status,
                     style = Body,
                     color = ContentAmount,
                     textAlign = TextAlign.End

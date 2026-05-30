@@ -1,26 +1,21 @@
 package com.lendly.fintech.ui.components.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CreditCard
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.annotation.DrawableRes
+import com.lendly.fintech.R
 import com.lendly.fintech.ui.navigation.Routes
 
 sealed class BottomNavItem(
     val route: String,
     val label: String,
-    val icon: ImageVector,
+    @DrawableRes val iconRes: Int,
 ) {
-    data object Home : BottomNavItem(Routes.HOME, "Home", Icons.Default.Home)
-    data object Loans : BottomNavItem(Routes.LOANS, "Loans", Icons.Default.CreditCard)
-    data object Shop : BottomNavItem(Routes.SHOP, "Shop", Icons.Default.ShoppingCart)
-    data object History : BottomNavItem(Routes.HISTORY, "History", Icons.Default.DateRange)
-    data object Manage : BottomNavItem(Routes.MANAGE, "Manage", Icons.Default.Settings)
+    data object Home : BottomNavItem(Routes.HOME, "Home", R.drawable.ic_home)
+    data object Loan : BottomNavItem(Routes.LOAN, "Loan", R.drawable.ic_credit_card)
+    data object Shop : BottomNavItem(Routes.SHOP, "Shop", R.drawable.ic_shopping_bag)
+    data object History : BottomNavItem(Routes.HISTORY, "History", R.drawable.ic_update)
+    data object Manage : BottomNavItem(Routes.MANAGE, "Manage", R.drawable.ic_grid_view)
 
     companion object {
-        val all = listOf(Home, Loans, Shop, History, Manage)
+        val all = listOf(Home, Loan, Shop, History, Manage)
     }
 }

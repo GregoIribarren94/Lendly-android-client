@@ -1,4 +1,4 @@
-package com.lendly.fintech.ui.home
+package com.lendly.fintech.ui.screens.debug
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,8 +21,8 @@ import com.lendly.fintech.ui.theme.Spacing
  * verificar el manejo global de errores de red (criterio "Manejo de errores").
  */
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+fun NetworkErrorDemoScreen(
+    viewModel: NetworkErrorDemoViewModel = hiltViewModel(),
 ) {
     Column(
         modifier = Modifier

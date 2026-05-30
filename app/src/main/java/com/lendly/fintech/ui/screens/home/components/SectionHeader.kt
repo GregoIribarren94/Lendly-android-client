@@ -1,5 +1,5 @@
 // SectionHeader.kt
-package com.lendly.fintech.ui.components
+package com.lendly.fintech.ui.screens.home.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text

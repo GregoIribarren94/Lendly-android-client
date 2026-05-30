@@ -1,5 +1,5 @@
 // TransactionRow.kt
-package com.lendly.fintech.ui.components
+package com.lendly.fintech.ui.screens.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
