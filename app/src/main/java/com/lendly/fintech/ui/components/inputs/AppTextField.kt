@@ -3,7 +3,6 @@ package com.lendly.fintech.ui.components.inputs
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,7 +37,7 @@ fun AppTextField(
         placeholder = placeholder?.let { { Text(text = it) } },
         isError = isError,
         supportingText = if (isError && errorMessage != null) {
-            { Text(text = errorMessage, style = MaterialTheme.typography.bodySmall) }
+            { Text(text = errorMessage) }
         } else null,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = visualTransformation,
