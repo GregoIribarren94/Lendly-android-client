@@ -1,5 +1,6 @@
 package com.lendly.fintech.ui.screens.onboarding
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,7 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -35,51 +38,71 @@ fun Onboarding1Screen(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Imagen + elementos flotantes
+
+            // ── Sección superior: imagen + overlays ──
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(333.dp)
+                    .height(420.dp)   // altura aumentada para mostrar la figura completa
             ) {
-                // Imagen principal
+
+                // 1. Fondo verde con forma diagonal (triángulo inferior-derecho)
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    val path = Path().apply {
+                        // Esquina superior-derecha → baja por la derecha
+                        // → corta diagonal hacia la izquierda → sube un poco y cierra
+                        moveTo(size.width * 0.38f, 0f)
+                        lineTo(size.width, 0f)
+                        lineTo(size.width, size.height * 0.82f)
+                        lineTo(size.width * 0.10f, size.height * 0.60f)
+                        lineTo(size.width * 0.10f, size.height * 0.38f)
+                        close()
+                    }
+                    drawPath(path = path, color = Color(0xFF3DDC6E))
+                }
+
+                // 2. Imagen principal (persona con el teléfono)
                 Image(
                     painter = painterResource(id = R.drawable.ic_primera_imagen),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    modifier = Modifier
+                        .fillMaxWidth(0.85f)        // no ocupa todo el ancho
+                        .height(420.dp)
+                        .align(Alignment.BottomEnd), // alineada a la derecha/abajo
+                    contentScale = ContentScale.Fit  // Fit para que no se recorte
                 )
 
-                // Figura verde arriba (ic_simbolo)
+                // 3. Figura verde arriba (ic_simbolo) — tarjeta/billete volando
                 Image(
                     painter = painterResource(id = R.drawable.ic_simbolo),
                     contentDescription = null,
                     modifier = Modifier
                         .size(117.dp, 40.dp)
-                        .offset(x = 120.dp, y = 8.dp)
+                        .absoluteOffset(x = 120.dp, y = 8.dp)
                 )
 
-                // Ícono billetera verde
+                // 4. Ícono precio (moneda) — izquierda
                 Image(
                     painter = painterResource(id = R.drawable.ic_precio),
                     contentDescription = null,
                     modifier = Modifier
                         .size(30.dp)
-                        .offset(x = (-8).dp, y = 62.dp)
+                        .absoluteOffset(x = 8.dp, y = 90.dp)
                 )
 
-                // Ícono aplauso
+                // 5. Ícono aplauso — centro superior
                 Image(
                     painter = painterResource(id = R.drawable.ic_aplauso),
                     contentDescription = null,
                     modifier = Modifier
                         .size(30.dp)
-                        .offset(x = 99.dp, y = 27.dp)
+                        .absoluteOffset(x = 180.dp, y = 55.dp)
                 )
 
-                // Cards "Loan Successful"
+                // 6. Cards "Loan Successful" — izquierda centro
                 Column(
                     modifier = Modifier
-                        .offset(x = 24.dp, y = 160.dp),
+                        .absoluteOffset(x = 16.dp, y = 190.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     repeat(2) {
@@ -114,25 +137,25 @@ fun Onboarding1Screen(
                     }
                 }
 
-                // Emoji carita
+                // 7. Emoji carita — justo debajo de las cards
                 Image(
                     painter = painterResource(id = R.drawable.ic_carita),
                     contentDescription = null,
                     modifier = Modifier
                         .size(30.dp)
-                        .offset(x = 24.dp, y = 189.dp)
+                        .absoluteOffset(x = 16.dp, y = 240.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Título + Descripción
+            // ── Título + Descripción ──
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
                     text = "QUICK LOANS",
@@ -150,6 +173,7 @@ fun Onboarding1Screen(
 
             Spacer(modifier = Modifier.weight(1f))
 
+            // ── Step indicator ──
             StepIndicator(
                 totalSteps = 3,
                 currentStep = 0
@@ -157,6 +181,7 @@ fun Onboarding1Screen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            // ── Botón principal ──
             PrimaryButton(
                 text = "Get Started",
                 onClick = onContinue,
@@ -165,7 +190,7 @@ fun Onboarding1Screen(
                     .padding(horizontal = 16.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
