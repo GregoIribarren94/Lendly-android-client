@@ -28,11 +28,10 @@ fun PrimaryButton(
         onClick = onClick,
         enabled = enabled && !isLoading,
         shape = CornerFull,
+        // primaryContainer = lime green (#7BF179) per Figma; M3 handles disabled alpha automatically
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            disabledContainerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.38f),
-            disabledContentColor = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.38f),
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -52,10 +51,6 @@ fun PrimaryButton(
         }
     }
 }
-
-// ---------------------------------------------------------------------------
-// Previews
-// ---------------------------------------------------------------------------
 
 @Preview(name = "Primary - Enabled")
 @Composable
