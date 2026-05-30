@@ -130,3 +130,35 @@ val Typography = Typography(
     labelLarge = ButtonLabel,
     labelMedium = CaptionMedium
 )
+
+val BalanceTitle = TextStyle(
+    fontFamily = Montserrat,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 32.sp,
+    lineHeight = 40.sp,
+    letterSpacing = 0.sp
+)
+
+val TitleMedium = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 16.sp,
+    lineHeight = 24.sp,
+    letterSpacing = 0.15.sp
+)
+
+val TitleLarge = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 22.sp,
+    lineHeight = 28.sp,
+    letterSpacing = 0.sp
+)
+
+val LabelSmall = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.Medium,
+    fontSize = 11.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.5.sp
+)
