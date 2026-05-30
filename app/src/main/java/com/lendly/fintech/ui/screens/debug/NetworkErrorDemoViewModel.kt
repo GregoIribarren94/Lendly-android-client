@@ -1,4 +1,4 @@
-package com.lendly.fintech.ui.home
+package com.lendly.fintech.ui.screens.debug
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +19,7 @@ import javax.inject.Inject
  * Incluye acciones de demostración para verificar el criterio "Manejo de errores".
  */
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class NetworkErrorDemoViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val snackbarController: SnackbarController,
     private val sessionEventBus: SessionEventBus,

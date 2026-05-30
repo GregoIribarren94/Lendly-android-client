@@ -2,9 +2,9 @@ package com.lendly.fintech.ui.components.buttons
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,10 +25,10 @@ fun SecondaryButton(
         onClick = onClick,
         enabled = enabled,
         shape = CornerFull,
-        colors = OutlinedButtonDefaults.outlinedButtonColors(
+        colors = ButtonDefaults.outlinedButtonColors(
             contentColor = MaterialTheme.colorScheme.primary,
         ),
-        border = OutlinedButtonDefaults.outlinedButtonBorder(),
+        border = ButtonDefaults.outlinedButtonBorder(enabled = enabled),
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp),

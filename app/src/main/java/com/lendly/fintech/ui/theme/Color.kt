@@ -43,6 +43,6 @@ val ContentOnSurface = Color(0xFF171D1E)  // nombre, monto
 val BackgroundCard = Color(0xFFFCF8F8)    // fondo de la card
 
 
-val OnboardiSngBackground = Color(0xFF0A1F00)
+val OnboardingBackground = Color(0xFF0A1F00)
 val OnboardingTitleColor = Color(0xFFB1D18A)
 val OnboardingSubtitleColor = Color(0xFFE5F5EA)

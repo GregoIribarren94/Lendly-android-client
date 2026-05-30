@@ -1,5 +1,5 @@
 // OnboardingPage.kt
-package com.lendly.fintech.ui.components
+package com.lendly.fintech.ui.screens.onboarding.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
+import com.lendly.fintech.ui.components.buttons.PrimaryButton
 import com.lendly.fintech.ui.theme.*
 
 @Composable
@@ -52,7 +53,7 @@ fun OnboardingPage(
             Text(
                 text = title.uppercase(),
                 style = OnboardingTitle,
-                color = OnboardingTitle,
+                color = OnboardingTitleColor,
                 textAlign = TextAlign.Center
             )
 

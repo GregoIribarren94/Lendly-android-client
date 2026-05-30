@@ -1,5 +1,5 @@
 // StepIndicator.kt
-package com.lendly.fintech.ui.components
+package com.lendly.fintech.ui.screens.onboarding.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
