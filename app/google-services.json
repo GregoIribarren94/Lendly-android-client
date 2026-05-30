@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252271823445",
+    "project_id": "lendly-android-client",
+    "storage_bucket": "lendly-android-client.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252271823445:android:7defcfd36cbb41256162dc",
+        "android_client_info": {
+          "package_name": "com.lendly.fintech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4nyftffcCv7e9z7Di5tBxZHesVOfbKKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

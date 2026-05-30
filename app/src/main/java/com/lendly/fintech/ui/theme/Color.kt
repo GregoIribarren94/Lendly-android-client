@@ -2,10 +2,37 @@ package com.lendly.fintech.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+//Content Colors
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val ContentPrimary = Color(0xFF122300)
+val ContentSecondary = Color(0xFF454745)
+val ContentTertiary = Color(0xFF6A6C6A)
+val ContentLink = Color(0xFF163300)
+
+//Interactive Colours
+
+val InteractivePrimary = Color(0xFF163300)
+val InteractiveAccent = Color(0xFF7BF179)
+val InteractiveSecondary = Color(0xFF868685)
+val InteractiveControl = Color(0xFF163300)
+val InteractiveContrast = Color(0xFF7BF179)
+
+// Background colours
+val BackgroundScreen = Color(0xFFFFFFFF)
+val BackgroundElevated = Color(0xFFFFFFFF)
+val BackgroundNeutral = Color(0xFFE5F5EA)
+val BackgroundOverlay = Color(0xFFE5F5EA)
+
+// Border colours
+val BorderNeutral = Color(red = 14, green = 15, blue = 12, alpha = 31)
+val BorderOverlay = Color(red = 14, green = 15, blue = 12, alpha = 31)
+
+// Sentiment colours
+val SentimentNegative = Color(0xFFA8200D)
+val SentimentNegativeDark = Color(0xFF2F5711)
+val SentimentWarning = Color(0xFFEDC843)
+
+// Base colours
+val BaseContrast = Color(0xFFFFFFFF)
+val BaseLight = Color(0xFFFFFFFF)
+val BaseDark = Color(0xFF121511)
