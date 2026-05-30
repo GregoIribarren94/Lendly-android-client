@@ -28,10 +28,7 @@ fun SecondaryButton(
         colors = OutlinedButtonDefaults.outlinedButtonColors(
             contentColor = MaterialTheme.colorScheme.primary,
         ),
-        border = OutlinedButtonDefaults.outlinedButtonBorder(
-            enabled = enabled,
-            disabledColor = MaterialTheme.colorScheme.primary,
-        ),
+        border = OutlinedButtonDefaults.outlinedButtonBorder(),
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp),
