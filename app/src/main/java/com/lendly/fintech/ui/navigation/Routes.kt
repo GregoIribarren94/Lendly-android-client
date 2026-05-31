@@ -27,6 +27,8 @@ object Routes {
     const val OTC_CASH_IN = "otcCashIn"
     const val ONLINE_CASH_IN = "onlineCashIn"
     const val SUCCESS_TX = "successTx"
+    const val OTC_CASH_IN_FORM = "otcCashInForm/{partnerId}"
+    const val ONLINE_CASH_IN_FORM = "onlineCashInForm/{methodId}"
     const val LOAN_INFO = "loanInfo"
     const val LOAN_FORM = "loanForm"
     const val ACTIVE_LOAN = "activeLoan"
@@ -46,7 +48,13 @@ object Routes {
     fun product(id: String) = "$PRODUCT_BASE/$id"
     fun txDetails(id: String) = "$TX_DETAILS_BASE/$id"
     fun profileDetail(id: String) = "$PROFILE_DETAIL_BASE/$id"
+    fun otcCashInForm(partnerId: String) = "otcCashInForm/$partnerId"
+    fun onlineCashInForm(methodId: String) = "onlineCashInForm/$methodId"
+    fun successTxWithRef(referenceCode: String) = "$SUCCESS_TX?$ARG_REF_CODE=$referenceCode"
 
     // Argument keys
     const val ARG_ID = "id"
+    const val ARG_PARTNER_ID = "partnerId"
+    const val ARG_METHOD_ID = "methodId"
+    const val ARG_REF_CODE = "referenceCode"
 }
