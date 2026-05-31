@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Lendly</string>
+    <string name="profile_form_heading">Enter your personal details</string>
+    <string name="profile_form_first_names_label">Full legal first and middle name(s)</string>
+    <string name="profile_form_first_names_placeholder">John D.</string>
+    <string name="profile_form_last_name_label">Full legal last name</string>
+    <string name="profile_form_last_name_placeholder">Doe</string>
+    <string name="profile_form_birth_date_label">Date of birth</string>
+    <string name="profile_form_day_placeholder">Day</string>
+    <string name="profile_form_month_placeholder">Month</string>
+    <string name="profile_form_year_placeholder">Year</string>
+    <string name="profile_form_address_label">Address</string>
+    <string name="profile_form_address_placeholder">Somewhere IN BLOCK 12</string>
+    <string name="profile_form_city_label">City</string>
+    <string name="profile_form_city_placeholder">Davao City</string>
+    <string name="profile_form_postal_code_label">Postal Code</string>
+    <string name="profile_form_postal_code_placeholder">8000</string>
+    <string name="profile_form_phone_label">Phone Number</string>
+    <string name="profile_form_next">Next</string>
+    <string name="profile_form_info_content_description">Profile information</string>
 </resources>

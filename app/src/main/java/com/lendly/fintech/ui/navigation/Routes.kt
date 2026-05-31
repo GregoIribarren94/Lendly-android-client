@@ -7,6 +7,7 @@ object Routes {
     const val ONBOARDING_2 = "onboarding2"
     const val ONBOARDING_3 = "onboarding3"
     const val LOGIN = "login"
+    const val AUTH_GRAPH = "authGraph"
     const val VERIFY_PHONE = "verifyPhone"
     const val SMS_VERIFICATION = "smsVerification"
     const val PROFILE_FORM = "profileForm"
