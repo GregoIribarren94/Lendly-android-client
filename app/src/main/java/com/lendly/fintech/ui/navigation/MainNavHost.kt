@@ -12,6 +12,7 @@ import com.lendly.fintech.ui.screens.home.HomeScreen
 import com.lendly.fintech.ui.screens.loan.*
 import com.lendly.fintech.ui.screens.manage.*
 import com.lendly.fintech.ui.screens.shop.*
+import com.lendly.fintech.ui.screens.shop.*
 
 @Composable
 fun MainNavHost(
@@ -84,6 +85,7 @@ fun MainNavHost(
         composable(Routes.SHOP) {
             ShopScreen(
                 onSearch = { navController.navigate(Routes.SEARCH) },
+                onFilter = { navController.navigate(Routes.FILTER) },
                 onProductClick = { id -> navController.navigate(Routes.product(id)) },
             )
         }
@@ -93,6 +95,13 @@ fun MainNavHost(
                 onBack = { navController.popBackStack() },
             )
         }
+        composable(Routes.FILTER) {
+            FilterScreen(
+                onApply = { navController.popBackStack() },
+                onBack  = { navController.popBackStack() },
+            )
+        }
+
         composable(
             route = Routes.PRODUCT,
             arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
