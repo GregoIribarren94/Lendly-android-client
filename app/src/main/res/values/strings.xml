@@ -18,4 +18,13 @@
     <string name="profile_form_phone_label">Phone Number</string>
     <string name="profile_form_next">Next</string>
     <string name="profile_form_info_content_description">Profile information</string>
+
+    <!-- Cash-In screen -->
+    <string name="cash_in_top_bar_title">Cash-In</string>
+    <string name="cash_in_top_bar_info_content_description">Cash-In information</string>
+    <string name="cash_in_options_heading">Cash-In Options</string>
+    <string name="cash_in_option_online_title">Online Banking</string>
+    <string name="cash_in_option_online_subtitle">Pay via other banks or e-wallet</string>
+    <string name="cash_in_option_otc_title">Over-the-counter</string>
+    <string name="cash_in_option_otc_subtitle">Pay in cash</string>
 </resources>
