@@ -87,4 +87,12 @@
     <string name="success_tx_subtitle">Your cash-in has been processed</string>
     <string name="success_tx_reference_code_label">Reference Code</string>
     <string name="success_tx_done_button">Done</string>
+    <string name="success_tx_title_cash_in">Added to your account</string>
+    <string name="success_tx_from">From %1$s</string>
+    <string name="success_tx_tag_cash_in">Cash-In</string>
+    <string name="success_tx_details_heading">Transaction Details</string>
+    <string name="success_tx_detail_datetime">Date &amp; Time</string>
+    <string name="success_tx_detail_tx_number">Transaction No.</string>
+    <string name="success_tx_need_help">Need help?</string>
+    <string name="success_tx_help_center">Go to Help Center</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.lendly.fintech.ui.navigation
 
+import android.net.Uri
+
 object Routes {
     // Root flow (sin BottomBar)
     const val SPLASH = "splash"
@@ -51,11 +53,17 @@ object Routes {
     fun profileDetail(id: String) = "$PROFILE_DETAIL_BASE/$id"
     fun otcCashInForm(partnerId: String) = "otcCashInForm/$partnerId"
     fun onlineCashInForm(methodId: String) = "onlineCashInForm/$methodId"
-    fun successTxWithRef(referenceCode: String) = "$SUCCESS_TX?$ARG_REF_CODE=$referenceCode"
+    fun successTxWithRef(referenceCode: String, amount: String = "", method: String = "") =
+        "$SUCCESS_TX?$ARG_REF_CODE=$referenceCode&$ARG_AMOUNT=${Uri.encode(amount)}&$ARG_METHOD=${Uri.encode(method)}"
+
+    fun successTxOnline(amount: String, method: String) =
+        "$SUCCESS_TX?$ARG_AMOUNT=${Uri.encode(amount)}&$ARG_METHOD=${Uri.encode(method)}"
 
     // Argument keys
     const val ARG_ID = "id"
     const val ARG_PARTNER_ID = "partnerId"
     const val ARG_METHOD_ID = "methodId"
     const val ARG_REF_CODE = "referenceCode"
+    const val ARG_AMOUNT = "amount"
+    const val ARG_METHOD = "method"
 }
