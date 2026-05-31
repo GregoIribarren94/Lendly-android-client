@@ -20,7 +20,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.HOME,
+        startDestination = Routes.SHOP,
         modifier = modifier,
     ) {
         // HOME TAB
