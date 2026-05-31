@@ -1,3 +1,98 @@
 <resources>
     <string name="app_name">Lendly</string>
+    <string name="profile_form_heading">Enter your personal details</string>
+    <string name="profile_form_first_names_label">Full legal first and middle name(s)</string>
+    <string name="profile_form_first_names_placeholder">John D.</string>
+    <string name="profile_form_last_name_label">Full legal last name</string>
+    <string name="profile_form_last_name_placeholder">Doe</string>
+    <string name="profile_form_birth_date_label">Date of birth</string>
+    <string name="profile_form_day_placeholder">Day</string>
+    <string name="profile_form_month_placeholder">Month</string>
+    <string name="profile_form_year_placeholder">Year</string>
+    <string name="profile_form_address_label">Address</string>
+    <string name="profile_form_address_placeholder">Somewhere IN BLOCK 12</string>
+    <string name="profile_form_city_label">City</string>
+    <string name="profile_form_city_placeholder">Davao City</string>
+    <string name="profile_form_postal_code_label">Postal Code</string>
+    <string name="profile_form_postal_code_placeholder">8000</string>
+    <string name="profile_form_phone_label">Phone Number</string>
+    <string name="profile_form_next">Next</string>
+    <string name="profile_form_info_content_description">Profile information</string>
+
+    <!-- Loan -->
+    <string name="loan_heading">Loan</string>
+    <string name="loan_cash_in_button">Cash-In</string>
+    <string name="loan_info_button">Loan Information</string>
+    <string name="loan_active_button">Active Loan</string>
+
+    <!-- Cash-In screen -->
+    <string name="cash_in_top_bar_title">Cash-In</string>
+    <string name="cash_in_top_bar_info_content_description">Cash-In information</string>
+    <string name="cash_in_options_heading">Cash-In Options</string>
+    <string name="cash_in_option_online_title">Online Banking</string>
+    <string name="cash_in_option_online_subtitle">Pay via other banks or e-wallet</string>
+    <string name="cash_in_option_otc_title">Over-the-counter</string>
+    <string name="cash_in_option_otc_subtitle">Pay in cash</string>
+
+    <!-- OTC Cash-In selector -->
+    <string name="otc_cash_in_top_bar_title">Over-the-counter Partners</string>
+    <string name="otc_cash_in_max_amount">Max. Transaction amount $5,000</string>
+    <string name="otc_partner_7eleven">7-Eleven</string>
+    <string name="otc_partner_cebuana">Cebuana Lhuillier</string>
+    <string name="otc_partner_lbc">LBC</string>
+    <string name="otc_partner_m_lhuillier">M Lhuillier</string>
+
+    <!-- Online Cash-In selector -->
+    <string name="online_cash_in_top_bar_title">Online Cash-In Options</string>
+    <string name="online_cash_in_search_placeholder">Search...</string>
+    <string name="online_cash_in_section_banks">BANKS</string>
+    <string name="online_cash_in_section_ewallets">E-WALLETS</string>
+    <string name="online_bank_bpi">BPI</string>
+    <string name="online_bank_chinabank">Chinabank</string>
+    <string name="online_bank_rcbc">RCBC</string>
+    <string name="online_bank_unionbank">Unionbank</string>
+    <string name="online_ewallet_gcash">GCash</string>
+    <string name="online_ewallet_paymaya">Pay Maya</string>
+    <string name="online_ewallet_paypal">PayPal</string>
+
+    <!-- OTC Cash-In form -->
+    <string name="otc_cash_in_form_top_bar_title">Enter Amount</string>
+    <string name="otc_cash_in_form_amount_label">Amount (USD)</string>
+    <string name="otc_cash_in_form_amount_error_empty">Please enter an amount</string>
+    <string name="otc_cash_in_form_amount_error_zero">Amount must be greater than 0</string>
+    <string name="otc_cash_in_form_amount_error_max">Amount exceeds maximum of $5,000</string>
+    <string name="otc_cash_in_form_field_required">This field is required</string>
+    <string name="otc_cash_in_form_generate_code_button">Generate Code</string>
+
+    <!-- Online Cash-In form -->
+    <string name="online_cash_in_form_top_bar_title">Payment Details</string>
+    <string name="online_cash_in_form_amount_label">Amount (USD)</string>
+    <string name="online_cash_in_form_amount_error_empty">Please enter an amount</string>
+    <string name="online_cash_in_form_amount_error_zero">Amount must be greater than 0</string>
+    <string name="online_cash_in_form_field_required">This field is required</string>
+    <string name="online_cash_in_form_payment_type_label">Payment Method</string>
+    <string name="online_cash_in_form_transfer_label">Transfer</string>
+    <string name="online_cash_in_form_credit_card_label">Credit Card</string>
+    <string name="online_cash_in_form_debit_card_label">Debit Card</string>
+    <string name="online_cash_in_form_account_number_label">Account Number</string>
+    <string name="online_cash_in_form_account_name_label">Account Name</string>
+    <string name="online_cash_in_form_card_number_label">Card Number</string>
+    <string name="online_cash_in_form_card_expiry_label">Expiry (MM/YY)</string>
+    <string name="online_cash_in_form_card_cvv_label">CVV</string>
+    <string name="online_cash_in_form_cardholder_name_label">Cardholder Name</string>
+    <string name="online_cash_in_form_confirm_button">Confirm</string>
+
+    <!-- Successful Transaction -->
+    <string name="success_tx_title">Transaction Successful!</string>
+    <string name="success_tx_subtitle">Your cash-in has been processed</string>
+    <string name="success_tx_reference_code_label">Reference Code</string>
+    <string name="success_tx_done_button">Done</string>
+    <string name="success_tx_title_cash_in">Added to your account</string>
+    <string name="success_tx_from">From %1$s</string>
+    <string name="success_tx_tag_cash_in">Cash-In</string>
+    <string name="success_tx_details_heading">Transaction Details</string>
+    <string name="success_tx_detail_datetime">Date &amp; Time</string>
+    <string name="success_tx_detail_tx_number">Transaction No.</string>
+    <string name="success_tx_need_help">Need help?</string>
+    <string name="success_tx_help_center">Go to Help Center</string>
 </resources>
