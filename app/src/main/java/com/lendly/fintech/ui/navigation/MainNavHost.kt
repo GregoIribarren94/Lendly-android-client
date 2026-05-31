@@ -45,18 +45,53 @@ fun MainNavHost(
         }
         composable(Routes.OTC_CASH_IN) {
             OtcCashInScreen(
-                onSuccess = { navController.navigate(Routes.SUCCESS_TX) },
+                onPartnerSelected = { partnerId ->
+                    navController.navigate(Routes.otcCashInForm(partnerId))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.OTC_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_PARTNER_ID) { type = NavType.StringType }),
+        ) {
+            OtcCashInFormScreen(
+                onSuccess = { referenceCode ->
+                    navController.navigate(Routes.successTxWithRef(referenceCode))
+                },
                 onBack = { navController.popBackStack() },
             )
         }
         composable(Routes.ONLINE_CASH_IN) {
             OnlineCashInScreen(
+                onMethodSelected = { methodId ->
+                    navController.navigate(Routes.onlineCashInForm(methodId))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.ONLINE_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_METHOD_ID) { type = NavType.StringType }),
+        ) {
+            OnlineCashInFormScreen(
                 onSuccess = { navController.navigate(Routes.SUCCESS_TX) },
                 onBack = { navController.popBackStack() },
             )
         }
-        composable(Routes.SUCCESS_TX) {
+        composable(
+            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}",
+            arguments = listOf(
+                navArgument(Routes.ARG_REF_CODE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+            ),
+        ) { backStackEntry ->
+            val referenceCode = backStackEntry.arguments?.getString(Routes.ARG_REF_CODE)
             SuccessTxScreen(
+                referenceCode = referenceCode,
                 onDone = {
                     navController.popBackStack(Routes.LOAN, inclusive = false)
                 },
