@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lendly.fintech.ui.theme.*
-import androidx.compose.material.icons.filled.Settings
 
 // ── Modelos de datos de ejemplo ─────────────────────────────────────────────
 
@@ -55,10 +55,10 @@ private val brands = listOf(
 )
 
 private val recommended = listOf(
-    ShopProduct("r1", "iPhone 12 Pro",      "1,200", "24", "📱"),
-    ShopProduct("r2", "iPhone 12 Pro Max",  "1,200", "24", "📱"),
-    ShopProduct("r3", "Air Jordan 1",       "1,200", "24", "👟"),
-    ShopProduct("r4", "Sony WH-1000XM5",    "1,200", "24", "🎧"),
+    ShopProduct("r1", "iPhone 12 Pro",     "1,200", "24", "📱"),
+    ShopProduct("r2", "iPhone 12 Pro Max", "1,200", "24", "📱"),
+    ShopProduct("r3", "Air Jordan 1",      "1,200", "24", "👟"),
+    ShopProduct("r4", "Sony WH-1000XM5",   "1,200", "24", "🎧"),
 )
 
 private val bestSellers = listOf(
@@ -73,6 +73,7 @@ private val bestSellers = listOf(
 @Composable
 fun ShopScreen(
     onSearch: () -> Unit,
+    onFilter: () -> Unit,
     onProductClick: (String) -> Unit,
 ) {
     Scaffold(containerColor = BackgroundScreen) { paddingValues ->
@@ -84,7 +85,7 @@ fun ShopScreen(
         ) {
             ShopTopBar()
             Spacer(Modifier.height(4.dp))
-            SearchBar(onClick = onSearch)
+            SearchBar(onSearch = onSearch, onFilter = onFilter)
             Spacer(Modifier.height(Spacing.md))
             HeroBanner()
             Spacer(Modifier.height(Spacing.lg))
@@ -125,10 +126,7 @@ private fun ShopTopBar() {
             modifier = Modifier.size(28.dp),
         )
         Spacer(Modifier.weight(1f))
-        Text(
-            text = "🌿",
-            fontSize = 26.sp,
-        )
+        Text(text = "🌿", fontSize = 26.sp)
         Spacer(Modifier.weight(1f))
         Icon(
             imageVector = Icons.Default.Notifications,
@@ -139,10 +137,10 @@ private fun ShopTopBar() {
     }
 }
 
-// ── Search Bar (tappable) ────────────────────────────────────────────────────
+// ── Search Bar ───────────────────────────────────────────────────────────────
 
 @Composable
-private fun SearchBar(onClick: () -> Unit) {
+private fun SearchBar(onSearch: () -> Unit, onFilter: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -156,7 +154,7 @@ private fun SearchBar(onClick: () -> Unit) {
                 .height(48.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(BackgroundNeutral)
-                .clickable(onClick = onClick)
+                .clickable(onClick = onSearch)
                 .padding(horizontal = Spacing.sm),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
@@ -175,7 +173,7 @@ private fun SearchBar(onClick: () -> Unit) {
                 .size(48.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(InteractivePrimary)
-                .clickable { },
+                .clickable(onClick = onFilter),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
@@ -210,7 +208,7 @@ private fun HeroBanner() {
                 .padding(Spacing.md),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(text = "The New Shoes",    style = SectionTitle, color = BaseContrast, fontSize = 20.sp)
+            Text(text = "The New Shoes", style = SectionTitle, color = BaseContrast, fontSize = 20.sp)
             Text(text = "Shop this season's\nTop Silhouette", style = Body, color = Color(0xFFB1D18A), fontSize = 13.sp)
             Spacer(Modifier.height(6.dp))
             Box(
@@ -229,7 +227,9 @@ private fun HeroBanner() {
             modifier = Modifier.align(Alignment.CenterEnd).padding(end = Spacing.md),
         )
         Row(
-            modifier = Modifier.align(Alignment.BottomStart).padding(start = Spacing.md, bottom = Spacing.sm),
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(start = Spacing.md, bottom = Spacing.sm),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             repeat(3) { i ->
@@ -249,7 +249,9 @@ private fun HeroBanner() {
 @Composable
 private fun SectionHeader(title: String, onSeeAll: () -> Unit) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.md),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = Spacing.md),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -319,7 +321,7 @@ private fun BrandsRow() {
     }
 }
 
-// ── Products Row (Recommended / Best Sellers) ────────────────────────────────
+// ── Products Row ─────────────────────────────────────────────────────────────
 
 @Composable
 private fun ProductsRow(

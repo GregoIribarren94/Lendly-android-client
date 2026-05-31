@@ -38,6 +38,7 @@ object Routes {
     const val CREDIT_SCORE = "creditScore"
     const val PRODUCT_BASE = "product"
     const val TX_DETAILS_BASE = "txDetails"
+    const val FILTER = "filter"
 
     // Rutas con argumentos
     const val PRODUCT = "$PRODUCT_BASE/{id}"
