@@ -67,7 +67,8 @@ fun LendlyNavHost(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToRegister = { navController.navigate(Routes.VERIFY_PHONE) },
+                onNavigateToRegister = { navController.navigate(Routes.AUTH_GRAPH) },
+                onForgotPassword = { /* TODO: pantalla de recupero de contraseña aún no existe */ },
                 onBack = { navController.popBackStack() },
             )
         }

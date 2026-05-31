@@ -4,7 +4,7 @@ package com.lendly.fintech.data.model
  * Payload de inicio de sesión para `POST /auth/login`.
  */
 data class LoginRequest(
-    val email: String,
+    val phone: String,
     val password: String,
 )
 

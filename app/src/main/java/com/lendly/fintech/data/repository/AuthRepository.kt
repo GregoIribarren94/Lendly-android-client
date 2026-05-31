@@ -9,8 +9,8 @@ import com.lendly.fintech.data.model.UserResponse
  */
 interface AuthRepository {
 
-    /** Inicia sesión con email y contraseña. */
-    suspend fun login(email: String, password: String): Resource<LoginResponse>
+    /** Inicia sesión con teléfono y contraseña. */
+    suspend fun login(phone: String, password: String): Resource<LoginResponse>
 
     /** Registra un nuevo usuario. */
     suspend fun register(
