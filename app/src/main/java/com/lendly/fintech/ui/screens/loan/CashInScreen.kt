@@ -1,5 +1,7 @@
 package com.lendly.fintech.ui.screens.loan
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,13 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.AccountBalance
-import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,11 +27,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
 import com.lendly.fintech.ui.components.navigation.AppTopBar
-import com.lendly.fintech.ui.theme.Spacing
 
 @Composable
 fun CashInScreen(
@@ -41,6 +44,16 @@ fun CashInScreen(
             AppTopBar(
                 title = stringResource(R.string.cash_in_top_bar_title),
                 onBackClick = onBack,
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(
+                                R.string.cash_in_top_bar_info_content_description
+                            ),
+                        )
+                    }
+                },
             )
         },
         containerColor = MaterialTheme.colorScheme.background,
@@ -49,90 +62,83 @@ fun CashInScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
-            verticalArrangement = Arrangement.spacedBy(Spacing.md),
+                .padding(horizontal = 24.dp, vertical = 16.dp),
         ) {
             Text(
-                text = stringResource(R.string.cash_in_heading),
+                text = stringResource(R.string.cash_in_options_heading),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(bottom = 24.dp),
             )
-
-            CashInOptionCard(
-                title = stringResource(R.string.cash_in_otc_title),
-                subtitle = stringResource(R.string.cash_in_otc_subtitle),
-                icon = { Icon(Icons.Default.AccountBalance, contentDescription = null) },
-                onClick = onSelectOtc,
-            )
-            CashInOptionCard(
-                title = stringResource(R.string.cash_in_online_title),
-                subtitle = stringResource(R.string.cash_in_online_subtitle),
-                icon = { Icon(Icons.Default.CreditCard, contentDescription = null) },
-                onClick = onSelectOnline,
-            )
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+            ) {
+                CashInOptionRow(
+                    iconRes = R.drawable.ic_wallet,
+                    title = stringResource(R.string.cash_in_option_online_title),
+                    subtitle = stringResource(R.string.cash_in_option_online_subtitle),
+                    onClick = onSelectOnline,
+                )
+                CashInOptionRow(
+                    iconRes = R.drawable.ic_location_pin,
+                    title = stringResource(R.string.cash_in_option_otc_title),
+                    subtitle = stringResource(R.string.cash_in_option_otc_subtitle),
+                    onClick = onSelectOtc,
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun CashInOptionCard(
+private fun CashInOptionRow(
+    @DrawableRes iconRes: Int,
     title: String,
     subtitle: String,
-    icon: @Composable () -> Unit,
     onClick: () -> Unit,
 ) {
-    Card(
-        shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick),
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 20.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Row(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(Spacing.md),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Spacing.md),
+                .size(48.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.secondaryContainer),
+            contentAlignment = Alignment.Center,
         ) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(CircleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                androidx.compose.material3.Surface(
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    shape = CircleShape,
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        icon()
-                    }
-                }
-            }
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                painter = painterResource(iconRes),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier.size(24.dp),
             )
         }
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }

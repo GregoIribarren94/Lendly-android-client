@@ -25,13 +25,14 @@
     <string name="loan_info_button">Loan Information</string>
     <string name="loan_active_button">Active Loan</string>
 
-    <!-- Cash-In selector -->
+    <!-- Cash-In screen -->
     <string name="cash_in_top_bar_title">Cash-In</string>
-    <string name="cash_in_heading">Choose cash-in method</string>
-    <string name="cash_in_otc_title">Over-the-counter</string>
-    <string name="cash_in_otc_subtitle">Generate a reference code and pay through a partner branch.</string>
-    <string name="cash_in_online_title">Online Banking</string>
-    <string name="cash_in_online_subtitle">Cash in using a bank account, card, or e-wallet.</string>
+    <string name="cash_in_top_bar_info_content_description">Cash-In information</string>
+    <string name="cash_in_options_heading">Cash-In Options</string>
+    <string name="cash_in_option_online_title">Online Banking</string>
+    <string name="cash_in_option_online_subtitle">Pay via other banks or e-wallet</string>
+    <string name="cash_in_option_otc_title">Over-the-counter</string>
+    <string name="cash_in_option_otc_subtitle">Pay in cash</string>
 
     <!-- OTC Cash-In selector -->
     <string name="otc_cash_in_top_bar_title">Over-the-counter Partners</string>
