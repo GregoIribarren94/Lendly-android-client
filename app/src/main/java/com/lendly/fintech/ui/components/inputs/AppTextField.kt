@@ -32,7 +32,7 @@ fun AppTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(text = label) },
+        label = label.takeIf { it.isNotEmpty() }?.let { { Text(text = it) } },
         modifier = modifier.fillMaxWidth(),
         placeholder = placeholder?.let { { Text(text = it) } },
         isError = isError,
