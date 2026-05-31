@@ -57,8 +57,8 @@ fun MainNavHost(
             arguments = listOf(navArgument(Routes.ARG_PARTNER_ID) { type = NavType.StringType }),
         ) {
             OtcCashInFormScreen(
-                onSuccess = { referenceCode ->
-                    navController.navigate(Routes.successTxWithRef(referenceCode))
+                onSuccess = { referenceCode, amount, method ->
+                    navController.navigate(Routes.successTxWithRef(referenceCode, amount, method))
                 },
                 onBack = { navController.popBackStack() },
             )
@@ -76,14 +76,26 @@ fun MainNavHost(
             arguments = listOf(navArgument(Routes.ARG_METHOD_ID) { type = NavType.StringType }),
         ) {
             OnlineCashInFormScreen(
-                onSuccess = { navController.navigate(Routes.SUCCESS_TX) },
+                onSuccess = { amount, method ->
+                    navController.navigate(Routes.successTxOnline(amount, method))
+                },
                 onBack = { navController.popBackStack() },
             )
         }
         composable(
-            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}",
+            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}&${Routes.ARG_AMOUNT}={${Routes.ARG_AMOUNT}}&${Routes.ARG_METHOD}={${Routes.ARG_METHOD}}",
             arguments = listOf(
                 navArgument(Routes.ARG_REF_CODE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_AMOUNT) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_METHOD) {
                     type = NavType.StringType
                     nullable = true
                     defaultValue = null
@@ -91,8 +103,12 @@ fun MainNavHost(
             ),
         ) { backStackEntry ->
             val referenceCode = backStackEntry.arguments?.getString(Routes.ARG_REF_CODE)
+            val amount = backStackEntry.arguments?.getString(Routes.ARG_AMOUNT).orEmpty()
+            val method = backStackEntry.arguments?.getString(Routes.ARG_METHOD).orEmpty()
             SuccessTxScreen(
                 referenceCode = referenceCode,
+                amount = amount,
+                method = method,
                 onDone = {
                     navController.popBackStack(Routes.LOAN, inclusive = false)
                 },

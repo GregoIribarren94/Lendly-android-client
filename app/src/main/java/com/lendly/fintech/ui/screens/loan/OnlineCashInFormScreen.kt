@@ -42,18 +42,22 @@ import com.lendly.fintech.ui.components.inputs.AppTextField
 import com.lendly.fintech.ui.components.navigation.AppTopBar
 import com.lendly.fintech.ui.theme.Spacing
 
+private fun formatAmount(raw: String): String =
+    raw.toDoubleOrNull()?.let { "\$%,.2f".format(it) } ?: raw
+
 @Composable
 fun OnlineCashInFormScreen(
-    onSuccess: () -> Unit,
+    onSuccess: (amount: String, method: String) -> Unit,
     onBack: () -> Unit,
     viewModel: OnlineCashInFormViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
+    val methodName = stringResource(state.method.nameRes)
 
     LaunchedEffect(state.navigateToSuccess) {
         if (state.navigateToSuccess) {
             viewModel.onNavigationHandled()
-            onSuccess()
+            onSuccess(formatAmount(state.amount), methodName)
         }
     }
 
