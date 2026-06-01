@@ -17,7 +17,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.data.model.Product
 import com.lendly.fintech.ui.theme.*
 
@@ -26,7 +26,7 @@ import com.lendly.fintech.ui.theme.*
 fun SearchScreen(
     onProductClick: (String) -> Unit,
     onBack: () -> Unit,
-    viewModel: SearchViewModel = viewModel(),
+    viewModel: SearchViewModel = hiltViewModel(),
 ) {
     val query by viewModel.query.collectAsState()
     val results by viewModel.results.collectAsState()

@@ -1,9 +1,11 @@
 package com.lendly.fintech.ui.screens.shop
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 data class FilterState(
     val selectedBrand:      String = "All",
@@ -12,32 +14,18 @@ data class FilterState(
     val selectedPriceRange: String = "All",
 )
 
-class FilterViewModel : ViewModel() {
+@HiltViewModel
+class FilterViewModel @Inject constructor() : ViewModel() {
 
     private val _state = MutableStateFlow(FilterState())
     val state: StateFlow<FilterState> = _state.asStateFlow()
 
-    fun selectBrand(brand: String) {
-        _state.value = _state.value.copy(selectedBrand = brand)
-    }
+    fun selectBrand(brand: String)      { _state.value = _state.value.copy(selectedBrand = brand) }
+    fun selectGender(gender: String)    { _state.value = _state.value.copy(selectedGender = gender) }
+    fun selectSort(sort: String)        { _state.value = _state.value.copy(selectedSort = sort) }
+    fun selectPriceRange(range: String) { _state.value = _state.value.copy(selectedPriceRange = range) }
 
-    fun selectGender(gender: String) {
-        _state.value = _state.value.copy(selectedGender = gender)
-    }
+    fun reset() { _state.value = FilterState() }
 
-    fun selectSort(sort: String) {
-        _state.value = _state.value.copy(selectedSort = sort)
-    }
-
-    fun selectPriceRange(range: String) {
-        _state.value = _state.value.copy(selectedPriceRange = range)
-    }
-
-    fun reset() {
-        _state.value = FilterState()
-    }
-
-    fun apply() {
-        // Acá se puede exponer el estado al ShopViewModel cuando esté conectado al repo
-    }
+    fun currentFilter(): FilterState = _state.value
 }
