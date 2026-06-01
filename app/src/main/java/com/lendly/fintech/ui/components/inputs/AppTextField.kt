@@ -4,10 +4,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,7 +46,15 @@ fun AppTextField(
         singleLine = singleLine,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color(0xFF777777),     // Gris marcado al hacer foco
+            unfocusedBorderColor = Color(0xFF8E8E8E),   // Gris marcado en reposo
+            errorBorderColor = Color.Red,
+            focusedLabelColor = Color(0xFF454745),
+            unfocusedLabelColor = Color(0xFF454745)
+        )
     )
+
 }
 
 @Preview(name = "TextField - Normal")

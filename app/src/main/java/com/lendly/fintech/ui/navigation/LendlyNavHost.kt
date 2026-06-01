@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.lendly.fintech.ui.screens.auth.LoginScreen
 import com.lendly.fintech.ui.screens.auth.*
 import com.lendly.fintech.ui.screens.onboarding.*
 import com.lendly.fintech.ui.screens.splash.SplashScreen
@@ -62,9 +63,8 @@ fun LendlyNavHost(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToRegister = { navController.navigate(Routes.AUTH_GRAPH) },
                 onForgotPassword = { /* TODO: pantalla de recupero de contraseña aún no existe */ },
-                onBack = { navController.popBackStack() },
+                onChangeProfile = { /* TODO: pantalla de cambio de perfil aún no existe */ },
             )
         }
 
