@@ -41,22 +41,16 @@ fun LendlyNavHost(
             )
         }
 
+        // Reemplazá los tres bloques composable de ONBOARDING_1, 2 y 3 por este único bloque:
+
         composable(Routes.ONBOARDING_1) {
-            Onboarding1Screen(
-                onContinue = { navController.navigate(Routes.ONBOARDING_2) },
-                onBack = { navController.popBackStack() },
-            )
-        }
-        composable(Routes.ONBOARDING_2) {
-            Onboarding2Screen(
-                onContinue = { navController.navigate(Routes.ONBOARDING_3) },
-                onBack = { navController.popBackStack() },
-            )
-        }
-        composable(Routes.ONBOARDING_3) {
-            Onboarding3Screen(
-                onContinue = { navController.navigate(Routes.LOGIN) },
-                onBack = { navController.popBackStack() },
+            OnboardingScreen(
+                onNavigateToAuth = {
+                    navController.navigate(Routes.LOGIN) {
+                        // Borra el onboarding del historial para que si el usuario tira para atrás desde el Login no vuelva ahí
+                        popUpTo(Routes.ONBOARDING_1) { inclusive = true }
+                    }
+                }
             )
         }
 
