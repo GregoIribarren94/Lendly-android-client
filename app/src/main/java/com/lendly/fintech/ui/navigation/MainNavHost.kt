@@ -2,6 +2,7 @@ package com.lendly.fintech.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -12,8 +13,7 @@ import com.lendly.fintech.ui.screens.home.HomeScreen
 import com.lendly.fintech.ui.screens.loan.*
 import com.lendly.fintech.ui.screens.manage.*
 import com.lendly.fintech.ui.screens.shop.*
-import com.lendly.fintech.ui.screens.shop.*
-
+import androidx.compose.runtime.remember
 @Composable
 fun MainNavHost(
     navController: NavHostController,
@@ -58,9 +58,7 @@ fun MainNavHost(
         }
         composable(Routes.SUCCESS_TX) {
             SuccessTxScreen(
-                onDone = {
-                    navController.popBackStack(Routes.LOAN, inclusive = false)
-                },
+                onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
             )
         }
         composable(Routes.LOAN_INFO) {
@@ -82,11 +80,15 @@ fun MainNavHost(
         }
 
         // SHOP TAB
+        // shopViewModel se obtiene del backStackEntry de SHOP para que
+        // FilterScreen comparta la misma instancia
         composable(Routes.SHOP) {
+            val shopViewModel = hiltViewModel<ShopViewModel>()
             ShopScreen(
                 onSearch = { navController.navigate(Routes.SEARCH) },
                 onFilter = { navController.navigate(Routes.FILTER) },
                 onProductClick = { id -> navController.navigate(Routes.product(id)) },
+                viewModel = shopViewModel,
             )
         }
         composable(Routes.SEARCH) {
@@ -96,12 +98,21 @@ fun MainNavHost(
             )
         }
         composable(Routes.FILTER) {
+            // Obtenemos el ShopViewModel del backstack entry de SHOP
+            // para que sea la MISMA instancia que usa ShopScreen
+            val shopBackStackEntry = remember(navController) {
+                navController.getBackStackEntry(Routes.SHOP)
+            }
+            val shopViewModel = hiltViewModel<ShopViewModel>(shopBackStackEntry)
+
             FilterScreen(
-                onApply = { navController.popBackStack() },
-                onBack  = { navController.popBackStack() },
+                onApply = { filterState ->
+                    shopViewModel.applyFilter(filterState)
+                    navController.popBackStack()
+                },
+                onBack = { navController.popBackStack() },
             )
         }
-
         composable(
             route = Routes.PRODUCT,
             arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
