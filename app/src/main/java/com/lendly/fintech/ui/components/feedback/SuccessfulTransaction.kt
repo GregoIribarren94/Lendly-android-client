@@ -41,7 +41,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
@@ -50,25 +49,24 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
+import com.lendly.fintech.ui.theme.BackgroundCard
+import com.lendly.fintech.ui.theme.BackgroundCircleNeutral
 import com.lendly.fintech.ui.theme.BackgroundScreen
+import com.lendly.fintech.ui.theme.ContentAmount
+import com.lendly.fintech.ui.theme.ContentOnSurface
+import com.lendly.fintech.ui.theme.ContentPrimary
+import com.lendly.fintech.ui.theme.ContentTertiary
 import com.lendly.fintech.ui.theme.CornerFull
+import com.lendly.fintech.ui.theme.IconTintDark
+import com.lendly.fintech.ui.theme.InteractiveAccent
 import com.lendly.fintech.ui.theme.LendlyTheme
+import com.lendly.fintech.ui.theme.SentimentPositive
 
 data class SuccessTxDetail(
     val label: String,
     val value: String,
     val isLink: Boolean = false,
 )
-
-private val SuccessHeroBackground = Color(0xFFFCF8F8)
-private val SuccessCloseBackground = Color(0xFFE5E2E1)
-private val SuccessAccent = Color(0xFF7BF179)
-private val SuccessIconTint = Color(0xFF1C1B1F)
-private val SuccessPrimaryText = Color(0xFF122300)
-private val SuccessSectionText = Color(0xFF171D1E)
-private val SuccessSecondaryText = Color(0xFF6A6C6A)
-private val SuccessLinkText = Color(0xFF4C662B)
-private val SuccessButtonText = Color(0xFF102000)
 
 @Composable
 fun SuccessfulTransaction(
@@ -99,8 +97,8 @@ fun SuccessfulTransaction(
                 onClick = onDone,
                 shape = CornerFull,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = SuccessAccent,
-                    contentColor = SuccessButtonText,
+                    containerColor = InteractiveAccent,
+                    contentColor = ContentAmount,
                 ),
                 contentPadding = PaddingValues(horizontal = 24.dp),
                 modifier = Modifier
@@ -112,7 +110,7 @@ fun SuccessfulTransaction(
                 Text(
                     text = doneButtonText,
                     style = MaterialTheme.typography.labelLarge,
-                    color = SuccessButtonText,
+                    color = ContentAmount,
                 )
             }
         },
@@ -128,7 +126,7 @@ fun SuccessfulTransaction(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(376.dp)
-                    .background(SuccessHeroBackground)
+                    .background(BackgroundCard)
                     .statusBarsPadding()
                     .padding(start = 16.dp, top = 28.dp, end = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -144,14 +142,14 @@ fun SuccessfulTransaction(
                             modifier = Modifier
                                 .size(48.dp)
                                 .clip(CircleShape)
-                                .background(SuccessCloseBackground)
+                                .background(BackgroundCircleNeutral)
                                 .clickable(onClick = onClose),
                             contentAlignment = Alignment.Center,
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
                                 contentDescription = "Close",
-                                tint = SuccessPrimaryText,
+                                tint = ContentPrimary,
                                 modifier = Modifier.size(24.dp),
                             )
                         }
@@ -179,13 +177,13 @@ fun SuccessfulTransaction(
                     modifier = Modifier
                         .size(72.dp)
                         .clip(CircleShape)
-                        .background(SuccessAccent),
+                        .background(InteractiveAccent),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
                         imageVector = illustration,
                         contentDescription = null,
-                        tint = SuccessIconTint,
+                        tint = IconTintDark,
                         modifier = Modifier.size(32.dp),
                     )
                 }
@@ -195,7 +193,7 @@ fun SuccessfulTransaction(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = SuccessSecondaryText,
+                    color = ContentTertiary,
                     textAlign = TextAlign.Center,
                 )
 
@@ -204,7 +202,7 @@ fun SuccessfulTransaction(
                 Text(
                     text = amount,
                     style = MaterialTheme.typography.displaySmall,
-                    color = SuccessPrimaryText,
+                    color = ContentPrimary,
                     textAlign = TextAlign.Center,
                 )
 
@@ -213,7 +211,7 @@ fun SuccessfulTransaction(
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodyLarge,
-                        color = SuccessSecondaryText,
+                        color = ContentTertiary,
                         textAlign = TextAlign.Center,
                     )
                 }
@@ -224,7 +222,7 @@ fun SuccessfulTransaction(
                         modifier = Modifier
                             .height(32.dp)
                             .defaultMinSize(minWidth = 86.dp)
-                            .border(1.dp, SuccessSecondaryText, CornerFull)
+                            .border(1.dp, ContentTertiary, CornerFull)
                             .clip(CornerFull)
                             .padding(horizontal = 18.dp),
                         contentAlignment = Alignment.Center,
@@ -232,7 +230,7 @@ fun SuccessfulTransaction(
                         Text(
                             text = tag,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = SuccessSecondaryText,
+                            color = ContentTertiary,
                         )
                     }
                 }
@@ -248,7 +246,7 @@ fun SuccessfulTransaction(
                 Text(
                     text = sectionTitle,
                     style = MaterialTheme.typography.titleLarge,
-                    color = SuccessSectionText,
+                    color = ContentOnSurface,
                 )
 
                 Spacer(modifier = Modifier.height(18.dp))
@@ -269,14 +267,14 @@ fun SuccessfulTransaction(
                         Text(
                             text = needHelpText,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = SuccessSecondaryText,
+                            color = ContentTertiary,
                         )
                         Text(
                             text = helpLinkText,
                             style = MaterialTheme.typography.titleMedium.copy(
                                 textDecoration = TextDecoration.Underline,
                             ),
-                            color = SuccessLinkText,
+                            color = SentimentPositive,
                             modifier = Modifier.clickable(onClick = onHelp),
                         )
                     }
@@ -301,7 +299,7 @@ private fun SuccessfulTransactionSystemBars() {
             val previousNavigationBarColor = window?.navigationBarColor
 
             if (window != null) {
-                window.statusBarColor = SuccessHeroBackground.toArgb()
+                window.statusBarColor = BackgroundCard.toArgb()
                 window.navigationBarColor = BackgroundScreen.toArgb()
                 WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
                 WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
@@ -334,7 +332,7 @@ private fun TopIconButton(
         Icon(
             imageVector = imageVector,
             contentDescription = contentDescription,
-            tint = SuccessSectionText,
+            tint = ContentOnSurface,
             modifier = Modifier.size(24.dp),
         )
     }
@@ -352,7 +350,7 @@ private fun DetailRow(detail: SuccessTxDetail) {
         Text(
             text = detail.label,
             style = MaterialTheme.typography.bodyLarge,
-            color = SuccessSecondaryText,
+            color = ContentTertiary,
             modifier = Modifier.weight(1f),
         )
 
@@ -363,7 +361,7 @@ private fun DetailRow(detail: SuccessTxDetail) {
             } else {
                 MaterialTheme.typography.bodyLarge
             },
-            color = if (detail.isLink) SuccessLinkText else SuccessSecondaryText,
+            color = if (detail.isLink) SentimentPositive else ContentTertiary,
             textAlign = TextAlign.End,
             modifier = Modifier.weight(1f),
         )
