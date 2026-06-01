@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.OffsetDateTime
 import javax.inject.Inject
 
 enum class HistoryFilter { ALL, LOANS, PAYMENTS, CASH_IN }
@@ -93,12 +94,15 @@ class HistoryViewModel @Inject constructor(
     ): List<Transaction> {
         var result = when (filter) {
             HistoryFilter.ALL      -> txs
-            HistoryFilter.LOANS    -> txs.filter { it.type == TransactionType.LOAN }
-            HistoryFilter.PAYMENTS -> txs.filter { it.type == TransactionType.PAYMENT }
-            HistoryFilter.CASH_IN  -> txs.filter { it.type == TransactionType.DEPOSIT }
+            HistoryFilter.LOANS    -> txs.filter { it.type == TransactionType.LOAN_DISBURSEMENT }
+            HistoryFilter.PAYMENTS -> txs.filter { it.type == TransactionType.LOAN_PAYMENT }
+            HistoryFilter.CASH_IN  -> txs.filter { it.type == TransactionType.CASH_IN }
         }
         if (query.isNotBlank()) {
-            result = result.filter { it.description.contains(query, ignoreCase = true) }
+            result = result.filter {
+                it.title.contains(query, ignoreCase = true) ||
+                    it.description.contains(query, ignoreCase = true)
+            }
         }
         return result
     }
@@ -106,7 +110,8 @@ class HistoryViewModel @Inject constructor(
     private fun groupByDate(txs: List<Transaction>): List<HistorySection> {
         val today = LocalDate.now()
         val (todayTxs, olderTxs) = txs.partition { tx ->
-            runCatching { LocalDate.parse(tx.date.take(10)) == today }.getOrDefault(false)
+            runCatching { OffsetDateTime.parse(tx.date).toLocalDate() == today }
+                .getOrDefault(false)
         }
         return buildList {
             if (todayTxs.isNotEmpty()) add(HistorySection("Today", todayTxs))

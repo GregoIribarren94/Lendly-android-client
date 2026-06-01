@@ -11,5 +11,5 @@ import com.lendly.fintech.data.model.Transaction
 class TransactionRepositoryImpl(private val api: TransactionsApi) : TransactionRepository {
 
     override suspend fun getAll(): Resource<List<Transaction>> =
-        safeApiCall { api.getTransactions() }
+        safeApiCall { api.getTransactions().transactions }
 }
