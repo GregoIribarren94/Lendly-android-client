@@ -13,6 +13,7 @@ import com.lendly.fintech.ui.screens.auth.*
 import com.lendly.fintech.ui.screens.onboarding.*
 import com.lendly.fintech.ui.screens.splash.SplashScreen
 
+
 /**
  * Root NavHost: maneja el flujo lineal sin BottomBar.
  * Splash -> Onboarding -> Auth -> MainScreen (que internamente arma su propio NavHost).
@@ -42,40 +43,47 @@ fun LendlyNavHost(
             )
         }
 
-        // Reemplazá los tres bloques composable de ONBOARDING_1, 2 y 3 por este único bloque:
-
+        // Bloque ONBOARDING_1 perfectamente cerrado
         composable(Routes.ONBOARDING_1) {
             OnboardingScreen(
                 onNavigateToAuth = {
                     navController.navigate(Routes.LOGIN) {
-                        // Borra el onboarding del historial para que si el usuario tira para atrás desde el Login no vuelva ahí
+                        // Borra el onboarding del historial para que no vuelva atrás ahí
                         popUpTo(Routes.ONBOARDING_1) { inclusive = true }
                     }
                 }
             )
-        }
+        } // <-- LLAVE CORREGIDA: Aquí cierra correctamente el onboarding
 
+        // Bloque LOGIN independiente y al mismo nivel
         composable(Routes.LOGIN) {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate(Routes.MAIN) {
-                        popUpTo(0) { inclusive = true }
-                        launchSingleTop = true
+                    navController.navigate(Routes.VERIFY_PHONE) {
+                        popUpTo(Routes.LOGIN) {
+                            inclusive = true
+                        }
                     }
                 },
-                onForgotPassword = { /* TODO: pantalla de recupero de contraseña aún no existe */ },
-                onChangeProfile = { /* TODO: pantalla de cambio de perfil aún no existe */ },
+                onForgotPassword = { },
+                onChangeProfile = {
+                    navController.navigate(Routes.VERIFY_PHONE)
+                }
             )
         }
 
+        // Subgrafo de Autenticación
         navigation(
             route = Routes.AUTH_GRAPH,
             startDestination = Routes.VERIFY_PHONE,
         ) {
             composable(Routes.VERIFY_PHONE) {
                 VerifyPhoneScreen(
-                    onContinue = { navController.navigate(Routes.SMS_VERIFICATION) },
                     onBack = { navController.popBackStack() },
+                    onInfo = { },
+                    onSendCode = { _, _ ->
+                        navController.navigate(Routes.SMS_VERIFICATION)
+                    }
                 )
             }
             composable(Routes.SMS_VERIFICATION) {
