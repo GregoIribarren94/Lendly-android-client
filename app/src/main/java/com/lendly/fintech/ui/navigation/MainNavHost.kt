@@ -106,6 +106,9 @@ fun MainNavHost(
             val amount = backStackEntry.arguments?.getString(Routes.ARG_AMOUNT).orEmpty()
             val method = backStackEntry.arguments?.getString(Routes.ARG_METHOD).orEmpty()
             SuccessTxScreen(
+                referenceCode = referenceCode,
+                amount = amount,
+                method = method,
                 onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
             )
         }
@@ -117,7 +120,9 @@ fun MainNavHost(
         }
         composable(Routes.LOAN_FORM) {
             LoanFormScreen(
-                onSubmit = { navController.navigate(Routes.ACTIVE_LOAN) },
+                onSubmit = { amount, method, refCode ->
+                    navController.navigate(Routes.successTxWithRef(refCode, amount, method))
+                },
                 onBack = { navController.popBackStack() },
             )
         }
