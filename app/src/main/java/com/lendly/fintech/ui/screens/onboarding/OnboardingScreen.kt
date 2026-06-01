@@ -16,7 +16,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lendly.fintech.R
+import com.lendly.fintech.ui.screens.onboarding.components.OnboardingMainImage
 import com.lendly.fintech.ui.screens.onboarding.components.OnboardingPage
+import com.lendly.fintech.ui.screens.onboarding.components.PaymentMiniCard
+import com.lendly.fintech.ui.screens.onboarding.components.ProductMiniCard
 
 @Composable
 fun OnboardingScreen(
@@ -35,16 +38,10 @@ fun OnboardingScreen(
                 onContinue = { currentStep = 1 }
             ) {
 
-                Image(
-                    painter = painterResource(R.drawable.ic_onboarding1),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(width = 359.dp, height = 333.dp)
-                        .align(Alignment.BottomEnd)
-                        .offset(x = 24.dp, y = 0.dp),
-                    contentScale = ContentScale.Fit
+                OnboardingMainImage(
+                    imageRes = R.drawable.ic_onboarding1,
+                    modifier = Modifier.align(Alignment.BottomEnd)
                 )
-
                 Image(
                     painter = painterResource(R.drawable.ic_aplauso),
                     contentDescription = null,
@@ -106,7 +103,104 @@ fun OnboardingScreen(
             }
         }
         // Quedan listos para que consumas tu OnboardingPage con los datos del paso 2 y 3
-        1 -> Box(modifier = Modifier.fillMaxSize())
-        2 -> Box(modifier = Modifier.fillMaxSize())
+        1 -> {
+            OnboardingPage(
+                title = "LOAN PRODUCT\nIN-APP",
+                description = "Many products to loan.",
+                currentStep = 1,
+                totalSteps = 3,
+                buttonText = "Get Started",
+                onContinue = { currentStep = 2 }
+            ) {
+                OnboardingMainImage(
+                    imageRes = R.drawable.ic_onboarding2,
+                    modifier = Modifier.align(Alignment.BottomEnd)
+                )
+                Image(
+                    painter = painterResource(R.drawable.ic_bolsa_compras),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 20.dp, y = 28.dp)
+                        .size(44.dp),
+                    alpha = 1f
+                )
+
+                Row(
+                    modifier = Modifier.offset(x = 42.dp, y = 51.dp),
+                    horizontalArrangement = Arrangement.spacedBy(7.dp)
+                ) {
+                    ProductMiniCard(
+                        imageRes = R.drawable.ic_notebook,
+                        text = "iPhone 12 Pro..."
+                    )
+
+                    ProductMiniCard(
+                        imageRes = R.drawable.ic_iphone,
+                        text = "iPhone 12 Pro..."
+                    )
+                }
+
+                Image(
+                    painter = painterResource(R.drawable.ic_sorpresa),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 235.dp, y = 91.dp)
+                        .size(35.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_billetes),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 66.dp, y = 147.dp)
+                        .size(50.dp)
+                )
+            }
+        }
+
+        2 -> {
+            OnboardingPage(
+                title = "TRACK & PAY\nEASILY",
+                description = "",
+                currentStep = 2,
+                totalSteps = 3,
+                buttonText = "Sign up for free",
+                onContinue = onNavigateToAuth
+            ) {
+                OnboardingMainImage(
+                    imageRes = R.drawable.ic_onboarding3,
+                    modifier = Modifier.align(Alignment.BottomEnd)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_cash),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 38.dp, y = 100.dp)
+                        .size(45.dp)
+                )
+
+                PaymentMiniCard(
+                    modifier = Modifier.offset(x = 19.dp, y = 145.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_calendar),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 198.dp, y = 119.dp)
+                        .size(49.dp),
+                    alpha = 1f
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_smile),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 96.dp, y = 210.dp)
+                        .size(38.dp)
+                )
+            }
+        }
     }
 }
