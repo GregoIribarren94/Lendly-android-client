@@ -1,14 +1,11 @@
 package com.lendly.fintech.data.api
 
-import com.lendly.fintech.data.model.Transaction
+import com.lendly.fintech.data.model.TransactionsResponse
 import retrofit2.http.GET
 
-/**
- * Endpoints del historial de transacciones.
- */
 interface TransactionsApi {
 
-    /** Devuelve el historial de movimientos del usuario. */
+    /** Devuelve el historial de movimientos (envuelto en TransactionsResponse). */
     @GET("transactions")
-    suspend fun getTransactions(): List<Transaction>
+    suspend fun getTransactions(): TransactionsResponse
 }
