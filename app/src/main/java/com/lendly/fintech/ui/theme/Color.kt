@@ -43,6 +43,10 @@ val ContentOnSurface = Color(0xFF171D1E)  // nombre, monto
 val BackgroundCard = Color(0xFFFCF8F8)    // fondo de la card
 
 
-val OnboardingBackground = Color(0xFF0A1F00)
-val OnboardingTitleColor = Color(0xFFB1D18A)
-val OnboardingSubtitleColor = Color(0xFFE5F5EA)
+
+val OnboardingBackground = Color(0xFF0A1F00) // Verde súper oscuro de fondo completo
+val OnboardingTitleColor = Color(0xFFB1D18A)  // Verde claro para títulos (QUICK LOANS)
+val OnboardingSubtitleColor = Color(0xFFE5F5EA) // Blanco/verde menta suave para descripciones
+
+val OnboardingGradientStart = Color(0xFF8FFF85)
+val OnboardingGradientEnd = Color(0xFF39A0FF)

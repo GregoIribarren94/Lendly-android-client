@@ -3,7 +3,7 @@ package com.lendly.fintech.ui.screens.onboarding
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,125 +34,78 @@ fun OnboardingScreen(
                 buttonText = "Get Started",
                 onContinue = { currentStep = 1 }
             ) {
-                // Contenedor gráfico con la altura exacta fijada en tu Figma (481px -> 481.dp)
-                Box(
+
+                Image(
+                    painter = painterResource(R.drawable.ic_onboarding1),
+                    contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(481.dp),
-                    contentAlignment = Alignment.TopStart
+                        .size(width = 359.dp, height = 333.dp)
+                        .align(Alignment.BottomEnd)
+                        .offset(x = 24.dp, y = 0.dp),
+                    contentScale = ContentScale.Fit
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_aplauso),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 125.dp, y = 72.dp)
+                        .size(30.dp)
+                )
+
+                Image(
+                    painter = painterResource(R.drawable.ic_precio),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 18.dp, y = 112.dp)
+                        .size(40.dp)
+                )
+
+                Column(
+                    modifier = Modifier
+                        .offset(x = 26.dp, y = 146.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    repeat(2) {
+                        Row(
+                            modifier = Modifier
+                                .size(width = 157.dp, height = 29.64.dp)
+                                .clip(RoundedCornerShape(5.dp))
+                                .background(Color.White.copy(alpha = 0.27f))
+                                .padding(start = 8.dp, end = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Loan Successful",
+                                color = Color(0xFFE5F5EA),
+                                fontSize = 7.8.sp,
+                                maxLines = 1
+                            )
 
-                    // 1. Imagen Principal (Chica + Fondo diagonal verde menta)
-                    // Se posiciona alineada al fondo a la derecha del contenedor para respetar la perspectiva
-                    Image(
-                        painter = painterResource(R.drawable.ic_onboarding1),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(width = 359.dp, height = 333.dp)
-                            .align(Alignment.BottomEnd),
-                        contentScale = ContentScale.Fit
-                    )
+                            Spacer(modifier = Modifier.weight(1f))
 
-                    // 2. Tarjeta flotante superior (Manitos aplaudiendo 👏)
-                    Image(
-                        painter = painterResource(R.drawable.ic_aplauso),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .offset(x = 110.dp, y = 140.dp)
-                            .size(30.dp)
-                    )
-
-                    // 3. Ícono flotante redondo verde (Billetes/Card 💵)
-                    Image(
-                        painter = painterResource(R.drawable.ic_precio),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .offset(x = 40.dp, y = 40.dp)
-                            .size(40.dp)
-                    )
-
-                    // 4. Bloque de tarjetas "Loan Successful" apiladas
-                    Column(
-                        modifier = Modifier
-                            .offset(x = 24.dp, y = 235.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        repeat(2) {
-                            Row(
-                                modifier = Modifier
-                                    .size(width = 157.dp, height = 29.64.dp)
-                                    .clip(CircleShape)
-                                    .background(Color(0xFFFFFF45).copy(alpha = 0.27f))
-                                    .padding(horizontal = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    "Loan Successful",
-                                    color = Color(0xFFE5F5EA),
-                                    fontSize = 8.32.sp
-                                )
-                                Text(
-                                    "+ ₱ 2000.00",
-                                    color = Color(0xFF7BF179),
-                                    fontSize = 8.32.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
+                            Text(
+                                text = "+ ₱ 2000.00",
+                                color = Color(0xFF7BF179),
+                                fontSize = 7.8.sp,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1
+                            )
                         }
                     }
-
-                    // 5. Carita Feliz flotante (😃)
-                    Image(
-                        painter = painterResource(R.drawable.ic_carita),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .offset(x = 45.dp, y = 320.dp)
-                            .size(24.dp)
-                    )
-
-
-                    // 6. El Logo de Lendly 3D flotando arriba centrado
-                    Box(
-                        modifier = Modifier
-                            .statusBarsPadding()
-                            .padding(top = 24.dp)
-                            // Reducimos el tamaño de forma proporcional para la cabecera (Mantiene la relación de aspecto)
-                            .size(width = 121.37.dp, height = 41.66.dp)
-                            .align(Alignment.TopCenter),
-                        contentAlignment = Alignment.TopStart // <- Clave: los offsets se calculan desde la esquina superior izquierda
-                    ) {
-                        // Capa 1: Base oscura / Sombra (Se dibuja al fondo)
-                        // Desfasaje proporcional exacto (la mitad de los píxeles originales de Figma)
-                        Image(
-                            painter = painterResource(R.drawable.logo_rectangle_5),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(width = 106.88.dp, height = 23.55.dp)
-                                .offset(x = 14.49.dp, y = 18.11.dp)
-                        )
-
-                        // Capa 2: Rectángulo intermedio translúcido
-                        Image(
-                            painter = painterResource(R.drawable.logo_rectangle_4),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(width = 106.88.dp, height = 23.55.dp)
-                                .offset(x = 7.24.dp, y = 9.06.dp)
-                        )
-
-                        // Capa 3: Tarjeta verde principal (Queda al frente)
-                        Image(
-                            painter = painterResource(R.drawable.logo_rectangle_3),
-                            contentDescription = "Lendly Logo",
-                            modifier = Modifier
-                                .size(width = 106.88.dp, height = 23.55.dp)
-                                .offset(x = 0.dp, y = 0.dp)
-                        )
-                    }
                 }
+
+                Image(
+                    painter = painterResource(R.drawable.ic_carita),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .offset(x = 55.dp, y = 236.dp)
+                        .size(30.dp)
+                )
+
             }
         }
+        // Quedan listos para que consumas tu OnboardingPage con los datos del paso 2 y 3
         1 -> Box(modifier = Modifier.fillMaxSize())
         2 -> Box(modifier = Modifier.fillMaxSize())
     }
