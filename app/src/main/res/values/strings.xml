@@ -25,6 +25,36 @@
     <string name="loan_info_button">Loan Information</string>
     <string name="loan_active_button">Active Loan</string>
 
+    <!-- Loan Info screen -->
+    <string name="loan_info_top_bar_title">Loan screen - info</string>
+    <string name="loan_info_limited_time_offer">Limited Time Offer</string>
+    <string name="loan_info_hero_title">Safe and\nsecure loans</string>
+    <string name="loan_info_hero_subtitle">All here in Rayland</string>
+    <string name="loan_info_borrow_up_to">You can borrow up to</string>
+    <string name="loan_info_amount">₱ 30,000.00</string>
+    <string name="loan_info_subject_to_eval">*Subject to evaluation</string>
+    <string name="loan_info_loan_details">Loan Details</string>
+    <string name="loan_info_what_is_this">What is this?</string>
+    <string name="loan_info_payable_in_title">Payable in</string>
+    <string name="loan_info_payable_in_value">6 - 12</string>
+    <string name="loan_info_payable_in_caption">months</string>
+    <string name="loan_info_interest_rate_title">Interest Rate</string>
+    <string name="loan_info_interest_rate_value">1.99%</string>
+    <string name="loan_info_interest_rate_caption">ave per mo.</string>
+    <string name="loan_info_process_fee_title">Process Fee</string>
+    <string name="loan_info_process_fee_value">3%</string>
+    <string name="loan_info_process_fee_caption">as low as</string>
+    <string name="loan_info_how_it_works">How it works</string>
+    <string name="loan_info_hiw_credit_title">Keep your credit score high</string>
+    <string name="loan_info_hiw_credit_body">The offered loan amount is based on your credit score</string>
+    <string name="loan_info_hiw_approval_title">Get instant approval</string>
+    <string name="loan_info_hiw_approval_body">Everything we need to process is already in the application</string>
+    <string name="loan_info_hiw_payments_title">Easy payments option available</string>
+    <string name="loan_info_hiw_payments_body">Skip the queue and pay your due on the application</string>
+    <string name="loan_info_hiw_secure_title">Safe and secure</string>
+    <string name="loan_info_hiw_secure_body">Rayland is working with trusted partners to provide this services</string>
+    <string name="loan_info_cta">Get This Loan</string>
+
     <!-- Cash-In screen -->
     <string name="cash_in_top_bar_title">Cash-In</string>
     <string name="cash_in_top_bar_info_content_description">Cash-In information</string>
