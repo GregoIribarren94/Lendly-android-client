@@ -138,4 +138,22 @@
     <string name="history_section_older">Older</string>
     <string name="history_empty_message">No transactions yet</string>
     <string name="history_retry">Try again</string>
+
+    <!-- Transaction Details screen -->
+    <string name="tx_details_back">Back</string>
+    <string name="tx_details_info">Information</string>
+    <string name="tx_details_more">More options</string>
+    <string name="tx_details_hero_paid_this_month">Paid this month</string>
+    <string name="tx_details_hero_received">Received</string>
+    <string name="tx_details_to">To %1$s</string>
+    <string name="tx_details_from">From %1$s</string>
+    <string name="tx_details_tag_paid_bills">Paid Bills</string>
+    <string name="tx_details_tag_cash_in">Cash-In</string>
+    <string name="tx_details_section_title">Transaction Details</string>
+    <string name="tx_details_fee">Fee</string>
+    <string name="tx_details_datetime">Date &amp; Time</string>
+    <string name="tx_details_tx_number">Transaction Number</string>
+    <string name="tx_details_help_question">Didn\'t find what you were looking for?</string>
+    <string name="tx_details_help_center">Go to Help Center</string>
+    <string name="tx_details_not_found">Transaction not found</string>
 </resources>
