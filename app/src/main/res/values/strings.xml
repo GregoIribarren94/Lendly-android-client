@@ -127,6 +127,38 @@
     <string name="success_tx_need_help">Need help?</string>
     <string name="success_tx_help_center">Go to Help Center</string>
 
+    <!-- Loan Form screen -->
+    <string name="loan_form_top_bar_title">Loan</string>
+    <string name="loan_form_info_content_description">Loan information</string>
+    <string name="loan_form_back_content_description">Back</string>
+    <string name="loan_form_heading">Please provide your details\nfor your loan</string>
+    <string name="loan_form_subheading">Please provide your details for your loan</string>
+    <string name="loan_form_step_label">Step %1$d</string>
+    <string name="loan_form_step1_title">Enter loan amount</string>
+    <string name="loan_form_amount_placeholder">0.00</string>
+    <string name="loan_form_step2_title">Select an installment plan</string>
+    <string name="loan_form_plan_months">%1$d Months</string>
+    <string name="loan_form_plan_interest">%1$s Interest</string>
+    <string name="loan_form_plan_monthly">₱ %1$s/mo</string>
+    <string name="loan_form_step3_title">Select your loan purpose</string>
+    <string name="loan_form_purpose_placeholder">Select an option</string>
+    <string name="loan_form_purpose_educational">Educational</string>
+    <string name="loan_form_purpose_medical">Medical</string>
+    <string name="loan_form_purpose_business">Business</string>
+    <string name="loan_form_purpose_personal">Personal</string>
+    <string name="loan_form_purpose_other">Other</string>
+    <string name="loan_form_summary_title">Summary</string>
+    <string name="loan_form_summary_loan_amount">Loan Amount</string>
+    <string name="loan_form_summary_processing_fee">3%% Processing Fee</string>
+    <string name="loan_form_summary_total">Total amount to Receive</string>
+    <string name="loan_form_summary_lender">Lender</string>
+    <string name="loan_form_summary_lender_value">null</string>
+    <string name="loan_form_summary_what_is_this">What is this?</string>
+    <string name="loan_form_amount_php_format">PHP %1$s</string>
+    <string name="loan_form_amount_php_signed">₱ %1$s</string>
+    <string name="loan_form_amount_php_negative">-%1$s</string>
+    <string name="loan_form_cta">Get This Loan</string>
+    <string name="loan_form_method">Loan</string>
     <!-- History screen -->
     <string name="history_title">History</string>
     <string name="history_search_placeholder">Search...</string>
