@@ -1,14 +1,17 @@
 package com.lendly.fintech.ui.components.feedback
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,29 +23,44 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import androidx.core.view.WindowCompat
 import com.lendly.fintech.ui.theme.BackgroundCard
+import com.lendly.fintech.ui.theme.BackgroundCircleNeutral
 import com.lendly.fintech.ui.theme.BackgroundScreen
-import com.lendly.fintech.ui.theme.ContentLink
+import com.lendly.fintech.ui.theme.ContentAmount
+import com.lendly.fintech.ui.theme.ContentOnSurface
+import com.lendly.fintech.ui.theme.ContentPrimary
 import com.lendly.fintech.ui.theme.ContentTertiary
 import com.lendly.fintech.ui.theme.CornerFull
+import com.lendly.fintech.ui.theme.IconTintDark
+import com.lendly.fintech.ui.theme.InteractiveAccent
 import com.lendly.fintech.ui.theme.LendlyTheme
-import com.lendly.fintech.ui.theme.Spacing
+import com.lendly.fintech.ui.theme.SentimentPositive
 
 data class SuccessTxDetail(
     val label: String,
@@ -66,19 +84,35 @@ fun SuccessfulTransaction(
     helpLinkText: String? = null,
     onHelp: (() -> Unit)? = null,
     onClose: (() -> Unit)? = null,
+    onInfo: (() -> Unit)? = null,
+    onMore: (() -> Unit)? = null,
 ) {
+    SuccessfulTransactionSystemBars()
+
     Scaffold(
         containerColor = BackgroundScreen,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            PrimaryButton(
-                text = doneButtonText,
+            Button(
                 onClick = onDone,
+                shape = CornerFull,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = InteractiveAccent,
+                    contentColor = ContentAmount,
+                ),
+                contentPadding = PaddingValues(horizontal = 24.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(horizontal = Spacing.lg, vertical = Spacing.md),
-            )
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+                    .height(48.dp),
+            ) {
+                Text(
+                    text = doneButtonText,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = ContentAmount,
+                )
+            }
         },
     ) { innerPadding ->
         Column(
@@ -88,88 +122,110 @@ fun SuccessfulTransaction(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            // ── HERO ────────────────────────────────────────────────────────
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(376.dp)
                     .background(BackgroundCard)
                     .statusBarsPadding()
-                    .padding(top = Spacing.md, bottom = Spacing.xl),
+                    .padding(start = 16.dp, top = 28.dp, end = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                if (onClose != null) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = Spacing.md, bottom = Spacing.lg),
-                    ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    if (onClose != null) {
                         Box(
                             modifier = Modifier
-                                .size(40.dp)
+                                .size(48.dp)
                                 .clip(CircleShape)
-                                .background(MaterialTheme.colorScheme.surfaceVariant)
+                                .background(BackgroundCircleNeutral)
                                 .clickable(onClick = onClose),
                             contentAlignment = Alignment.Center,
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(20.dp),
+                                contentDescription = "Close",
+                                tint = ContentPrimary,
+                                modifier = Modifier.size(24.dp),
                             )
                         }
+                    } else {
+                        Spacer(modifier = Modifier.size(48.dp))
                     }
-                } else {
-                    Spacer(modifier = Modifier.height(Spacing.xxl))
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    TopIconButton(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = "Info",
+                        onClick = onInfo ?: onHelp,
+                    )
+                    TopIconButton(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "More options",
+                        onClick = onMore,
+                    )
                 }
+
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Box(
                     modifier = Modifier
                         .size(72.dp)
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primaryContainer),
+                        .background(InteractiveAccent),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
                         imageVector = illustration,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        tint = IconTintDark,
                         modifier = Modifier.size(32.dp),
                     )
                 }
 
-                Spacer(modifier = Modifier.height(Spacing.sm))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodyLarge,
                     color = ContentTertiary,
+                    textAlign = TextAlign.Center,
                 )
 
-                Spacer(modifier = Modifier.height(Spacing.md))
+                Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
                     text = amount,
                     style = MaterialTheme.typography.displaySmall,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = ContentPrimary,
+                    textAlign = TextAlign.Center,
                 )
 
                 if (subtitle != null) {
-                    Spacer(modifier = Modifier.height(Spacing.md))
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodyLarge,
                         color = ContentTertiary,
+                        textAlign = TextAlign.Center,
                     )
                 }
 
                 if (tag != null) {
-                    Spacer(modifier = Modifier.height(Spacing.md))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Box(
                         modifier = Modifier
-                            .border(1.dp, MaterialTheme.colorScheme.outline, CornerFull)
+                            .height(32.dp)
+                            .defaultMinSize(minWidth = 86.dp)
+                            .border(1.dp, ContentTertiary, CornerFull)
                             .clip(CornerFull)
-                            .padding(horizontal = Spacing.md, vertical = Spacing.xs),
+                            .padding(horizontal = 18.dp),
+                        contentAlignment = Alignment.Center,
                     ) {
                         Text(
                             text = tag,
@@ -180,58 +236,30 @@ fun SuccessfulTransaction(
                 }
             }
 
-            // ── BODY ────────────────────────────────────────────────────────
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = Spacing.lg),
+                    .padding(horizontal = 16.dp),
             ) {
-                Spacer(modifier = Modifier.height(Spacing.lg))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Text(
                     text = sectionTitle,
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = ContentOnSurface,
                 )
 
-                Spacer(modifier = Modifier.height(Spacing.md))
+                Spacer(modifier = Modifier.height(18.dp))
 
                 details.forEach { detail ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Top,
-                    ) {
-                        Text(
-                            text = detail.label,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = ContentTertiary,
-                            modifier = Modifier.weight(1f),
-                        )
-                        if (detail.isLink) {
-                            Text(
-                                text = detail.value,
-                                style = MaterialTheme.typography.bodyLarge.copy(
-                                    textDecoration = TextDecoration.Underline,
-                                ),
-                                color = ContentLink,
-                            )
-                        } else {
-                            Text(
-                                text = detail.value,
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onBackground,
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(Spacing.sm))
+                    DetailRow(detail = detail)
                 }
 
-                Spacer(modifier = Modifier.height(Spacing.md))
+                Spacer(modifier = Modifier.height(14.dp))
                 HorizontalDivider(color = MaterialTheme.colorScheme.outline)
 
                 if (onHelp != null && needHelpText != null && helpLinkText != null) {
-                    Spacer(modifier = Modifier.height(Spacing.lg))
+                    Spacer(modifier = Modifier.height(32.dp))
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -241,21 +269,102 @@ fun SuccessfulTransaction(
                             style = MaterialTheme.typography.bodyLarge,
                             color = ContentTertiary,
                         )
-                        Spacer(modifier = Modifier.height(Spacing.xs))
                         Text(
                             text = helpLinkText,
-                            style = MaterialTheme.typography.bodyLarge.copy(
+                            style = MaterialTheme.typography.titleMedium.copy(
                                 textDecoration = TextDecoration.Underline,
                             ),
-                            color = ContentLink,
+                            color = SentimentPositive,
                             modifier = Modifier.clickable(onClick = onHelp),
                         )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Spacing.xxl))
+                Spacer(modifier = Modifier.height(62.dp))
             }
         }
+    }
+}
+
+@Composable
+@Suppress("DEPRECATION")
+private fun SuccessfulTransactionSystemBars() {
+    val view = LocalView.current
+    DisposableEffect(view) {
+        if (view.isInEditMode) {
+            onDispose { }
+        } else {
+            val window = (view.context as? Activity)?.window
+            val previousStatusBarColor = window?.statusBarColor
+            val previousNavigationBarColor = window?.navigationBarColor
+
+            if (window != null) {
+                window.statusBarColor = BackgroundCard.toArgb()
+                window.navigationBarColor = BackgroundScreen.toArgb()
+                WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+                WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
+            }
+
+            onDispose {
+                if (window != null) {
+                    if (previousStatusBarColor != null) {
+                        window.statusBarColor = previousStatusBarColor
+                    }
+                    if (previousNavigationBarColor != null) {
+                        window.navigationBarColor = previousNavigationBarColor
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TopIconButton(
+    imageVector: ImageVector,
+    contentDescription: String,
+    onClick: (() -> Unit)?,
+) {
+    IconButton(
+        onClick = onClick ?: {},
+        modifier = Modifier.size(48.dp),
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = contentDescription,
+            tint = ContentOnSurface,
+            modifier = Modifier.size(24.dp),
+        )
+    }
+}
+
+@Composable
+private fun DetailRow(detail: SuccessTxDetail) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top,
+    ) {
+        Text(
+            text = detail.label,
+            style = MaterialTheme.typography.bodyLarge,
+            color = ContentTertiary,
+            modifier = Modifier.weight(1f),
+        )
+
+        Text(
+            text = detail.value,
+            style = if (detail.isLink) {
+                MaterialTheme.typography.bodyLarge.copy(textDecoration = TextDecoration.Underline)
+            } else {
+                MaterialTheme.typography.bodyLarge
+            },
+            color = if (detail.isLink) SentimentPositive else ContentTertiary,
+            textAlign = TextAlign.End,
+            modifier = Modifier.weight(1f),
+        )
     }
 }
 
@@ -268,6 +377,7 @@ private fun SuccessfulTransactionCashInPreview() {
             amount = "\$2,500.00",
             details = listOf(
                 SuccessTxDetail(label = "Date & Time", value = "May 31, 2026 02:00 PM"),
+                SuccessTxDetail(label = "Amount", value = "\$2,500.00"),
                 SuccessTxDetail(label = "Transaction No.", value = "A1B2C3D4", isLink = true),
             ),
             sectionTitle = "Transaction Details",
@@ -275,7 +385,7 @@ private fun SuccessfulTransactionCashInPreview() {
             onDone = {},
             subtitle = "From GCash",
             tag = "Cash-In",
-            illustration = Icons.Filled.Check,
+            illustration = Icons.Filled.Add,
             needHelpText = "Need help?",
             helpLinkText = "Go to Help Center",
             onHelp = {},
@@ -293,6 +403,7 @@ private fun SuccessfulTransactionLoanPreview() {
             amount = "\$5,000.00",
             details = listOf(
                 SuccessTxDetail(label = "Date & Time", value = "May 31, 2026 02:00 PM"),
+                SuccessTxDetail(label = "Amount", value = "\$5,000.00"),
                 SuccessTxDetail(label = "Loan ID", value = "LN-00042"),
             ),
             sectionTitle = "Transaction Details",

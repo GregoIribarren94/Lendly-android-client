@@ -1,7 +1,7 @@
-// HistoryTransactionRow.kt
 package com.lendly.fintech.ui.screens.history.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -21,72 +21,40 @@ fun HistoryTransactionRow(
     title: String,
     company: String,
     amount: String,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 56.dp),
+            .heightIn(min = 56.dp)
+            .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        // Ícono
         Box(
             modifier = Modifier
                 .size(40.dp)
-                .background(
-                    color = BackgroundCard,
-                    shape = CircleShape
-                ),
-            contentAlignment = Alignment.Center
+                .background(color = BackgroundCard, shape = CircleShape),
+            contentAlignment = Alignment.Center,
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = ContentOnSurface
-            )
+            Icon(imageVector = icon, contentDescription = null, tint = ContentOnSurface)
         }
-
-        // Contenido
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(0.dp)
-        ) {
-            // Fila superior: hora + empresa
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = time,
-                    style = CaptionMedium,
-                    color = ContentTertiary
-                )
-                Text(
-                    text = company,
-                    style = CaptionMedium,
-                    color = ContentTertiary,
-                    textAlign = TextAlign.End
-                )
-            }
-
-            // Fila inferior: título + monto
+        Column(modifier = Modifier.weight(1f)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = title,
-                    style = Body,
-                    color = ContentPrimary
-                )
-                Text(
-                    text = amount,
-                    style = Body,
-                    color = ContentAmount,
-                    textAlign = TextAlign.End
-                )
+                Text(text = time, style = CaptionMedium, color = ContentTertiary)
+                Text(text = company, style = CaptionMedium, color = ContentTertiary, textAlign = TextAlign.End)
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(text = title, style = Body, color = ContentPrimary)
+                Text(text = amount, style = Body, color = ContentAmount, textAlign = TextAlign.End)
             }
         }
     }
