@@ -23,6 +23,7 @@ val BackgroundScreen = Color(0xFFFFFFFF)
 val BackgroundElevated = Color(0xFFFFFFFF)
 val BackgroundNeutral = Color(0xFFE5F5EA)
 val BackgroundOverlay = Color(0xFFE5F5EA)
+val BackgroundCircleNeutral = Color(0xFFE5E2E1) // fondo del botón circular "back" del hero
 
 // Border colours
 val BorderNeutral = Color(red = 14, green = 15, blue = 12, alpha = 31)
@@ -32,6 +33,10 @@ val BorderOverlay = Color(red = 14, green = 15, blue = 12, alpha = 31)
 val SentimentNegative = Color(0xFFA8200D)
 val SentimentNegativeDark = Color(0xFF2F5711)
 val SentimentWarning = Color(0xFFEDC843)
+val SentimentPositive = Color(0xFF4C662B)        // link/valor positivo: Tx Number + Help Center
+
+// Icon tint
+val IconTintDark = Color(0xFF1C1B1F)             // tint de íconos sobre fondo claro (flecha hero)
 
 // Base colours
 val BaseContrast = Color(0xFFFFFFFF)
