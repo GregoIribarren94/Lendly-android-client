@@ -1,5 +1,7 @@
 package com.lendly.fintech.ui.navigation
 
+import android.net.Uri
+
 object Routes {
     // Root flow (sin BottomBar)
     const val SPLASH = "splash"
@@ -7,7 +9,8 @@ object Routes {
     const val ONBOARDING_2 = "onboarding2"
     const val ONBOARDING_3 = "onboarding3"
     const val LOGIN = "login"
-    const val AUTH_GRAPH = "authGraph"
+    // Sub-graph que agrupa el flujo de registro y permite compartir el RegisterViewModel.
+    const val REGISTER_GRAPH = "registerGraph"
     const val VERIFY_PHONE = "verifyPhone"
     const val SMS_VERIFICATION = "smsVerification"
     const val PROFILE_FORM = "profileForm"
@@ -27,6 +30,8 @@ object Routes {
     const val OTC_CASH_IN = "otcCashIn"
     const val ONLINE_CASH_IN = "onlineCashIn"
     const val SUCCESS_TX = "successTx"
+    const val OTC_CASH_IN_FORM = "otcCashInForm/{partnerId}"
+    const val ONLINE_CASH_IN_FORM = "onlineCashInForm/{methodId}"
     const val LOAN_INFO = "loanInfo"
     const val LOAN_FORM = "loanForm"
     const val ACTIVE_LOAN = "activeLoan"
@@ -47,7 +52,19 @@ object Routes {
     fun product(id: String) = "$PRODUCT_BASE/$id"
     fun txDetails(id: String) = "$TX_DETAILS_BASE/$id"
     fun profileDetail(id: String) = "$PROFILE_DETAIL_BASE/$id"
+    fun otcCashInForm(partnerId: String) = "otcCashInForm/$partnerId"
+    fun onlineCashInForm(methodId: String) = "onlineCashInForm/$methodId"
+    fun successTxWithRef(referenceCode: String, amount: String = "", method: String = "") =
+        "$SUCCESS_TX?$ARG_REF_CODE=$referenceCode&$ARG_AMOUNT=${Uri.encode(amount)}&$ARG_METHOD=${Uri.encode(method)}"
+
+    fun successTxOnline(amount: String, method: String) =
+        "$SUCCESS_TX?$ARG_AMOUNT=${Uri.encode(amount)}&$ARG_METHOD=${Uri.encode(method)}"
 
     // Argument keys
     const val ARG_ID = "id"
+    const val ARG_PARTNER_ID = "partnerId"
+    const val ARG_METHOD_ID = "methodId"
+    const val ARG_REF_CODE = "referenceCode"
+    const val ARG_AMOUNT = "amount"
+    const val ARG_METHOD = "method"
 }

@@ -46,17 +46,65 @@ fun MainNavHost(
         }
         composable(Routes.OTC_CASH_IN) {
             OtcCashInScreen(
-                onSuccess = { navController.navigate(Routes.SUCCESS_TX) },
+                onPartnerSelected = { partnerId ->
+                    navController.navigate(Routes.otcCashInForm(partnerId))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.OTC_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_PARTNER_ID) { type = NavType.StringType }),
+        ) {
+            OtcCashInFormScreen(
+                onSuccess = { referenceCode, amount, method ->
+                    navController.navigate(Routes.successTxWithRef(referenceCode, amount, method))
+                },
                 onBack = { navController.popBackStack() },
             )
         }
         composable(Routes.ONLINE_CASH_IN) {
             OnlineCashInScreen(
-                onSuccess = { navController.navigate(Routes.SUCCESS_TX) },
+                onMethodSelected = { methodId ->
+                    navController.navigate(Routes.onlineCashInForm(methodId))
+                },
                 onBack = { navController.popBackStack() },
             )
         }
-        composable(Routes.SUCCESS_TX) {
+        composable(
+            route = Routes.ONLINE_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_METHOD_ID) { type = NavType.StringType }),
+        ) {
+            OnlineCashInFormScreen(
+                onSuccess = { amount, method ->
+                    navController.navigate(Routes.successTxOnline(amount, method))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}&${Routes.ARG_AMOUNT}={${Routes.ARG_AMOUNT}}&${Routes.ARG_METHOD}={${Routes.ARG_METHOD}}",
+            arguments = listOf(
+                navArgument(Routes.ARG_REF_CODE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_AMOUNT) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_METHOD) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+            ),
+        ) { backStackEntry ->
+            val referenceCode = backStackEntry.arguments?.getString(Routes.ARG_REF_CODE)
+            val amount = backStackEntry.arguments?.getString(Routes.ARG_AMOUNT).orEmpty()
+            val method = backStackEntry.arguments?.getString(Routes.ARG_METHOD).orEmpty()
             SuccessTxScreen(
                 onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
             )

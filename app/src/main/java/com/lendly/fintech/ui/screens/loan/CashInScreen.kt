@@ -48,8 +48,9 @@ fun CashInScreen(
                     IconButton(onClick = {}) {
                         Icon(
                             imageVector = Icons.Outlined.Info,
-                            contentDescription =
-                                stringResource(R.string.cash_in_top_bar_info_content_description),
+                            contentDescription = stringResource(
+                                R.string.cash_in_top_bar_info_content_description
+                            ),
                         )
                     }
                 },
