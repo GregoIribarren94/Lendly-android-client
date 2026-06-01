@@ -15,21 +15,27 @@ fun MainScreen() {
     val nestedNavController = rememberNavController()
     val navBackStackEntry by nestedNavController.currentBackStackEntryAsState()
 
+    val currentRoute = navBackStackEntry?.destination?.route
+    // Full-screen sin BottomNav en el detalle de transacción.
+    val hideBottomBar = currentRoute?.startsWith(Routes.TX_DETAILS_BASE) == true
+
     Scaffold(
         bottomBar = {
-            BottomNavBar(
-                selectedRoute = navBackStackEntry?.destination?.route.orEmpty(),
-                onItemSelected = { item ->
-                    nestedNavController.navigate(item.route) {
-                        // Mantiene el back stack interno de cada tab
-                        popUpTo(nestedNavController.graph.findStartDestination().id) {
-                            saveState = true
+            if (!hideBottomBar) {
+                BottomNavBar(
+                    selectedRoute = currentRoute.orEmpty(),
+                    onItemSelected = { item ->
+                        nestedNavController.navigate(item.route) {
+                            // Mantiene el back stack interno de cada tab
+                            popUpTo(nestedNavController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-            )
+                    },
+                )
+            }
         },
     ) { innerPadding ->
         MainNavHost(

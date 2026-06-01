@@ -14,3 +14,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Design reference assets (Figma exports) — no deben subirse al repo
+/app/src/main/design/
