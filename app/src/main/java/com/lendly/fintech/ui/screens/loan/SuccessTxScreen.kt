@@ -20,6 +20,7 @@ fun SuccessTxScreen(
     onDone: () -> Unit,
 ) {
     val dateTimeLabel = stringResource(R.string.success_tx_detail_datetime)
+    val amountLabel = stringResource(R.string.success_tx_detail_amount)
     val txNumberLabel = stringResource(R.string.success_tx_detail_tx_number)
     val now = remember {
         SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault()).format(Date())
@@ -27,6 +28,9 @@ fun SuccessTxScreen(
 
     val details = buildList {
         add(SuccessTxDetail(label = dateTimeLabel, value = now))
+        if (amount.isNotEmpty()) {
+            add(SuccessTxDetail(label = amountLabel, value = amount))
+        }
         if (referenceCode != null) {
             add(SuccessTxDetail(label = txNumberLabel, value = referenceCode, isLink = true))
         }

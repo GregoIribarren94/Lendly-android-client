@@ -122,6 +122,7 @@
     <string name="success_tx_tag_cash_in">Cash-In</string>
     <string name="success_tx_details_heading">Transaction Details</string>
     <string name="success_tx_detail_datetime">Date &amp; Time</string>
+    <string name="success_tx_detail_amount">Amount</string>
     <string name="success_tx_detail_tx_number">Transaction No.</string>
     <string name="success_tx_need_help">Need help?</string>
     <string name="success_tx_help_center">Go to Help Center</string>
