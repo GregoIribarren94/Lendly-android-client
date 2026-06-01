@@ -1,6 +1,7 @@
 package com.lendly.fintech.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -89,24 +90,26 @@ fun LendlyNavHost(
                     onBack = { navController.popBackStack() },
                 )
             }
-            composable(Routes.PROFILE_FORM) {
-                val registrationViewModel: RegistrationViewModel = hiltViewModel(
+            composable(Routes.PROFILE_FORM) { backStackEntry ->
+                val authGraphEntry = remember(backStackEntry) {
                     navController.getBackStackEntry(Routes.AUTH_GRAPH)
-                )
+                }
+                val registrationViewModel: RegistrationViewModel = hiltViewModel(authGraphEntry)
                 ProfileFormScreen(
                     onContinue = { navController.navigate(Routes.CREATE_PASSWORD) },
                     onBack = { navController.popBackStack() },
                     viewModel = registrationViewModel,
                 )
             }
-            composable(Routes.CREATE_PASSWORD) {
-                val registrationViewModel: RegistrationViewModel = hiltViewModel(
+            composable(Routes.CREATE_PASSWORD) { backStackEntry ->
+                val authGraphEntry = remember(backStackEntry) {
                     navController.getBackStackEntry(Routes.AUTH_GRAPH)
-                )
+                }
+                val registerViewModel: RegisterViewModel = hiltViewModel(authGraphEntry)
                 CreatePasswordScreen(
                     onContinue = { navController.navigate(Routes.DONE) },
                     onBack = { navController.popBackStack() },
-                    viewModel = registrationViewModel,
+                    viewModel = registerViewModel,
                 )
             }
             composable(Routes.DONE) {

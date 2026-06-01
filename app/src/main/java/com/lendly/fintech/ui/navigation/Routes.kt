@@ -9,8 +9,8 @@ object Routes {
     const val ONBOARDING_2 = "onboarding2"
     const val ONBOARDING_3 = "onboarding3"
     const val LOGIN = "login"
-    // Sub-graph que agrupa el flujo de registro y permite compartir el RegisterViewModel.
-    const val REGISTER_GRAPH = "registerGraph"
+    // Sub-graph que agrupa el flujo de auth/registro y permite compartir el RegistrationViewModel.
+    const val AUTH_GRAPH = "authGraph"
     const val VERIFY_PHONE = "verifyPhone"
     const val SMS_VERIFICATION = "smsVerification"
     const val PROFILE_FORM = "profileForm"
