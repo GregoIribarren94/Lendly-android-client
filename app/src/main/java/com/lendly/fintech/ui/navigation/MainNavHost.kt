@@ -181,12 +181,9 @@ fun MainNavHost(
         composable(
             route = Routes.TX_DETAILS,
             arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
-        ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getString(Routes.ARG_ID).orEmpty()
-            TxDetailsScreen(
-                txId = id,
-                onBack = { navController.popBackStack() },
-            )
+        ) {
+            // El id lo lee el TxDetailsViewModel desde el SavedStateHandle.
+            TxDetailsScreen(onBack = { navController.popBackStack() })
         }
 
         // MANAGE TAB
