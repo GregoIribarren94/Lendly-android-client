@@ -14,7 +14,7 @@ fun AvailableBalanceLabel(modifier: Modifier = Modifier) {
         text = "AVAILABLE BALANCE",
         style = CaptionMedium,
         color = ContentSecondary,
-        textAlign = TextAlign.Center,
+        textAlign = TextAlign.Left,
         modifier = modifier
     )
 }
