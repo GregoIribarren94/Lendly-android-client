@@ -88,8 +88,28 @@ fun LendlyNavHost(
             }
             composable(Routes.SMS_VERIFICATION) {
                 SmsVerificationScreen(
-                    onContinue = { navController.navigate(Routes.PROFILE_FORM) },
+                    onContinue = { navController.navigate(Routes.FACE_VERIFICATION) },
                     onBack = { navController.popBackStack() },
+                )
+            }
+            // Orden segun Figma: codigo SMS -> Face Verification -> ID Verification -> Verified -> Datos personales.
+            composable(Routes.FACE_VERIFICATION) {
+                FaceVerificationScreen(
+                    onBack = { navController.popBackStack() },
+                    onInfo = { },
+                    onContinue = { navController.navigate(Routes.ID_VERIFICATION) },
+                )
+            }
+            composable(Routes.ID_VERIFICATION) {
+                IdVerificationScreen(
+                    onBack = { navController.popBackStack() },
+                    onInfo = { },
+                    onContinue = { navController.navigate(Routes.VERIFIED) },
+                )
+            }
+            composable(Routes.VERIFIED) {
+                VerifiedScreen(
+                    onContinue = { navController.navigate(Routes.PROFILE_FORM) },
                 )
             }
             composable(Routes.PROFILE_FORM) { backStackEntry ->

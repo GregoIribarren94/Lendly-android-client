@@ -6,20 +6,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
@@ -37,10 +31,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.AuthBottomBar
 import com.lendly.fintech.ui.components.inputs.AppTextField
 import com.lendly.fintech.ui.components.inputs.PhoneNumberInput
-import com.lendly.fintech.ui.components.navigation.AppTopBar
+import com.lendly.fintech.ui.components.navigation.AuthTopBar
 import com.lendly.fintech.ui.theme.Spacing
 import java.time.LocalDate
 import java.time.YearMonth
@@ -56,33 +50,16 @@ fun ProfileFormScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            AppTopBar(
-                title = "",
-                onBackClick = onBack,
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = stringResource(
-                                R.string.profile_form_info_content_description
-                            ),
-                        )
-                    }
-                },
+            AuthTopBar(
+                onBack = onBack,
+                onInfo = {},
             )
         },
         bottomBar = {
-            PrimaryButton(
+            AuthBottomBar(
                 text = stringResource(R.string.profile_form_next),
-                onClick = {
-                    if (state.isProfileComplete) onContinue()
-                },
+                onClick = onContinue,
                 enabled = state.isProfileComplete,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .imePadding()
-                    .padding(horizontal = Spacing.md, vertical = Spacing.md),
             )
         },
     ) { innerPadding ->

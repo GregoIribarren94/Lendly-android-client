@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.AuthBottomBar
 import com.lendly.fintech.ui.theme.LendlyTheme
 import com.lendly.fintech.ui.theme.OnboardingBackground
 import com.lendly.fintech.ui.theme.OnboardingSubtitleColor
@@ -67,7 +67,7 @@ fun DoneScreen(
                     .fillMaxSize()
                     .statusBarsPadding()
                     .padding(horizontal = Spacing.lg)
-                    .padding(top = Spacing.md, bottom = Spacing.xl),
+                    .padding(top = Spacing.md),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 StackedLogoMark(modifier = Modifier.padding(top = Spacing.xs))
@@ -102,12 +102,15 @@ fun DoneScreen(
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
-
-                PrimaryButton(
-                    text = "Done",
-                    onClick = onContinue,
-                )
             }
+
+            AuthBottomBar(
+                text = "Done",
+                onClick = onContinue,
+                showDivider = false,
+                containerColor = OnboardingBackground,
+                modifier = Modifier.align(Alignment.BottomCenter),
+            )
         }
     }
 }
