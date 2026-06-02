@@ -109,6 +109,8 @@ fun LendlyNavHost(
             }
             composable(Routes.VERIFIED) {
                 VerifiedScreen(
+                    onBack = { navController.popBackStack() },
+                    onInfo = { },
                     onContinue = { navController.navigate(Routes.PROFILE_FORM) },
                 )
             }
