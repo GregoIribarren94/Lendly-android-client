@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -40,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.AuthBottomBar
 import com.lendly.fintech.ui.components.inputs.AppTextField
 import com.lendly.fintech.R
 
@@ -88,14 +87,14 @@ private fun LoginContent(
         color = Color.White,
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding()
-                .padding(horizontal = 24.dp, vertical = 16.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
             // Bloque Superior Contenedor
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+                    .padding(top = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(180.dp))
@@ -179,37 +178,14 @@ private fun LoginContent(
                 }
             } // Cierre correcto del Column superior
 
-            // Bloque Inferior Fijo con el botón y la línea divisoria
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(Color(0xFFE0E0E0))
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                PrimaryButton(
-                    text = "Log In",
-                    onClick = onSubmit,
-                    enabled = state.canSubmit,
-                    isLoading = state.isLoading,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp)
-                        .background(
-                            Color(0xFF76EE76),
-                            shape = CircleShape
-                        )
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-            }
+            // Bloque Inferior Fijo: mismo AuthBottomBar que el resto del flujo de auth.
+            AuthBottomBar(
+                text = "Log In",
+                onClick = onSubmit,
+                enabled = state.canSubmit,
+                isLoading = state.isLoading,
+                modifier = Modifier.align(Alignment.BottomCenter),
+            )
         }
     }
 }

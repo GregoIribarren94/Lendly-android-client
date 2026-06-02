@@ -1,25 +1,14 @@
 package com.lendly.fintech.ui.screens.auth
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -46,13 +34,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.R
+import com.lendly.fintech.ui.components.buttons.AuthBottomBar
+import com.lendly.fintech.ui.components.navigation.AuthTopBar
 import com.lendly.fintech.ui.theme.BackgroundCard
 import com.lendly.fintech.ui.theme.ContentPrimary
 import com.lendly.fintech.ui.theme.ContentTertiary
-import com.lendly.fintech.ui.theme.CornerFull
 import com.lendly.fintech.ui.theme.FormHelper
 import com.lendly.fintech.ui.theme.FormLabel
-import com.lendly.fintech.ui.theme.InteractiveAccent
 import com.lendly.fintech.ui.theme.LendlyTheme
 import com.lendly.fintech.ui.theme.Spacing
 
@@ -97,14 +85,16 @@ private fun CreatePasswordContent(
         color = BackgroundCard,
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
+            AuthTopBar(
+                onBack = onBack,
+                onInfo = {},
+            )
+
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .statusBarsPadding()
                     .padding(horizontal = Spacing.lg),
             ) {
-                TopBar(onBack = onBack)
-
                 Spacer(modifier = Modifier.height(Spacing.md))
 
                 Text(
@@ -139,36 +129,11 @@ private fun CreatePasswordContent(
                 )
             }
 
-            Footer(
-                onSubmit = onSubmit,
+            AuthBottomBar(
+                text = "Next",
+                onClick = onSubmit,
                 enabled = state.canSubmit,
                 isLoading = state.isLoading,
-            )
-        }
-    }
-}
-
-@Composable
-private fun TopBar(onBack: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = Spacing.xs),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        IconButton(onClick = onBack) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_left_alt),
-                contentDescription = "Volver",
-                tint = Color.Unspecified,
-            )
-        }
-        IconButton(onClick = { /* TODO: mostrar info contextual cuando exista el contenido */ }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_info),
-                contentDescription = "Información",
-                tint = Color.Unspecified,
             )
         }
     }
@@ -214,57 +179,6 @@ private fun PasswordField(
             }
         },
     )
-}
-
-@Composable
-private fun Footer(
-    onSubmit: () -> Unit,
-    enabled: Boolean,
-    isLoading: Boolean,
-) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        HorizontalDivider(
-            thickness = 1.dp,
-            color = Color(0xFFE5E5E5),
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .navigationBarsPadding()
-                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
-        ) {
-            Button(
-                onClick = onSubmit,
-                enabled = enabled && !isLoading,
-                shape = CornerFull,
-                colors = ButtonDefaults.buttonColors(
-                    // Mantengo el verde #7BF179 tanto en estado habilitado como deshabilitado,
-                    // como pidió el diseño; el `enabled` ya bloquea el click.
-                    containerColor = InteractiveAccent,
-                    disabledContainerColor = InteractiveAccent,
-                    contentColor = ContentPrimary,
-                    disabledContentColor = ContentPrimary,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-            ) {
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp),
-                        color = ContentPrimary,
-                        strokeWidth = 2.dp,
-                    )
-                } else {
-                    Text(
-                        text = "Next",
-                        style = MaterialTheme.typography.labelLarge,
-                    )
-                }
-            }
-        }
-    }
 }
 
 private fun passwordHint() = buildAnnotatedString {
