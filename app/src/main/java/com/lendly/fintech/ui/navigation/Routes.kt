@@ -17,6 +17,7 @@ object Routes {
     const val FACE_VERIFICATION = "faceVerification"
     const val ID_VERIFICATION = "idVerification"
     const val VERIFIED = "verified"
+    const val SIGNATURE = "signature"
     const val CREATE_PASSWORD = "createPassword"
     const val DONE = "done"
     const val MAIN = "main" // Contenedor del MainNavHost con BottomNav

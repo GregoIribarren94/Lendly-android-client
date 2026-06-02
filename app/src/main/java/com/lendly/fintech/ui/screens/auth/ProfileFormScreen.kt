@@ -1,12 +1,14 @@
 package com.lendly.fintech.ui.screens.auth
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -35,6 +37,7 @@ import com.lendly.fintech.ui.components.buttons.AuthBottomBar
 import com.lendly.fintech.ui.components.inputs.AppTextField
 import com.lendly.fintech.ui.components.inputs.PhoneNumberInput
 import com.lendly.fintech.ui.components.navigation.AuthTopBar
+import com.lendly.fintech.ui.theme.ContentSecondary
 import com.lendly.fintech.ui.theme.Spacing
 import java.time.LocalDate
 import java.time.YearMonth
@@ -93,9 +96,9 @@ fun ProfileFormScreen(
 
             DateOfBirthFields(
                 label = stringResource(R.string.profile_form_birth_date_label),
-                dayPlaceholder = stringResource(R.string.profile_form_day_placeholder),
-                monthPlaceholder = stringResource(R.string.profile_form_month_placeholder),
-                yearPlaceholder = stringResource(R.string.profile_form_year_placeholder),
+                dayPlaceholder = "08",   // Ejemplo real
+                monthPlaceholder = "12", // Ejemplo real
+                yearPlaceholder = "1997",// Ejemplo real
                 selectedDay = state.birthDay,
                 selectedMonth = state.birthMonth,
                 selectedYear = state.birthYear,
@@ -128,13 +131,38 @@ fun ProfileFormScreen(
 
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
                 ProfileFieldLabel(text = stringResource(R.string.profile_form_phone_label))
-                PhoneNumberInput(
-                    phoneNumber = state.phoneNumber,
-                    onPhoneNumberChange = viewModel::onPhoneNumberChange,
-                    selectedCountry = state.selectedCountry,
-                    onCountrySelected = viewModel::onCountrySelected,
-                    label = "",
-                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.md) // Espaciado idéntico entre las cajas
+                ) {
+                    // Contenedor del código de país (+65)
+                    Box(
+                        modifier = Modifier.width(72.dp) // Ancho fijo y compacto como la captura
+                    ) {
+                        AppTextField(
+                            value = "+65", // Si necesitas cambiarlo dinámicamente podés usar state.selectedCountry
+                            onValueChange = { /* Si es editable o abre selector, va acá */ },
+                            label = "",
+                            placeholder = "+65",
+                            keyboardType = KeyboardType.Number,
+                        )
+                    }
+
+                    // Contenedor expandible para el número de celular
+                    Box(
+                        modifier = Modifier.weight(1f) // Toma de forma fluida todo el espacio sobrante
+                    ) {
+                        AppTextField(
+                            value = state.phoneNumber,
+                            onValueChange = viewModel::onPhoneNumberChange,
+                            label = "",
+                            placeholder = "991251255", // Ejemplo real que pusiste en la imagen anterior
+                            keyboardType = KeyboardType.Number,
+                        )
+                    }
+                }
+
             }
         }
     }
@@ -186,47 +214,80 @@ private fun DateOfBirthFields(
     onMonthSelected: (Int?) -> Unit,
     onYearSelected: (Int?) -> Unit,
 ) {
-    val currentYear = remember { LocalDate.now().year }
-    val days = remember(selectedMonth, selectedYear) {
-        val dayCount = if (selectedMonth != null && selectedYear != null) {
-            YearMonth.of(selectedYear, selectedMonth).lengthOfMonth()
-        } else {
-            31
-        }
-        (1..dayCount).toList()
-    }
-    val months = remember { (1..12).toList() }
-    val years = remember(currentYear) { (currentYear downTo 1900).toList() }
-
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
         ProfileFieldLabel(text = label)
+
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-            DateDropdownField(
-                selectedValue = selectedDay,
-                placeholder = dayPlaceholder,
-                options = days,
-                onValueSelected = onDaySelected,
+            // Campo del DÍA
+            Column(
                 modifier = Modifier.weight(1f),
-            )
-            DateDropdownField(
-                selectedValue = selectedMonth,
-                placeholder = monthPlaceholder,
-                options = months,
-                onValueSelected = onMonthSelected,
+                verticalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                Text(text = "Day", style = MaterialTheme.typography.bodyMedium, color = ContentSecondary)
+                DateInputField(
+                    value = selectedDay,
+                    placeholder = dayPlaceholder,
+                    maxLength = 2,
+                    onValueChange = onDaySelected
+                )
+            }
+
+            // Campo del MES
+            Column(
                 modifier = Modifier.weight(1f),
-            )
-            DateDropdownField(
-                selectedValue = selectedYear,
-                placeholder = yearPlaceholder,
-                options = years,
-                onValueSelected = onYearSelected,
-                modifier = Modifier.weight(1f),
-            )
+                verticalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                Text(text = "Month", style = MaterialTheme.typography.bodyMedium, color = ContentSecondary)
+                DateInputField(
+                    value = selectedMonth,
+                    placeholder = monthPlaceholder,
+                    maxLength = 2,
+                    onValueChange = onMonthSelected
+                )
+            }
+
+            // Campo del AÑO (Más ancho como el diseño)
+            Column(
+                modifier = Modifier.weight(1.4f),
+                verticalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                Text(text = "Year", style = MaterialTheme.typography.bodyMedium, color = ContentSecondary)
+                DateInputField(
+                    value = selectedYear,
+                    placeholder = yearPlaceholder,
+                    maxLength = 4,
+                    onValueChange = onYearSelected
+                )
+            }
         }
     }
+}
+
+@Composable
+private fun DateInputField(
+    value: Int?,
+    placeholder: String,
+    maxLength: Int,
+    onValueChange: (Int?) -> Unit,
+) {
+    val textValue = value?.toString().orEmpty()
+
+    AppTextField(
+        value = textValue,
+        onValueChange = { newValue ->
+            // Filtramos para aceptar solo números y respetar el límite de caracteres (2 o 4 dígitos)
+            if (newValue.length <= maxLength && newValue.all { it.isDigit() }) {
+                // Si borra todo mandamos null, si no, lo convertimos a entero de forma segura
+                onValueChange(newValue.toIntOrNull())
+            }
+        },
+        label = "",
+        placeholder = placeholder,
+        keyboardType = KeyboardType.Number, // Abre directamente el teclado numérico
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

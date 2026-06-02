@@ -120,9 +120,16 @@ fun LendlyNavHost(
                 }
                 val registrationViewModel: RegistrationViewModel = hiltViewModel(authGraphEntry)
                 ProfileFormScreen(
-                    onContinue = { navController.navigate(Routes.CREATE_PASSWORD) },
+                    onContinue = { navController.navigate(Routes.SIGNATURE) },
                     onBack = { navController.popBackStack() },
                     viewModel = registrationViewModel,
+                )
+            }
+            composable(Routes.SIGNATURE) {
+                SignatureScreen(
+                    onBack = { navController.popBackStack() },
+                    onInfo = { },
+                    onContinue = { navController.navigate(Routes.CREATE_PASSWORD) },
                 )
             }
             composable(Routes.CREATE_PASSWORD) { backStackEntry ->

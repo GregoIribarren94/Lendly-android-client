@@ -154,6 +154,12 @@ private fun PasswordField(
         shape = MaterialTheme.shapes.small,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
+        placeholder = {
+            Text(
+                text = "********",
+                color = ContentTertiary // O el color gris claro que tengas definido para las pistas
+            )
+        },
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = ContentTertiary,
             unfocusedBorderColor = ContentTertiary,

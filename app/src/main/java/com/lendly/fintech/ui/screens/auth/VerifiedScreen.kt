@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.lendly.fintech.R
 import com.lendly.fintech.ui.components.buttons.AuthBottomBar
 import com.lendly.fintech.ui.components.navigation.AuthTopBar
@@ -116,14 +117,14 @@ private fun SecurityGuardCard() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(16.dp))
             .background(VerifiedCardBackground)
             .border(
                 width = 1.dp,
                 color = VerifiedCardBorder,
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(16.dp),
             )
-            .padding(horizontal = Spacing.lg, vertical = Spacing.lg),
+            .padding(horizontal = 12.dp, vertical = 28.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -136,11 +137,11 @@ private fun SecurityGuardCard() {
         Spacer(modifier = Modifier.height(Spacing.md))
 
         Text(
-            text = "Our online security feature world-class " +
-                "protection against hackers. It makes " +
-                "them cry and rethink their purpose " +
-                "in life.",
-            style = Body,
+            text = """Our online security feature world-class
+protection against hackers. It makes
+them cry and rethink their purpose
+in life.""",
+            style = Body.copy(lineHeight = 20.sp),
             color = ContentSecondary,
             textAlign = TextAlign.Center,
         )
