@@ -18,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.brand.LendlyLogoMark
+import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.screens.manage.components.ManageMenuItem
 import com.lendly.fintech.ui.theme.BackgroundCard
 import com.lendly.fintech.ui.theme.BackgroundScreen
@@ -66,7 +65,7 @@ fun ManageScreen(
             .background(BackgroundScreen)
             .verticalScroll(rememberScrollState()),
     ) {
-        ManageTopBar()
+        MainTopBar()
 
         ManageHeader()
 
@@ -140,34 +139,6 @@ fun ManageScreen(
         )
 
         Spacer(Modifier.height(Spacing.xl))
-    }
-}
-
-@Composable
-private fun ManageTopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.xs, vertical = Spacing.xs),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(R.drawable.ic_avatar_placeholder),
-                contentDescription = "Profile",
-                tint = ContentPrimary,
-            )
-        }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            LendlyLogoMark()
-        }
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(R.drawable.ic_notifications),
-                contentDescription = "Notifications",
-                tint = ContentPrimary,
-            )
-        }
     }
 }
 

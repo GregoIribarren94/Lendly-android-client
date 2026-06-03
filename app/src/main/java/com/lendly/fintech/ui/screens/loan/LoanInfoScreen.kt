@@ -21,10 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.lendly.fintech.R
 import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.screens.loan.components.HeroCard
 import com.lendly.fintech.ui.screens.loan.components.HowItWorksCard
 import com.lendly.fintech.ui.screens.loan.components.LoanDetailsCard
-import com.lendly.fintech.ui.screens.loan.components.LoanInfoTopBar
 import com.lendly.fintech.ui.theme.ContentPrimary
 import com.lendly.fintech.ui.theme.LendlyTheme
 import com.lendly.fintech.ui.theme.Spacing
@@ -45,7 +45,7 @@ fun LoanInfoScreen(
                 .padding(horizontal = Spacing.md, vertical = Spacing.md),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
-            LoanInfoTopBar()
+            MainTopBar()
             HeroCard()
             LoanDetailsCard()
             Text(
