@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -37,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.R
 import com.lendly.fintech.data.model.PaymentMethodType
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.FixedBottomBar
 import com.lendly.fintech.ui.components.inputs.AppTextField
 import com.lendly.fintech.ui.components.navigation.AppTopBar
 import com.lendly.fintech.ui.theme.Spacing
@@ -69,15 +67,10 @@ fun OnlineCashInFormScreen(
             )
         },
         bottomBar = {
-            PrimaryButton(
+            FixedBottomBar(
                 text = stringResource(R.string.online_cash_in_form_confirm_button),
                 onClick = viewModel::onConfirm,
                 enabled = state.canConfirm,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .imePadding()
-                    .padding(horizontal = Spacing.lg, vertical = Spacing.md),
             )
         },
         containerColor = MaterialTheme.colorScheme.background,

@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -28,8 +26,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,13 +42,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.lendly.fintech.ui.components.buttons.FixedBottomBar
 import com.lendly.fintech.ui.theme.BackgroundCard
 import com.lendly.fintech.ui.theme.BackgroundCircleNeutral
 import com.lendly.fintech.ui.theme.BackgroundScreen
-import com.lendly.fintech.ui.theme.ContentAmount
 import com.lendly.fintech.ui.theme.ContentOnSurface
 import com.lendly.fintech.ui.theme.ContentPrimary
 import com.lendly.fintech.ui.theme.ContentTertiary
@@ -93,26 +91,10 @@ fun SuccessfulTransaction(
         containerColor = BackgroundScreen,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            Button(
+            FixedBottomBar(
+                text = doneButtonText,
                 onClick = onDone,
-                shape = CornerFull,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = InteractiveAccent,
-                    contentColor = ContentAmount,
-                ),
-                contentPadding = PaddingValues(horizontal = 24.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
-                    .height(48.dp),
-            ) {
-                Text(
-                    text = doneButtonText,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = ContentAmount,
-                )
-            }
+            )
         },
     ) { innerPadding ->
         Column(
@@ -340,30 +322,40 @@ private fun TopIconButton(
 
 @Composable
 private fun DetailRow(detail: SuccessTxDetail) {
+    // Letra un poco más chica que bodyLarge para que el AM/PM de la fecha entre completo.
+    val detailStyle = MaterialTheme.typography.bodyLarge.copy(
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(40.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Top,
+            .defaultMinSize(minHeight = 40.dp)
+            .padding(vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = detail.label,
-            style = MaterialTheme.typography.bodyLarge,
+            style = detailStyle,
             color = ContentTertiary,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),
         )
 
         Text(
             text = detail.value,
             style = if (detail.isLink) {
-                MaterialTheme.typography.bodyLarge.copy(textDecoration = TextDecoration.Underline)
+                detailStyle.copy(textDecoration = TextDecoration.Underline)
             } else {
-                MaterialTheme.typography.bodyLarge
+                detailStyle
             },
             color = if (detail.isLink) SentimentPositive else ContentTertiary,
             textAlign = TextAlign.End,
-            modifier = Modifier.weight(1f),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1.4f),
         )
     }
 }
@@ -399,16 +391,25 @@ private fun SuccessfulTransactionCashInPreview() {
 private fun SuccessfulTransactionLoanPreview() {
     LendlyTheme {
         SuccessfulTransaction(
-            title = "Loan request submitted",
-            amount = "\$5,000.00",
+            title = "Added to your account",
+            amount = "2,000.00 PHP",
             details = listOf(
-                SuccessTxDetail(label = "Date & Time", value = "May 31, 2026 02:00 PM"),
-                SuccessTxDetail(label = "Amount", value = "\$5,000.00"),
-                SuccessTxDetail(label = "Loan ID", value = "LN-00042"),
+                SuccessTxDetail(label = "Monthly Fee", value = "₱982.12"),
+                SuccessTxDetail(label = "Interest", value = "2.99%"),
+                SuccessTxDetail(label = "Installment plan", value = "6 Months"),
+                SuccessTxDetail(label = "Date & Time", value = "Jul 15, 2024 9:12 AM"),
+                SuccessTxDetail(label = "Transaction Number", value = "#200412312551", isLink = true),
             ),
             sectionTitle = "Transaction Details",
             doneButtonText = "Done",
             onDone = {},
+            subtitle = "From Apple Inc.",
+            tag = "Loan Amount",
+            illustration = Icons.Filled.Add,
+            needHelpText = "Need help?",
+            helpLinkText = "Go to Help Center",
+            onHelp = {},
+            onClose = {},
         )
     }
 }

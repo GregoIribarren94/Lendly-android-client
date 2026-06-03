@@ -129,7 +129,7 @@ fun OnboardingPage(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 32.dp)
+                    .padding(bottom = 64.dp)
             ) {
                 StepIndicator(
                     totalSteps = totalSteps,
@@ -156,7 +156,7 @@ fun OnboardingPage(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
 
                 PrimaryButton(

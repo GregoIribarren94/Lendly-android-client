@@ -20,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.lendly.fintech.ui.components.navigation.LendlyTopBar
 import com.lendly.fintech.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,21 +67,21 @@ private fun ProductContent(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            LendlyTopBar(
+                leading = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = ContentPrimary)
+                    }
+                },
                 title = {
                     Text(
                         text = "${product.brand} ${product.name.split(" ").take(3).joinToString(" ")}",
                         style = BodyEmphasis,
                         color = ContentPrimary,
                         maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
                 },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = ContentPrimary)
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = BackgroundScreen),
             )
         },
         bottomBar = {
