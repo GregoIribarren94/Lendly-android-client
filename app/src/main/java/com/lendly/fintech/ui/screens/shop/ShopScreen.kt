@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.lendly.fintech.data.model.Product
-import com.lendly.fintech.ui.components.navigation.LendlyTopBar
 import com.lendly.fintech.ui.theme.*
 
 // ── Static display data ───────────────────────────────────────────────────────
@@ -198,17 +197,21 @@ private fun ShopContent(
 
 @Composable
 private fun ShopTopBar(onSearch: () -> Unit) {
-    LendlyTopBar(
-        leading = { Text(text = "🌿", fontSize = 26.sp) },
-        actions = {
-            IconButton(onClick = onSearch) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "Search", tint = ContentPrimary, modifier = Modifier.size(24.dp))
-            }
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Default.Notifications, contentDescription = "Notifications", tint = ContentPrimary, modifier = Modifier.size(24.dp))
-            }
-        },
-    )
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = Spacing.md, vertical = Spacing.sm),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(text = "🌿", fontSize = 26.sp)
+        Spacer(Modifier.weight(1f))
+        IconButton(onClick = onSearch) {
+            Icon(imageVector = Icons.Default.Search, contentDescription = "Search", tint = ContentPrimary, modifier = Modifier.size(24.dp))
+        }
+        IconButton(onClick = { }) {
+            Icon(imageVector = Icons.Default.Notifications, contentDescription = "Notifications", tint = ContentPrimary, modifier = Modifier.size(24.dp))
+        }
+    }
 }
 
 // ── Search Bar ────────────────────────────────────────────────────────────────
