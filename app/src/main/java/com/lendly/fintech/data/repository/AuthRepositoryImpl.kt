@@ -13,8 +13,8 @@ import com.lendly.fintech.data.model.UserResponse
  */
 class AuthRepositoryImpl(private val api: AuthApi) : AuthRepository {
 
-    override suspend fun login(email: String, password: String): Resource<LoginResponse> =
-        safeApiCall { api.login(LoginRequest(email, password)) }
+    override suspend fun login(phone: String, password: String): Resource<LoginResponse> =
+        safeApiCall { api.login(LoginRequest(phone, password)) }
 
     override suspend fun register(
         name: String,

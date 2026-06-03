@@ -5,6 +5,9 @@ import com.lendly.fintech.data.api.LoansApi
 import com.lendly.fintech.data.api.ProductsApi
 import com.lendly.fintech.data.api.TransactionsApi
 import com.lendly.fintech.data.api.UserApi
+import com.lendly.fintech.data.local.db.dao.LoanDao
+import com.lendly.fintech.data.local.db.dao.TransactionDao
+import com.lendly.fintech.data.local.db.dao.UserDao
 import com.lendly.fintech.data.repository.AuthRepository
 import com.lendly.fintech.data.repository.AuthRepositoryImpl
 import com.lendly.fintech.data.repository.LoanRepository
@@ -39,18 +42,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(api: UserApi): UserRepository =
-        UserRepositoryImpl(api)
+    fun provideUserRepository(api: UserApi, userDao: UserDao): UserRepository =
+        UserRepositoryImpl(api, userDao)
 
     @Provides
     @Singleton
-    fun provideLoanRepository(api: LoansApi): LoanRepository =
-        LoanRepositoryImpl(api)
+    fun provideLoanRepository(api: LoansApi, loanDao: LoanDao): LoanRepository =
+        LoanRepositoryImpl(api, loanDao)
 
     @Provides
     @Singleton
-    fun provideTransactionRepository(api: TransactionsApi): TransactionRepository =
-        TransactionRepositoryImpl(api)
+    fun provideTransactionRepository(api: TransactionsApi, transactionDao: TransactionDao): TransactionRepository =
+        TransactionRepositoryImpl(api, transactionDao)
 
     @Provides
     @Singleton

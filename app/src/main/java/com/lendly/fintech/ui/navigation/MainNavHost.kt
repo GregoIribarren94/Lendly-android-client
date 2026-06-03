@@ -1,0 +1,283 @@
+package com.lendly.fintech.ui.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.lendly.fintech.ui.screens.history.*
+import com.lendly.fintech.ui.screens.home.HomeScreen
+import com.lendly.fintech.ui.screens.loan.*
+import com.lendly.fintech.ui.screens.manage.*
+import com.lendly.fintech.ui.screens.notifications.NotificationScreen
+import com.lendly.fintech.ui.screens.shop.*
+import androidx.compose.runtime.remember
+@Composable
+fun MainNavHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
+    NavHost(
+        navController = navController,
+        startDestination = Routes.HOME,
+        modifier = modifier,
+    ) {
+        // HOME TAB
+        composable(Routes.HOME) {
+            HomeScreen(
+                onCashIn = { navController.navigate(Routes.CASH_IN) },
+                onSeeAllLoans = { navController.navigate(Routes.HISTORY) },
+                onSeeAllRecommended = { navController.navigate(Routes.SHOP) },
+                onNotifications = { navController.navigate(Routes.NOTIFICATIONS) },
+            )
+        }
+        composable(Routes.NOTIFICATIONS) {
+            NotificationScreen(onBack = { navController.popBackStack() })
+        }
+
+        // LOAN TAB
+        composable(Routes.LOAN) {
+            LoanScreen(
+                onNavigateToCashIn = { navController.navigate(Routes.CASH_IN) },
+                onNavigateToLoanInfo = { navController.navigate(Routes.LOAN_INFO) },
+                onNavigateToActiveLoan = { navController.navigate(Routes.ACTIVE_LOAN) },
+            )
+        }
+        composable(Routes.CASH_IN) {
+            CashInScreen(
+                onSelectOtc = { navController.navigate(Routes.OTC_CASH_IN) },
+                onSelectOnline = { navController.navigate(Routes.ONLINE_CASH_IN) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.OTC_CASH_IN) {
+            OtcCashInScreen(
+                onPartnerSelected = { partnerId ->
+                    navController.navigate(Routes.otcCashInForm(partnerId))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.OTC_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_PARTNER_ID) { type = NavType.StringType }),
+        ) {
+            OtcCashInFormScreen(
+                onSuccess = { referenceCode, amount, method ->
+                    navController.navigate(Routes.successTxWithRef(referenceCode, amount, method))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.ONLINE_CASH_IN) {
+            OnlineCashInScreen(
+                onMethodSelected = { methodId ->
+                    navController.navigate(Routes.onlineCashInForm(methodId))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.ONLINE_CASH_IN_FORM,
+            arguments = listOf(navArgument(Routes.ARG_METHOD_ID) { type = NavType.StringType }),
+        ) {
+            OnlineCashInFormScreen(
+                onSuccess = { amount, method ->
+                    navController.navigate(Routes.successTxOnline(amount, method))
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}&${Routes.ARG_AMOUNT}={${Routes.ARG_AMOUNT}}&${Routes.ARG_METHOD}={${Routes.ARG_METHOD}}&${Routes.ARG_MONTHLY_FEE}={${Routes.ARG_MONTHLY_FEE}}&${Routes.ARG_INTEREST}={${Routes.ARG_INTEREST}}&${Routes.ARG_INSTALLMENTS}={${Routes.ARG_INSTALLMENTS}}",
+            arguments = listOf(
+                navArgument(Routes.ARG_REF_CODE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_AMOUNT) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_METHOD) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_MONTHLY_FEE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_INTEREST) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_INSTALLMENTS) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+            ),
+        ) { backStackEntry ->
+            val referenceCode = backStackEntry.arguments?.getString(Routes.ARG_REF_CODE)
+            val amount = backStackEntry.arguments?.getString(Routes.ARG_AMOUNT).orEmpty()
+            val method = backStackEntry.arguments?.getString(Routes.ARG_METHOD).orEmpty()
+            val monthlyFee = backStackEntry.arguments?.getString(Routes.ARG_MONTHLY_FEE)
+            val interest = backStackEntry.arguments?.getString(Routes.ARG_INTEREST)
+            val installments = backStackEntry.arguments?.getString(Routes.ARG_INSTALLMENTS)
+            SuccessTxScreen(
+                referenceCode = referenceCode,
+                amount = amount,
+                method = method,
+                monthlyFee = monthlyFee,
+                interest = interest,
+                installments = installments,
+                onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
+            )
+        }
+        composable(Routes.LOAN_INFO) {
+            LoanInfoScreen(
+                onApply = { navController.navigate(Routes.LOAN_FORM) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.LOAN_FORM) {
+            LoanFormScreen(
+                onSubmit = { amount, method, refCode, monthlyFee, interest, installments ->
+                    navController.navigate(
+                        Routes.successTxLoan(
+                            referenceCode = refCode,
+                            amount = amount,
+                            method = method,
+                            monthlyFee = monthlyFee,
+                            interest = interest,
+                            installments = installments,
+                        ),
+                    )
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.ACTIVE_LOAN) {
+            ActiveLoanScreen(
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        // SHOP TAB
+        // shopViewModel se obtiene del backStackEntry de SHOP para que
+        // FilterScreen comparta la misma instancia
+        composable(Routes.SHOP) {
+            val shopViewModel = hiltViewModel<ShopViewModel>()
+            ShopScreen(
+                onSearch = { navController.navigate(Routes.SEARCH) },
+                onFilter = { navController.navigate(Routes.FILTER) },
+                onProductClick = { id -> navController.navigate(Routes.product(id)) },
+                viewModel = shopViewModel,
+            )
+        }
+        composable(Routes.SEARCH) {
+            SearchScreen(
+                onProductClick = { id -> navController.navigate(Routes.product(id)) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.FILTER) { backStackEntry ->
+            // Obtenemos el ShopViewModel del backstack entry de SHOP
+            // para que sea la MISMA instancia que usa ShopScreen
+            val shopBackStackEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(Routes.SHOP)
+            }
+            val shopViewModel = hiltViewModel<ShopViewModel>(shopBackStackEntry)
+
+            FilterScreen(
+                onApply = { filterState ->
+                    shopViewModel.applyFilter(filterState)
+                    navController.popBackStack()
+                },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.PRODUCT,
+            arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString(Routes.ARG_ID).orEmpty()
+            ProductScreen(
+                productId = id,
+                onBack = { navController.popBackStack() },
+            )
+        }
+
+        // HISTORY TAB
+        composable(Routes.HISTORY) {
+            HistoryScreen(
+                onTxClick = { id -> navController.navigate(Routes.txDetails(id)) },
+            )
+        }
+        composable(
+            route = Routes.TX_DETAILS,
+            arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
+        ) {
+            // El id lo lee el TxDetailsViewModel desde el SavedStateHandle.
+            TxDetailsScreen(onBack = { navController.popBackStack() })
+        }
+
+        // MANAGE TAB
+        composable(Routes.MANAGE) {
+            ManageScreen(
+                onNavigateToProfile = { navController.navigate(Routes.PROFILE) },
+                onNavigateToCreditScore = { navController.navigate(Routes.CREDIT_SCORE) },
+                onNavigateToEditProfile = { navController.navigate(Routes.EDIT_PROFILE) },
+            )
+        }
+        composable(Routes.EDIT_PROFILE) {
+            EditProfileScreen(
+                onBack = { navController.popBackStack() },
+                onSaved = {
+                    navController.navigate(Routes.DONE_PAGE) {
+                        popUpTo(Routes.EDIT_PROFILE) { inclusive = true }
+                    }
+                },
+            )
+        }
+        composable(Routes.DONE_PAGE) {
+            DonePageScreen(
+                onDone = {
+                    navController.navigate(Routes.HOME) {
+                        popUpTo(Routes.HOME) { inclusive = false }
+                    }
+                },
+            )
+        }
+        composable(Routes.PROFILE) {
+            ProfileScreen(
+                onDetailClick = { id -> navController.navigate(Routes.profileDetail(id)) },
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.PROFILE_DETAIL,
+            arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString(Routes.ARG_ID).orEmpty()
+            ProfileDetailScreen(
+                detailId = id,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.CREDIT_SCORE) {
+            CreditScoreScreen(
+                onBack = { navController.popBackStack() },
+                onNavigateToProfile = { navController.navigate(Routes.PROFILE) },
+            )
+        }
+    }
+}

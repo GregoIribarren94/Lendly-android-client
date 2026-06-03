@@ -67,7 +67,13 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.ui.text)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.material3)
 
     // Testing
     testImplementation(libs.junit)
@@ -97,6 +103,9 @@ dependencies {
     // Phone Number Library
     implementation(libs.libphonenumber.android)
 
+    // DataStore (persistencia de sesión / token)
+    implementation(libs.androidx.datastore.preferences)
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
@@ -114,6 +123,7 @@ dependencies {
 
     // Coroutines para Firebase
     implementation(libs.kotlinx.coroutines.play.services)
+
 }
 
 

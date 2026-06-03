@@ -96,6 +96,22 @@ val ButtonLabel = TextStyle(
     letterSpacing = 0.1.sp,
 )
 
+// Label de inputs (ej. "Choose a password") — Inter Medium 14/20
+val FormLabel = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.Medium,
+    fontSize = 14.sp,
+    lineHeight = 20.sp,
+)
+
+// Helper text debajo de un input (ej. requisitos de contraseña) — Inter Regular 14/20
+val FormHelper = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.Normal,
+    fontSize = 14.sp,
+    lineHeight = 20.sp,
+)
+
 // Párrafos chicos — Inter Regular 12/16, ls 0.4
 val Caption = TextStyle(
     fontFamily = Inter,
@@ -129,4 +145,36 @@ val Typography = Typography(
     bodySmall = Caption,
     labelLarge = ButtonLabel,
     labelMedium = CaptionMedium
+)
+
+val BalanceTitle = TextStyle(
+    fontFamily = Montserrat,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 32.sp,
+    lineHeight = 40.sp,
+    letterSpacing = 0.sp
+)
+
+val TitleMedium = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 16.sp,
+    lineHeight = 24.sp,
+    letterSpacing = 0.15.sp
+)
+
+val TitleLarge = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 22.sp,
+    lineHeight = 28.sp,
+    letterSpacing = 0.sp
+)
+
+val LabelSmall = TextStyle(
+    fontFamily = Inter,
+    fontWeight = FontWeight.Medium,
+    fontSize = 11.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.5.sp
 )

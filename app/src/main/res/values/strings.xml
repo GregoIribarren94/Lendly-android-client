@@ -1,3 +1,257 @@
 <resources>
     <string name="app_name">Lendly</string>
+    <string name="profile_form_heading">Enter your personal details</string>
+    <string name="profile_form_first_names_label">Full legal first and middle name(s)</string>
+    <string name="profile_form_first_names_placeholder">John D.</string>
+    <string name="profile_form_last_name_label">Full legal last name</string>
+    <string name="profile_form_last_name_placeholder">Doe</string>
+    <string name="profile_form_birth_date_label">Date of birth</string>
+    <string name="profile_form_day_placeholder">Day</string>
+    <string name="profile_form_month_placeholder">Month</string>
+    <string name="profile_form_year_placeholder">Year</string>
+    <string name="profile_form_address_label">Address</string>
+    <string name="profile_form_address_placeholder">Somewhere IN BLOCK 12</string>
+    <string name="profile_form_city_label">City</string>
+    <string name="profile_form_city_placeholder">Davao City</string>
+    <string name="profile_form_postal_code_label">Postal Code</string>
+    <string name="profile_form_postal_code_placeholder">8000</string>
+    <string name="profile_form_phone_label">Phone Number</string>
+    <string name="profile_form_next">Next</string>
+    <string name="profile_form_info_content_description">Profile information</string>
+
+    <!-- Edit Profile screen -->
+    <string name="edit_profile_save">Save</string>
+
+    <!-- Done page (post-save confirmation) -->
+    <string name="done_page_title">ALL DONE!</string>
+    <string name="done_page_subtitle">Your info was saved</string>
+    <string name="done_page_button">Done</string>
+    <string name="done_page_close_content_description">Close</string>
+
+    <!-- Credit Score screen -->
+    <string name="credit_score_title">Credit Score</string>
+    <string name="credit_score_back_content_description">Back</string>
+    <string name="credit_score_min">300</string>
+    <string name="credit_score_max">850</string>
+    <string name="credit_score_label_prefix">Your Score is </string>
+    <string name="credit_score_label_poor">Poor</string>
+    <string name="credit_score_label_fair">Fair</string>
+    <string name="credit_score_label_good">Good</string>
+    <string name="credit_score_label_very_good">Very Good</string>
+    <string name="credit_score_label_excellent">Excellent</string>
+    <string name="credit_score_value_placeholder">—</string>
+    <string name="credit_score_what_is_title">What is Credit Score?</string>
+    <string name="credit_score_what_is_body">This is your trust score, used as a bases to determine the various activities you do on Credit Score.</string>
+    <string name="credit_score_section_general">General</string>
+    <string name="credit_score_row_account_details">Account details</string>
+    <string name="credit_score_row_receiving">Receiving by email or phone</string>
+    <string name="credit_score_row_scheduled_pay">Scheduled pay</string>
+    <string name="credit_score_row_settings">Settings</string>
+
+    <!-- Loan -->
+    <string name="loan_heading">Loan</string>
+    <string name="loan_cash_in_button">Cash-In</string>
+    <string name="loan_info_button">Loan Information</string>
+    <string name="loan_active_button">Active Loan</string>
+
+    <!-- Active loans screen -->
+    <string name="active_loans_title">Active loans</string>
+    <string name="active_loans_section_present">Present</string>
+    <string name="active_loans_section_recent">Recent Loans</string>
+    <string name="active_loans_back">Back</string>
+    <string name="active_loans_calendar">Calendar</string>
+    <string name="active_loans_paid">Paid</string>
+
+    <!-- Loan Info screen -->
+    <string name="loan_info_top_bar_title">Loan screen - info</string>
+    <string name="loan_info_limited_time_offer">Limited Time Offer</string>
+    <string name="loan_info_hero_title">Safe and\nsecure loans</string>
+    <string name="loan_info_hero_subtitle">All here in Rayland</string>
+    <string name="loan_info_borrow_up_to">You can borrow up to</string>
+    <string name="loan_info_amount">&#8369; 30,000.00</string>
+    <string name="loan_info_subject_to_eval">*Subject to evaluation</string>
+    <string name="loan_info_loan_details">Loan Details</string>
+    <string name="loan_info_what_is_this">What is this?</string>
+    <string name="loan_info_payable_in_title">Payable in</string>
+    <string name="loan_info_payable_in_value">6 - 12</string>
+    <string name="loan_info_payable_in_caption">months</string>
+    <string name="loan_info_interest_rate_title">Interest Rate</string>
+    <string name="loan_info_interest_rate_value">1.99%</string>
+    <string name="loan_info_interest_rate_caption">ave per mo.</string>
+    <string name="loan_info_process_fee_title">Process Fee</string>
+    <string name="loan_info_process_fee_value">3%</string>
+    <string name="loan_info_process_fee_caption">as low as</string>
+    <string name="loan_info_how_it_works">How it works</string>
+    <string name="loan_info_hiw_credit_title">Keep your credit score high</string>
+    <string name="loan_info_hiw_credit_body">The offered loan amount is based on your credit score</string>
+    <string name="loan_info_hiw_approval_title">Get instant approval</string>
+    <string name="loan_info_hiw_approval_body">Everything we need to process is already in the application</string>
+    <string name="loan_info_hiw_payments_title">Easy payments option available</string>
+    <string name="loan_info_hiw_payments_body">Skip the queue and pay your due on the application</string>
+    <string name="loan_info_hiw_secure_title">Safe and secure</string>
+    <string name="loan_info_hiw_secure_body">Rayland is working with trusted partners to provide this services</string>
+    <string name="loan_info_cta">Get This Loan</string>
+
+    <!-- Cash-In screen -->
+    <string name="cash_in_top_bar_title">Cash-In</string>
+    <string name="cash_in_top_bar_info_content_description">Cash-In information</string>
+    <string name="cash_in_options_heading">Cash-In Options</string>
+    <string name="cash_in_option_online_title">Online Banking</string>
+    <string name="cash_in_option_online_subtitle">Pay via other banks or e-wallet</string>
+    <string name="cash_in_option_otc_title">Over-the-counter</string>
+    <string name="cash_in_option_otc_subtitle">Pay in cash</string>
+
+    <!-- OTC Cash-In selector -->
+    <string name="otc_cash_in_top_bar_title">Over-the-counter Partners</string>
+    <string name="otc_cash_in_max_amount">Max. Transaction amount $5,000</string>
+    <string name="otc_partner_7eleven">7-Eleven</string>
+    <string name="otc_partner_cebuana">Cebuana Lhuillier</string>
+    <string name="otc_partner_lbc">LBC</string>
+    <string name="otc_partner_m_lhuillier">M Lhuillier</string>
+
+    <!-- Online Cash-In selector -->
+    <string name="online_cash_in_top_bar_title">Online Cash-In Options</string>
+    <string name="online_cash_in_search_placeholder">Search...</string>
+    <string name="online_cash_in_section_banks">BANKS</string>
+    <string name="online_cash_in_section_ewallets">E-WALLETS</string>
+    <string name="online_bank_bpi">BPI</string>
+    <string name="online_bank_chinabank">Chinabank</string>
+    <string name="online_bank_rcbc">RCBC</string>
+    <string name="online_bank_unionbank">Unionbank</string>
+    <string name="online_ewallet_gcash">GCash</string>
+    <string name="online_ewallet_paymaya">Pay Maya</string>
+    <string name="online_ewallet_paypal">PayPal</string>
+
+    <!-- OTC Cash-In form -->
+    <string name="otc_cash_in_form_top_bar_title">Enter Amount</string>
+    <string name="otc_cash_in_form_amount_label">Amount (USD)</string>
+    <string name="otc_cash_in_form_amount_error_empty">Please enter an amount</string>
+    <string name="otc_cash_in_form_amount_error_zero">Amount must be greater than 0</string>
+    <string name="otc_cash_in_form_amount_error_max">Amount exceeds maximum of $5,000</string>
+    <string name="otc_cash_in_form_field_required">This field is required</string>
+    <string name="otc_cash_in_form_generate_code_button">Generate Code</string>
+
+    <!-- Online Cash-In form -->
+    <string name="online_cash_in_form_top_bar_title">Payment Details</string>
+    <string name="online_cash_in_form_amount_label">Amount (USD)</string>
+    <string name="online_cash_in_form_amount_error_empty">Please enter an amount</string>
+    <string name="online_cash_in_form_amount_error_zero">Amount must be greater than 0</string>
+    <string name="online_cash_in_form_field_required">This field is required</string>
+    <string name="online_cash_in_form_payment_type_label">Payment Method</string>
+    <string name="online_cash_in_form_transfer_label">Transfer</string>
+    <string name="online_cash_in_form_credit_card_label">Credit Card</string>
+    <string name="online_cash_in_form_debit_card_label">Debit Card</string>
+    <string name="online_cash_in_form_account_number_label">Account Number</string>
+    <string name="online_cash_in_form_account_name_label">Account Name</string>
+    <string name="online_cash_in_form_card_number_label">Card Number</string>
+    <string name="online_cash_in_form_card_expiry_label">Expiry (MM/YY)</string>
+    <string name="online_cash_in_form_card_cvv_label">CVV</string>
+    <string name="online_cash_in_form_cardholder_name_label">Cardholder Name</string>
+    <string name="online_cash_in_form_confirm_button">Confirm</string>
+
+    <!-- Successful Transaction -->
+    <string name="success_tx_title">Transaction Successful!</string>
+    <string name="success_tx_subtitle">Your cash-in has been processed</string>
+    <string name="success_tx_reference_code_label">Reference Code</string>
+    <string name="success_tx_done_button">Done</string>
+    <string name="success_tx_title_cash_in">Added to your account</string>
+    <string name="success_tx_from">From %1$s</string>
+    <string name="success_tx_tag_cash_in">Cash-In</string>
+    <string name="success_tx_details_heading">Transaction Details</string>
+    <string name="success_tx_detail_datetime">Date &amp; Time</string>
+    <string name="success_tx_detail_amount">Amount</string>
+    <string name="success_tx_detail_tx_number">Transaction No.</string>
+    <string name="success_tx_detail_tx_number_full">Transaction Number</string>
+    <string name="success_tx_tag_loan">Loan Amount</string>
+    <string name="success_tx_amount_php">%1$s PHP</string>
+    <string name="success_tx_amount_peso">&#8369;%1$s</string>
+    <string name="success_tx_detail_monthly_fee">Monthly Fee</string>
+    <string name="success_tx_detail_interest">Interest</string>
+    <string name="success_tx_detail_installment_plan">Installment plan</string>
+    <string name="success_tx_need_help">Need help?</string>
+    <string name="success_tx_help_center">Go to Help Center</string>
+
+    <!-- Loan Form screen -->
+    <string name="loan_form_top_bar_title">Loan</string>
+    <string name="loan_form_info_content_description">Loan information</string>
+    <string name="loan_form_back_content_description">Back</string>
+    <string name="loan_form_heading">Please provide your details\nfor your loan</string>
+    <string name="loan_form_subheading">Please provide your details for your loan</string>
+    <string name="loan_form_step_label">Step %1$d</string>
+    <string name="loan_form_step1_title">Enter loan amount</string>
+    <string name="loan_form_amount_placeholder">0.00</string>
+    <string name="loan_form_step2_title">Select an installment plan</string>
+    <string name="loan_form_plan_months">%1$d Months</string>
+    <string name="loan_form_plan_interest">%1$s Interest</string>
+    <string name="loan_form_plan_monthly">&#8369; %1$s/mo</string>
+    <string name="loan_form_step3_title">Select your loan purpose</string>
+    <string name="loan_form_purpose_placeholder">Select an option</string>
+    <string name="loan_form_purpose_educational">Educational</string>
+    <string name="loan_form_purpose_medical">Medical</string>
+    <string name="loan_form_purpose_business">Business</string>
+    <string name="loan_form_purpose_personal">Personal</string>
+    <string name="loan_form_purpose_other">Other</string>
+    <string name="loan_form_summary_title">Summary</string>
+    <string name="loan_form_summary_loan_amount">Loan Amount</string>
+    <string name="loan_form_summary_processing_fee">3%% Processing Fee</string>
+    <string name="loan_form_summary_total">Total amount to Receive</string>
+    <string name="loan_form_summary_lender">Lender</string>
+    <string name="loan_form_summary_lender_value">null</string>
+    <string name="loan_form_summary_what_is_this">What is this?</string>
+    <string name="loan_form_amount_php_format">PHP %1$s</string>
+    <string name="loan_form_amount_php_signed">&#8369; %1$s</string>
+    <string name="loan_form_amount_php_negative">-%1$s</string>
+    <string name="loan_form_cta">Get This Loan</string>
+    <string name="loan_form_method">Loan</string>
+    <!-- History screen -->
+    <string name="history_title">History</string>
+    <string name="history_search_placeholder">Search...</string>
+    <string name="history_filter_all">All</string>
+    <string name="history_filter_loans">Loans</string>
+    <string name="history_filter_payments">Payments</string>
+    <string name="history_filter_cash_in">Cash In</string>
+    <string name="history_section_today">Today</string>
+    <string name="history_section_older">Older</string>
+    <string name="history_empty_message">No transactions yet</string>
+    <string name="history_retry">Try again</string>
+
+    <!-- Transaction Details screen -->
+    <string name="tx_details_back">Back</string>
+    <string name="tx_details_info">Information</string>
+    <string name="tx_details_more">More options</string>
+    <string name="tx_details_hero_paid_this_month">Paid this month</string>
+    <string name="tx_details_hero_received">Received</string>
+    <string name="tx_details_to">To %1$s</string>
+    <string name="tx_details_from">From %1$s</string>
+    <string name="tx_details_tag_paid_bills">Paid Bills</string>
+    <string name="tx_details_tag_cash_in">Cash-In</string>
+    <string name="tx_details_section_title">Transaction Details</string>
+    <string name="tx_details_fee">Fee</string>
+    <string name="tx_details_datetime">Date &amp; Time</string>
+    <string name="tx_details_tx_number">Transaction Number</string>
+    <string name="tx_details_help_question">Didn\'t find what you were looking for?</string>
+    <string name="tx_details_help_center">Go to Help Center</string>
+    <string name="tx_details_not_found">Transaction not found</string>
+
+    <!-- Home screen -->
+    <string name="home_profile_content_description">Profile</string>
+    <string name="home_notifications_content_description">Notifications</string>
+    <string name="home_account_title">Account</string>
+    <string name="home_balance_amount">&#8369; 2,500.00</string>
+    <string name="home_unpaid_loans_section">Unpaid Loans</string>
+    <string name="home_recommended_section">Recommended For You</string>
+
+    <!-- Home placeholder data (hasta conectar al ViewModel) -->
+    <string name="home_loan_nike_name">Nike Inc.</string>
+    <string name="home_loan_nike_amount">&#8369;400.00</string>
+    <string name="home_loan_nike_fee">Fees of February</string>
+    <string name="home_loan_apple_name">Apple Inc.</string>
+    <string name="home_loan_apple_amount">&#8369;1500.00</string>
+    <string name="home_loan_apple_fee">Fees of March</string>
+    <string name="home_product_iphone_name">iPhone 12 Pro</string>
+    <string name="home_product_headphones_name">Wireless Headphones</string>
+    <string name="home_product_sneakers_name">Sneakers</string>
+    <string name="home_product_price_placeholder">1,200</string>
+    <string name="home_product_months_placeholder">24</string>
+    <string name="home_available_balance_label">AVAILABLE BALANCE</string>
 </resources>
