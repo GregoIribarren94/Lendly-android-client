@@ -276,6 +276,7 @@ fun MainNavHost(
         composable(Routes.CREDIT_SCORE) {
             CreditScoreScreen(
                 onBack = { navController.popBackStack() },
+                onNavigateToProfile = { navController.navigate(Routes.PROFILE) },
             )
         }
     }

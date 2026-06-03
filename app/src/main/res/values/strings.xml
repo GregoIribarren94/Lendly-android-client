@@ -28,6 +28,26 @@
     <string name="done_page_button">Done</string>
     <string name="done_page_close_content_description">Close</string>
 
+    <!-- Credit Score screen -->
+    <string name="credit_score_title">Credit Score</string>
+    <string name="credit_score_back_content_description">Back</string>
+    <string name="credit_score_min">300</string>
+    <string name="credit_score_max">850</string>
+    <string name="credit_score_label_prefix">Your Score is </string>
+    <string name="credit_score_label_poor">Poor</string>
+    <string name="credit_score_label_fair">Fair</string>
+    <string name="credit_score_label_good">Good</string>
+    <string name="credit_score_label_very_good">Very Good</string>
+    <string name="credit_score_label_excellent">Excellent</string>
+    <string name="credit_score_value_placeholder">—</string>
+    <string name="credit_score_what_is_title">What is Credit Score?</string>
+    <string name="credit_score_what_is_body">This is your trust score, used as a bases to determine the various activities you do on Credit Score.</string>
+    <string name="credit_score_section_general">General</string>
+    <string name="credit_score_row_account_details">Account details</string>
+    <string name="credit_score_row_receiving">Receiving by email or phone</string>
+    <string name="credit_score_row_scheduled_pay">Scheduled pay</string>
+    <string name="credit_score_row_settings">Settings</string>
+
     <!-- Loan -->
     <string name="loan_heading">Loan</string>
     <string name="loan_cash_in_button">Cash-In</string>
