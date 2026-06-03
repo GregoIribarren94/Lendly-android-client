@@ -93,7 +93,7 @@ fun ManageScreen(
         ManageMenuItem(
             iconRes = R.drawable.ic_manage_accounts,
             label = "Account details",
-            onClick = onNavigateToProfile,
+            onClick = onNavigateToEditProfile,
         )
         ManageMenuItem(
             iconRes = R.drawable.ic_markunread_mailbox,

@@ -257,22 +257,7 @@ fun MainNavHost(
                 },
             )
         }
-        composable(Routes.PROFILE) {
-            ProfileScreen(
-                onDetailClick = { id -> navController.navigate(Routes.profileDetail(id)) },
-                onBack = { navController.popBackStack() },
-            )
-        }
-        composable(
-            route = Routes.PROFILE_DETAIL,
-            arguments = listOf(navArgument(Routes.ARG_ID) { type = NavType.StringType }),
-        ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getString(Routes.ARG_ID).orEmpty()
-            ProfileDetailScreen(
-                detailId = id,
-                onBack = { navController.popBackStack() },
-            )
-        }
+
         composable(Routes.CREDIT_SCORE) {
             CreditScoreScreen(
                 onBack = { navController.popBackStack() },
