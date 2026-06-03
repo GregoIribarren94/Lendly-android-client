@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
@@ -32,27 +33,27 @@ import com.lendly.fintech.ui.theme.*
 
 private data class UnpaidLoan(
     val iconRes: Int,
-    val name: String,
-    val amount: String,
-    val fee: String,
+    val nameRes: Int,
+    val amountRes: Int,
+    val feeRes: Int,
 )
 
 private data class RecommendedProduct(
     val imageRes: Int,
-    val name: String,
-    val price: String,
-    val months: String,
+    val nameRes: Int,
+    val priceRes: Int,
+    val monthsRes: Int,
 )
 
 private val unpaidLoans = listOf(
-    UnpaidLoan(R.drawable.ic_nike, "Nike Inc.", "₱400.00", "Fees of February"),
-    UnpaidLoan(R.drawable.ic_apple, "Apple Inc.", "₱1500.00", "Fees of March"),
+    UnpaidLoan(R.drawable.ic_nike, R.string.home_loan_nike_name, R.string.home_loan_nike_amount, R.string.home_loan_nike_fee),
+    UnpaidLoan(R.drawable.ic_apple, R.string.home_loan_apple_name, R.string.home_loan_apple_amount, R.string.home_loan_apple_fee),
 )
 
 private val recommendedProducts = listOf(
-    RecommendedProduct(R.drawable.ic_iphone_12_pro, "iPhone 12 Pro", "1,200", "24"),
-    RecommendedProduct(R.drawable.ic_notebook, "Work Laptop", "1,200", "24"),
-    RecommendedProduct(R.drawable.ic_nike_shoe, "Sneakers", "1,200", "24"),
+    RecommendedProduct(R.drawable.ic_iphone_12_pro, R.string.home_product_iphone_name, R.string.home_product_price_placeholder, R.string.home_product_months_placeholder),
+    RecommendedProduct(R.drawable.ic_headphones, R.string.home_product_headphones_name, R.string.home_product_price_placeholder, R.string.home_product_months_placeholder),
+    RecommendedProduct(R.drawable.ic_nike_shoe, R.string.home_product_sneakers_name, R.string.home_product_price_placeholder, R.string.home_product_months_placeholder),
 )
 
 // ── HomeScreen ────────────────────────────────────────────────────────────────
@@ -75,7 +76,7 @@ fun HomeScreen(
 
         // Título de pantalla
         Text(
-            text = "Account",
+            text = stringResource(R.string.home_account_title),
             style = Headline,
             color = ContentPrimary,
             modifier = Modifier.padding(top = Spacing.xs, bottom = Spacing.md),
@@ -83,22 +84,22 @@ fun HomeScreen(
 
         // Card de balance
         BalanceCard(
-            balance = "₱ 2,500.00",
+            balance = stringResource(R.string.home_balance_amount),
             onCashIn = onCashIn,
         )
 
         Spacer(Modifier.height(Spacing.lg))
 
         // Unpaid Loans
-        SectionHeader(title = "Unpaid Loans", onSeeAllClick = onSeeAllLoans)
+        SectionHeader(title = stringResource(R.string.home_unpaid_loans_section), onSeeAllClick = onSeeAllLoans)
         Spacer(Modifier.height(Spacing.sm))
         Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
             unpaidLoans.forEach { loan ->
                 TransactionRow(
                     iconRes = loan.iconRes,
-                    name = loan.name,
-                    amount = loan.amount,
-                    subtitle = loan.fee,
+                    name = stringResource(loan.nameRes),
+                    amount = stringResource(loan.amountRes),
+                    subtitle = stringResource(loan.feeRes),
                 )
             }
         }
@@ -106,15 +107,15 @@ fun HomeScreen(
         Spacer(Modifier.height(Spacing.lg))
 
         // Recommended For You
-        SectionHeader(title = "Recommended For You", onSeeAllClick = onSeeAllRecommended)
+        SectionHeader(title = stringResource(R.string.home_recommended_section), onSeeAllClick = onSeeAllRecommended)
         Spacer(Modifier.height(Spacing.sm))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
             items(recommendedProducts) { product ->
                 ProductCard(
                     imageRes = product.imageRes,
-                    name = product.name,
-                    price = product.price,
-                    months = product.months,
+                    name = stringResource(product.nameRes),
+                    price = stringResource(product.priceRes),
+                    months = stringResource(product.monthsRes),
                 )
             }
         }
@@ -134,7 +135,7 @@ private fun HomeTopBar() {
         IconButton(onClick = { }) {
             Icon(
                 imageVector = Icons.Outlined.PersonOutline,
-                contentDescription = "Profile",
+                contentDescription = stringResource(R.string.home_profile_content_description),
                 tint = ContentPrimary,
                 modifier = Modifier.size(24.dp),
             )
@@ -145,7 +146,7 @@ private fun HomeTopBar() {
         IconButton(onClick = { }) {
             Icon(
                 imageVector = Icons.Outlined.NotificationsNone,
-                contentDescription = "Notifications",
+                contentDescription = stringResource(R.string.home_notifications_content_description),
                 tint = ContentPrimary,
                 modifier = Modifier.size(24.dp),
             )
