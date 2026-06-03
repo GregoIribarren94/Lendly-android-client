@@ -96,7 +96,6 @@ fun LoanFormScreen(
                 text = stringResource(R.string.loan_form_cta),
                 onClick = viewModel::onSubmit,
                 enabled = state.canSubmit,
-                modifier = Modifier.align(Alignment.BottomCenter), // <--- ESTO ES LA CLAVE
             )
         },
         containerColor = MaterialTheme.colorScheme.background,
