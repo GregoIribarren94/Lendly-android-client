@@ -21,7 +21,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.PROFILE,
+        startDestination = Routes.HOME,
         modifier = modifier,
     ) {
         // HOME TAB
@@ -154,10 +154,10 @@ fun MainNavHost(
                 onBack = { navController.popBackStack() },
             )
         }
-        composable(Routes.FILTER) {
+        composable(Routes.FILTER) { backStackEntry ->
             // Obtenemos el ShopViewModel del backstack entry de SHOP
             // para que sea la MISMA instancia que usa ShopScreen
-            val shopBackStackEntry = remember(navController) {
+            val shopBackStackEntry = remember(backStackEntry) {
                 navController.getBackStackEntry(Routes.SHOP)
             }
             val shopViewModel = hiltViewModel<ShopViewModel>(shopBackStackEntry)
