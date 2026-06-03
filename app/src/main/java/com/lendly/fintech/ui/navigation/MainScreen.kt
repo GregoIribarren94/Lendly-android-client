@@ -16,12 +16,20 @@ fun MainScreen() {
     val navBackStackEntry by nestedNavController.currentBackStackEntryAsState()
 
     val currentRoute = navBackStackEntry?.destination?.route
-    // Full-screen sin BottomNav en el detalle de transacción.
-    val hideBottomBar = currentRoute?.startsWith(Routes.TX_DETAILS_BASE) == true
+    // El tab bar (BottomNav) solo se muestra en las pantallas principales de cada sección.
+    // En el resto, cada pantalla usa su propio botón fijo (FixedBottomBar) o no tiene bottom bar.
+    val routesWithTabBar = setOf(
+        Routes.HOME,
+        Routes.LOAN,
+        Routes.SHOP,
+        Routes.HISTORY,
+        Routes.MANAGE,
+    )
+    val showTabBar = currentRoute in routesWithTabBar
 
     Scaffold(
         bottomBar = {
-            if (!hideBottomBar) {
+            if (showTabBar) {
                 BottomNavBar(
                     selectedRoute = currentRoute.orEmpty(),
                     onItemSelected = { item ->

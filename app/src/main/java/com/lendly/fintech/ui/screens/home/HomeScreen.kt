@@ -58,6 +58,7 @@ fun HomeScreen(
     onCashIn: () -> Unit = {},
     onSeeAllLoans: () -> Unit = {},
     onSeeAllRecommended: () -> Unit = {},
+    onNotifications: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
@@ -67,7 +68,7 @@ fun HomeScreen(
             .padding(horizontal = Spacing.md)
             .padding(bottom = Spacing.lg),
     ) {
-        MainTopBar()
+        MainTopBar(onNotificationsClick = onNotifications)
 
         // Título de pantalla
         Text(

@@ -2,11 +2,12 @@ package com.lendly.fintech.ui.components.navigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Info
@@ -30,11 +31,13 @@ fun AuthTopBar(
     onInfo: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val statusTopPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    val topPadding = if (statusTopPadding > 20.dp) statusTopPadding - 20.dp else 0.dp
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .statusBarsPadding()
-            .offset(y = (-16).dp)
+            .padding(top = topPadding)
             .padding(horizontal = Spacing.xs),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,

@@ -43,6 +43,7 @@ object Routes {
     const val PROFILE = "profile"
     const val PROFILE_DETAIL_BASE = "profileDetail"
     const val CREDIT_SCORE = "creditScore"
+    const val NOTIFICATIONS = "notifications"
     const val PRODUCT_BASE = "product"
     const val TX_DETAILS_BASE = "txDetails"
     const val FILTER = "filter"
@@ -64,6 +65,17 @@ object Routes {
     fun successTxOnline(amount: String, method: String) =
         "$SUCCESS_TX?$ARG_AMOUNT=${Uri.encode(amount)}&$ARG_METHOD=${Uri.encode(method)}"
 
+    fun successTxLoan(
+        referenceCode: String,
+        amount: String,
+        method: String,
+        monthlyFee: String,
+        interest: String,
+        installments: String,
+    ) = "$SUCCESS_TX?$ARG_REF_CODE=$referenceCode&$ARG_AMOUNT=${Uri.encode(amount)}" +
+        "&$ARG_METHOD=${Uri.encode(method)}&$ARG_MONTHLY_FEE=${Uri.encode(monthlyFee)}" +
+        "&$ARG_INTEREST=${Uri.encode(interest)}&$ARG_INSTALLMENTS=${Uri.encode(installments)}"
+
     // Argument keys
     const val ARG_ID = "id"
     const val ARG_PARTNER_ID = "partnerId"
@@ -71,4 +83,7 @@ object Routes {
     const val ARG_REF_CODE = "referenceCode"
     const val ARG_AMOUNT = "amount"
     const val ARG_METHOD = "method"
+    const val ARG_MONTHLY_FEE = "monthlyFee"
+    const val ARG_INTEREST = "interest"
+    const val ARG_INSTALLMENTS = "installments"
 }

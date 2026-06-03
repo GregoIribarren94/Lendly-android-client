@@ -2,10 +2,13 @@ package com.lendly.fintech.ui.screens.loan.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
 import com.lendly.fintech.ui.theme.BaseLight
@@ -36,16 +40,19 @@ fun HeroCard(modifier: Modifier = Modifier) {
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = InteractiveAccent),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(196.dp),
     ) {
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(Spacing.md),
-            verticalAlignment = Alignment.CenterVertically,
+                .height(196.dp),
         ) {
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .fillMaxWidth(0.58f)
+                    .padding(start = Spacing.lg, top = Spacing.lg),
                 verticalArrangement = Arrangement.spacedBy(Spacing.xs),
             ) {
                 LimitedTimeOfferBadge()
@@ -61,10 +68,13 @@ fun HeroCard(modifier: Modifier = Modifier) {
                 )
             }
             Image(
-                painter = painterResource(R.drawable.img_undraw_confirmation_re_b6q5_1),
+                painter = painterResource(R.drawable.img_loan_hero_woman),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.size(112.dp),
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 14.dp, y = 12.dp)
+                    .size(190.dp),
             )
         }
     }
@@ -90,6 +100,7 @@ private fun LimitedTimeOfferBadge() {
             text = stringResource(R.string.loan_info_limited_time_offer),
             style = CaptionMedium,
             color = ContentPrimary,
+            textAlign = TextAlign.Center,
         )
     }
 }

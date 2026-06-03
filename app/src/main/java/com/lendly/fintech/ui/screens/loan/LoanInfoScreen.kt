@@ -13,14 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.FixedBottomBar
 import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.screens.loan.components.HeroCard
 import com.lendly.fintech.ui.screens.loan.components.HowItWorksCard
@@ -34,15 +34,16 @@ fun LoanInfoScreen(
     onApply: () -> Unit,
     onBack: () -> Unit,
 ) {
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-    ) { innerPadding ->
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+                .weight(1f)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = Spacing.md, vertical = Spacing.md),
+                .padding(horizontal = Spacing.md)
+                // Espacio inferior para que el contenido no quede tapado por el botón fijo.
+                .padding(top = Spacing.md, bottom = Spacing.md),
             verticalArrangement = Arrangement.spacedBy(Spacing.md),
         ) {
             MainTopBar()
@@ -55,12 +56,13 @@ fun LoanInfoScreen(
             )
             HowItWorksGrid()
             Spacer(Modifier.height(Spacing.xs))
-            PrimaryButton(
-                text = stringResource(R.string.loan_info_cta),
-                onClick = onApply,
-            )
-            Spacer(Modifier.height(Spacing.xs))
         }
+
+        FixedBottomBar(
+            text = stringResource(R.string.loan_info_cta),
+            onClick = onApply,
+            modifier = Modifier.align(Alignment.BottomCenter), // <--- ESTO ES LA CLAVE
+        )
     }
 }
 

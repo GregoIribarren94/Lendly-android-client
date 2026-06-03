@@ -28,6 +28,7 @@ val BackgroundCircleNeutral = Color(0xFFE5E2E1) // fondo del botón circular "ba
 // Border colours
 val BorderNeutral = Color(red = 14, green = 15, blue = 12, alpha = 31)
 val BorderOverlay = Color(red = 14, green = 15, blue = 12, alpha = 31)
+val DividerNeutral = Color(0xFFE5E2E1) // líneas divisorias (listas, secciones)
 
 // Sentiment colours
 val SentimentNegative = Color(0xFFA8200D)

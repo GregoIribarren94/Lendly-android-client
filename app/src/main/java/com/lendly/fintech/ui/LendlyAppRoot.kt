@@ -1,7 +1,12 @@
 package com.lendly.fintech.ui
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -45,7 +50,15 @@ fun LendlyAppRoot(viewModel: AppViewModel = hiltViewModel()) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+        // Solo consumimos el inset superior (status bar). El inferior queda libre para que
+        // el BottomNavBar interno (MainScreen) llegue hasta el borde inferior de la pantalla.
+        contentWindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Top),
+        snackbarHost = {
+            SnackbarHost(
+                snackbarHostState,
+                modifier = Modifier.navigationBarsPadding(),
+            )
+        },
     ) { innerPadding ->
         LendlyNavHost(
             navController = navController,

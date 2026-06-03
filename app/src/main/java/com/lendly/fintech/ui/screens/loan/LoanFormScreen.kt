@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.buttons.PrimaryButton
+import com.lendly.fintech.ui.components.buttons.FixedBottomBar
 import com.lendly.fintech.ui.screens.loan.components.InstallmentPlanSelector
 import com.lendly.fintech.ui.screens.loan.components.LoanAmountField
 import com.lendly.fintech.ui.screens.loan.components.LoanFormTopBar
@@ -46,21 +44,44 @@ private fun formatAmount(value: Double): String = "%,.2f".format(value)
 
 @Composable
 fun LoanFormScreen(
-    onSubmit: (amount: String, method: String, refCode: String) -> Unit,
+    onSubmit: (
+        amount: String,
+        method: String,
+        refCode: String,
+        monthlyFee: String,
+        interest: String,
+        installments: String,
+    ) -> Unit,
     onBack: () -> Unit,
     viewModel: LoanFormViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
     val methodLabel = stringResource(R.string.loan_form_method)
     val formattedTotalForSuccess = stringResource(
-        R.string.loan_form_amount_php_signed,
+        R.string.success_tx_amount_php,
         formatAmount(state.totalToReceive),
+    )
+    val monthlyFeeForSuccess = stringResource(
+        R.string.success_tx_amount_peso,
+        formatAmount(state.monthlyPaymentFor(state.selectedPlan)),
+    )
+    val interestForSuccess = "%.2f%%".format(state.selectedPlan.monthlyInterestRate * 100)
+    val installmentsForSuccess = stringResource(
+        R.string.loan_form_plan_months,
+        state.selectedPlan.months,
     )
 
     LaunchedEffect(state.pendingNavigationRef) {
         val ref = state.pendingNavigationRef ?: return@LaunchedEffect
         viewModel.onNavigationHandled()
-        onSubmit(formattedTotalForSuccess, methodLabel, ref)
+        onSubmit(
+            formattedTotalForSuccess,
+            methodLabel,
+            ref,
+            monthlyFeeForSuccess,
+            interestForSuccess,
+            installmentsForSuccess,
+        )
     }
 
     Scaffold(
@@ -71,15 +92,11 @@ fun LoanFormScreen(
             )
         },
         bottomBar = {
-            PrimaryButton(
+            FixedBottomBar(
                 text = stringResource(R.string.loan_form_cta),
                 onClick = viewModel::onSubmit,
                 enabled = state.canSubmit,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .imePadding()
-                    .padding(horizontal = Spacing.md, vertical = Spacing.md),
+                modifier = Modifier.align(Alignment.BottomCenter), // <--- ESTO ES LA CLAVE
             )
         },
         containerColor = MaterialTheme.colorScheme.background,
@@ -193,7 +210,7 @@ private fun LoanFormBody(
 private fun LoanFormScreenPreview() {
     LendlyTheme {
         LoanFormScreen(
-            onSubmit = { _, _, _ -> },
+            onSubmit = { _, _, _, _, _, _ -> },
             onBack = {},
         )
     }

@@ -12,6 +12,7 @@ import com.lendly.fintech.ui.screens.history.*
 import com.lendly.fintech.ui.screens.home.HomeScreen
 import com.lendly.fintech.ui.screens.loan.*
 import com.lendly.fintech.ui.screens.manage.*
+import com.lendly.fintech.ui.screens.notifications.NotificationScreen
 import com.lendly.fintech.ui.screens.shop.*
 import androidx.compose.runtime.remember
 @Composable
@@ -30,7 +31,11 @@ fun MainNavHost(
                 onCashIn = { navController.navigate(Routes.CASH_IN) },
                 onSeeAllLoans = { navController.navigate(Routes.HISTORY) },
                 onSeeAllRecommended = { navController.navigate(Routes.SHOP) },
+                onNotifications = { navController.navigate(Routes.NOTIFICATIONS) },
             )
+        }
+        composable(Routes.NOTIFICATIONS) {
+            NotificationScreen(onBack = { navController.popBackStack() })
         }
 
         // LOAN TAB
@@ -87,7 +92,7 @@ fun MainNavHost(
             )
         }
         composable(
-            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}&${Routes.ARG_AMOUNT}={${Routes.ARG_AMOUNT}}&${Routes.ARG_METHOD}={${Routes.ARG_METHOD}}",
+            route = "${Routes.SUCCESS_TX}?${Routes.ARG_REF_CODE}={${Routes.ARG_REF_CODE}}&${Routes.ARG_AMOUNT}={${Routes.ARG_AMOUNT}}&${Routes.ARG_METHOD}={${Routes.ARG_METHOD}}&${Routes.ARG_MONTHLY_FEE}={${Routes.ARG_MONTHLY_FEE}}&${Routes.ARG_INTEREST}={${Routes.ARG_INTEREST}}&${Routes.ARG_INSTALLMENTS}={${Routes.ARG_INSTALLMENTS}}",
             arguments = listOf(
                 navArgument(Routes.ARG_REF_CODE) {
                     type = NavType.StringType
@@ -104,15 +109,36 @@ fun MainNavHost(
                     nullable = true
                     defaultValue = null
                 },
+                navArgument(Routes.ARG_MONTHLY_FEE) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_INTEREST) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
+                navArgument(Routes.ARG_INSTALLMENTS) {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                },
             ),
         ) { backStackEntry ->
             val referenceCode = backStackEntry.arguments?.getString(Routes.ARG_REF_CODE)
             val amount = backStackEntry.arguments?.getString(Routes.ARG_AMOUNT).orEmpty()
             val method = backStackEntry.arguments?.getString(Routes.ARG_METHOD).orEmpty()
+            val monthlyFee = backStackEntry.arguments?.getString(Routes.ARG_MONTHLY_FEE)
+            val interest = backStackEntry.arguments?.getString(Routes.ARG_INTEREST)
+            val installments = backStackEntry.arguments?.getString(Routes.ARG_INSTALLMENTS)
             SuccessTxScreen(
                 referenceCode = referenceCode,
                 amount = amount,
                 method = method,
+                monthlyFee = monthlyFee,
+                interest = interest,
+                installments = installments,
                 onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
             )
         }
@@ -124,8 +150,17 @@ fun MainNavHost(
         }
         composable(Routes.LOAN_FORM) {
             LoanFormScreen(
-                onSubmit = { amount, method, refCode ->
-                    navController.navigate(Routes.successTxWithRef(refCode, amount, method))
+                onSubmit = { amount, method, refCode, monthlyFee, interest, installments ->
+                    navController.navigate(
+                        Routes.successTxLoan(
+                            referenceCode = refCode,
+                            amount = amount,
+                            method = method,
+                            monthlyFee = monthlyFee,
+                            interest = interest,
+                            installments = installments,
+                        ),
+                    )
                 },
                 onBack = { navController.popBackStack() },
             )
