@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -429,5 +430,90 @@ private fun GridProductCard(product: Product, onClick: () -> Unit) {
             Text(text = product.brand, style = Caption, color = ContentTertiary, maxLines = 1)
             Text(text = "₱${"%.0f".format(product.price)} × ${product.installments} mo", style = Caption, color = InteractivePrimary, maxLines = 1)
         }
+    }
+}
+
+@Preview(name = "ShopScreen", showBackground = true, showSystemUi = true, heightDp = 1200)
+@Composable
+private fun ShopScreenPreview() {
+    val previewProducts = listOf(
+        Product(
+            id = "iphone-15",
+            name = "iPhone 15 Pro",
+            brand = "Apple",
+            category = "electronics",
+            price = 54990.0,
+            installments = 4583,
+            installmentMonths = 12,
+            rating = 4.8,
+            reviewCount = 128,
+        ),
+        Product(
+            id = "galaxy-s24",
+            name = "Galaxy S24",
+            brand = "Samsung",
+            category = "electronics",
+            price = 45990.0,
+            installments = 3833,
+            installmentMonths = 12,
+            rating = 4.7,
+            reviewCount = 94,
+        ),
+        Product(
+            id = "airpods-pro",
+            name = "AirPods Pro",
+            brand = "Apple",
+            category = "electronics",
+            price = 12990.0,
+            installments = 1083,
+            installmentMonths = 12,
+            rating = 4.6,
+            reviewCount = 76,
+        ),
+        Product(
+            id = "nike-air",
+            name = "Nike Air Max",
+            brand = "Nike",
+            category = "fashion",
+            price = 6990.0,
+            installments = 583,
+            installmentMonths = 12,
+            rating = 4.5,
+            reviewCount = 42,
+        ),
+        Product(
+            id = "sony-wh",
+            name = "Sony WH-1000XM5",
+            brand = "Sony",
+            category = "electronics",
+            price = 18990.0,
+            installments = 1583,
+            installmentMonths = 12,
+            rating = 4.9,
+            reviewCount = 61,
+        ),
+        Product(
+            id = "apple-watch",
+            name = "Apple Watch Series 9",
+            brand = "Apple",
+            category = "electronics",
+            price = 21990.0,
+            installments = 1833,
+            installmentMonths = 12,
+            rating = 4.7,
+            reviewCount = 88,
+        ),
+    )
+
+    LendlyTheme {
+        ShopContent(
+            products = previewProducts,
+            recommended = previewProducts.take(4),
+            bestSellers = previewProducts.takeLast(4),
+            paddingValues = PaddingValues(0.dp),
+            onSearch = {},
+            onFilter = {},
+            onProductClick = {},
+        )
     }
 }
