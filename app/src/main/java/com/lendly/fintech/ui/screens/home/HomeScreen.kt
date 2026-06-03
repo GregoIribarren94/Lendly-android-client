@@ -7,11 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.NotificationsNone
-import androidx.compose.material.icons.outlined.PersonOutline
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
-import com.lendly.fintech.ui.components.brand.LendlyLogoMark
+import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.screens.home.components.AvailableBalanceLabel
 import com.lendly.fintech.ui.screens.home.components.CashInButton
 import com.lendly.fintech.ui.screens.home.components.ProductCard
@@ -72,7 +67,7 @@ fun HomeScreen(
             .padding(horizontal = Spacing.md)
             .padding(bottom = Spacing.lg),
     ) {
-        HomeTopBar()
+        MainTopBar()
 
         // Título de pantalla
         Text(
@@ -118,38 +113,6 @@ fun HomeScreen(
                     months = stringResource(product.monthsRes),
                 )
             }
-        }
-    }
-}
-
-// ── Top Bar (persona · logo · campana) ────────────────────────────────────────
-
-@Composable
-private fun HomeTopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = Spacing.sm),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        IconButton(onClick = { }) {
-            Icon(
-                imageVector = Icons.Outlined.PersonOutline,
-                contentDescription = stringResource(R.string.home_profile_content_description),
-                tint = ContentPrimary,
-                modifier = Modifier.size(24.dp),
-            )
-        }
-        Spacer(Modifier.weight(1f))
-        LendlyLogoMark()
-        Spacer(Modifier.weight(1f))
-        IconButton(onClick = { }) {
-            Icon(
-                imageVector = Icons.Outlined.NotificationsNone,
-                contentDescription = stringResource(R.string.home_notifications_content_description),
-                tint = ContentPrimary,
-                modifier = Modifier.size(24.dp),
-            )
         }
     }
 }

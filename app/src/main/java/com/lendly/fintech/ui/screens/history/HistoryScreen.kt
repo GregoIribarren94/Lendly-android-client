@@ -13,8 +13,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.SwapHoriz
-import androidx.compose.material.icons.outlined.NotificationsNone
-import androidx.compose.material.icons.outlined.PersonOutline
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -30,8 +28,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.R
 import com.lendly.fintech.data.model.Transaction
 import com.lendly.fintech.data.model.TransactionType
-import com.lendly.fintech.ui.components.brand.LendlyLogoMark
 import com.lendly.fintech.ui.components.feedback.EmptyState
+import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.screens.history.components.HistoryTransactionRow
 import com.lendly.fintech.ui.theme.*
 import java.time.OffsetDateTime
@@ -50,7 +48,7 @@ fun HistoryScreen(onTxClick: (String) -> Unit) {
             .background(BackgroundScreen),
         contentPadding = PaddingValues(bottom = Spacing.md),
     ) {
-        item { HistoryTopBar() }
+        item { MainTopBar() }
         item {
             Text(
                 text = stringResource(R.string.history_title),
@@ -149,34 +147,6 @@ fun HistoryScreen(onTxClick: (String) -> Unit) {
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun HistoryTopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = Spacing.xs),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        IconButton(onClick = {}) {
-            Icon(
-                imageVector = Icons.Outlined.PersonOutline,
-                contentDescription = null,
-                tint = ContentPrimary,
-            )
-        }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            LendlyLogoMark()
-        }
-        IconButton(onClick = {}) {
-            Icon(
-                imageVector = Icons.Outlined.NotificationsNone,
-                contentDescription = null,
-                tint = ContentPrimary,
-            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.lendly.fintech.ui.screens.loan.components
+package com.lendly.fintech.ui.components.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -6,31 +6,41 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.lendly.fintech.R
 import com.lendly.fintech.ui.components.brand.LendlyLogoMark
+import com.lendly.fintech.ui.theme.LendlyTheme
 import com.lendly.fintech.ui.theme.Spacing
 
+/**
+ * Top bar principal de las pantallas de nivel raíz (Home, History, Manage, Loan info):
+ * avatar (izquierda) · logo Lendly (centro) · campana de notificaciones (derecha).
+ *
+ * Reemplaza las implementaciones duplicadas que vivían dentro de cada pantalla.
+ */
 @Composable
-fun LoanInfoTopBar(
-    onAvatarClick: () -> Unit = {},
+fun MainTopBar(
+    onProfileClick: () -> Unit = {},
     onNotificationsClick: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = Spacing.xs),
+            .padding(vertical = Spacing.sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(onClick = onAvatarClick) {
+        IconButton(onClick = onProfileClick) {
             Icon(
                 painter = painterResource(R.drawable.ic_avatar_placeholder),
-                contentDescription = null,
+                contentDescription = stringResource(R.string.home_profile_content_description),
                 tint = Color.Unspecified,
             )
         }
@@ -40,9 +50,19 @@ fun LoanInfoTopBar(
         IconButton(onClick = onNotificationsClick) {
             Icon(
                 painter = painterResource(R.drawable.ic_notifications),
-                contentDescription = null,
+                contentDescription = stringResource(R.string.home_notifications_content_description),
                 tint = Color.Unspecified,
             )
+        }
+    }
+}
+
+@Preview(name = "MainTopBar")
+@Composable
+private fun MainTopBarPreview() {
+    LendlyTheme {
+        Surface {
+            MainTopBar()
         }
     }
 }
