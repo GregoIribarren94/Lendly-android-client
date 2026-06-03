@@ -97,12 +97,12 @@ private fun ShopContent(
             .padding(paddingValues)
             .verticalScroll(rememberScrollState()),
     ) {
-        ShopTopBar(onSearch = onSearch)
+        ShopTopBar()
         Spacer(Modifier.height(4.dp))
         SearchBarRow(onSearch = onSearch, onFilter = onFilter)
         Spacer(Modifier.height(Spacing.md))
         HeroBanner()
-        Spacer(Modifier.height(Spacing.lg))
+        Spacer(Modifier.height(Spacing.xl))
 
         SectionHeader(title = "Shop By Category", onSeeAll = {})
         Spacer(Modifier.height(Spacing.sm))

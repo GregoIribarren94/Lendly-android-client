@@ -11,7 +11,7 @@ import com.lendly.fintech.ui.theme.*
 fun ProductsRow(products: List<Product>, onProductClick: (String) -> Unit) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = Spacing.md),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
     ) {
         items(products, key = { it.id }) { product ->
             RowProductCard(product = product, onClick = { onProductClick(product.id) })

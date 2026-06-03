@@ -1,5 +1,7 @@
 package com.lendly.fintech.ui.screens.shop.components
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,35 +13,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.lendly.fintech.R
 import com.lendly.fintech.ui.theme.*
 
-private data class CategoryItem(val label: String, val emoji: String)
+private data class CategoryItem(val label: String, @DrawableRes val image: Int)
 
 private val staticCategories = listOf(
-    CategoryItem("Phone",      "📱"),
-    CategoryItem("Headphones", "🎧"),
-    CategoryItem("Laptop",     "💻"),
-    CategoryItem("Shoes",      "👟"),
-    CategoryItem("Watches",    "⌚"),
+    CategoryItem("Phone", R.drawable.ic_iphone),
+    CategoryItem("Headphones", R.drawable.ic_headphones),
+    CategoryItem("Apparel", R.drawable.ic_shirt),
+    CategoryItem("Laptop", R.drawable.ic_laptop_surface),
+    CategoryItem("Shoes", R.drawable.img_shop_shoes),
 )
 
 @Composable
 fun CategoriesRow() {
     LazyRow(
         contentPadding = PaddingValues(horizontal = Spacing.md),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
     ) {
         items(staticCategories) { cat ->
-            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Box(
-                    modifier = Modifier.size(64.dp).clip(RoundedCornerShape(12.dp)).background(BackgroundNeutral).clickable { },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(96.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(BackgroundCard)
+                        .clickable { },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text(text = cat.emoji, fontSize = 28.sp)
+                    Image(
+                        painter = painterResource(cat.image),
+                        contentDescription = cat.label,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.size(width = 60.dp, height = 80.dp),
+                    )
                 }
-                Text(text = cat.label, style = Caption, color = ContentSecondary)
+                Text(text = cat.label, style = FormLabel, color = ContentSecondary)
             }
         }
     }
