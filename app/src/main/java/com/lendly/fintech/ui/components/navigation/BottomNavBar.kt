@@ -1,5 +1,7 @@
 package com.lendly.fintech.ui.components.navigation
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -10,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.lendly.fintech.ui.navigation.Routes
 import com.lendly.fintech.ui.theme.BackgroundNeutral
 import com.lendly.fintech.ui.theme.BackgroundScreen
+import com.lendly.fintech.ui.theme.BorderNeutral
 import com.lendly.fintech.ui.theme.ContentPrimary
 import com.lendly.fintech.ui.theme.ContentTertiary
 import com.lendly.fintech.ui.theme.LendlyTheme
@@ -23,24 +27,27 @@ fun BottomNavBar(
     onItemSelected: (BottomNavItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    NavigationBar(
-        modifier = modifier,
-        containerColor = BackgroundScreen, // blanco plano, sin tinte de elevación
-    ) {
-        BottomNavItem.all.forEach { item ->
-            NavigationBarItem(
-                selected = item.route == selectedRoute,
-                onClick = { onItemSelected(item) },
-                icon = { Icon(painter = painterResource(item.iconRes), contentDescription = item.label) },
-                label = { Text(text = item.label) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = ContentPrimary,
-                    selectedTextColor = ContentPrimary,
-                    indicatorColor = BackgroundNeutral, // píldora verde suave del item activo
-                    unselectedIconColor = ContentTertiary,
-                    unselectedTextColor = ContentTertiary,
-                ),
-            )
+    Column(modifier = modifier) {
+        HorizontalDivider(thickness = 1.dp, color = BorderNeutral)
+        NavigationBar(
+            containerColor = BackgroundScreen, // blanco plano
+            tonalElevation = 0.dp,             // sin tinte de elevación (surfaceTint violeta)
+        ) {
+            BottomNavItem.all.forEach { item ->
+                NavigationBarItem(
+                    selected = item.route == selectedRoute,
+                    onClick = { onItemSelected(item) },
+                    icon = { Icon(painter = painterResource(item.iconRes), contentDescription = item.label) },
+                    label = { Text(text = item.label) },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = ContentPrimary,
+                        selectedTextColor = ContentPrimary,
+                        indicatorColor = BackgroundNeutral, // píldora verde suave del item activo
+                        unselectedIconColor = ContentTertiary,
+                        unselectedTextColor = ContentTertiary,
+                    ),
+                )
+            }
         }
     }
 }
