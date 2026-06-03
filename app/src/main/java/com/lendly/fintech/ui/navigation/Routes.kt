@@ -41,6 +41,8 @@ object Routes {
     const val ACTIVE_LOAN = "activeLoan"
     const val SEARCH = "search"
     const val PROFILE = "profile"
+    const val EDIT_PROFILE = "editProfile"
+    const val DONE_PAGE = "donePage"
     const val PROFILE_DETAIL_BASE = "profileDetail"
     const val CREDIT_SCORE = "creditScore"
     const val PRODUCT_BASE = "product"
