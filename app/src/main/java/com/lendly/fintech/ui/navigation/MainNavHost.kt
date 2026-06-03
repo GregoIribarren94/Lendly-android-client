@@ -235,6 +235,26 @@ fun MainNavHost(
             ManageScreen(
                 onNavigateToProfile = { navController.navigate(Routes.PROFILE) },
                 onNavigateToCreditScore = { navController.navigate(Routes.CREDIT_SCORE) },
+                onNavigateToEditProfile = { navController.navigate(Routes.EDIT_PROFILE) },
+            )
+        }
+        composable(Routes.EDIT_PROFILE) {
+            EditProfileScreen(
+                onBack = { navController.popBackStack() },
+                onSaved = {
+                    navController.navigate(Routes.DONE_PAGE) {
+                        popUpTo(Routes.EDIT_PROFILE) { inclusive = true }
+                    }
+                },
+            )
+        }
+        composable(Routes.DONE_PAGE) {
+            DonePageScreen(
+                onDone = {
+                    navController.navigate(Routes.HOME) {
+                        popUpTo(Routes.HOME) { inclusive = false }
+                    }
+                },
             )
         }
         composable(Routes.PROFILE) {
