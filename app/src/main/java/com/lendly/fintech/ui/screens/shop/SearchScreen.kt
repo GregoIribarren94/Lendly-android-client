@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lendly.fintech.data.model.Product
+import com.lendly.fintech.ui.components.navigation.LendlyTopBar
 import com.lendly.fintech.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,11 +41,8 @@ fun SearchScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(text = "Search", style = BodyEmphasis, color = ContentPrimary)
-                },
-                navigationIcon = {
+            LendlyTopBar(
+                leading = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -53,9 +51,9 @@ fun SearchScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = BackgroundScreen,
-                ),
+                title = {
+                    Text(text = "Search", style = BodyEmphasis, color = ContentPrimary)
+                },
             )
         },
         containerColor = BackgroundScreen,

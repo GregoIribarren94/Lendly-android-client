@@ -25,7 +25,7 @@ fun LendlyNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.MAIN,
+        startDestination = Routes.SPLASH,
         modifier = modifier,
     ) {
         composable(Routes.SPLASH) {

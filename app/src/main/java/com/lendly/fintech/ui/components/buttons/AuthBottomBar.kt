@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -46,6 +47,9 @@ fun AuthBottomBar(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            // Maneja su propio inset inferior (la barra de navegación del sistema); antes lo
+            // aportaba el Scaffold raíz, que ahora solo consume el inset superior.
+            .navigationBarsPadding()
             .padding(bottom = 20.dp),
     ) {
         Column(

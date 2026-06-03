@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lendly.fintech.R
+import com.lendly.fintech.ui.components.navigation.MainTopBar
 import com.lendly.fintech.ui.theme.Spacing
 
 @Composable
@@ -37,19 +38,19 @@ fun LoanScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = Spacing.lg, vertical = Spacing.lg),
-            verticalArrangement = Arrangement.spacedBy(Spacing.md),
+                .padding(innerPadding),
         ) {
+            MainTopBar()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.lg),
+                verticalArrangement = Arrangement.spacedBy(Spacing.md),
+            ) {
             Text(
                 text = stringResource(R.string.loan_heading),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
-            )
-            LoanActionCard(
-                text = stringResource(R.string.loan_cash_in_button),
-                icon = { Icon(Icons.Default.AccountBalance, contentDescription = null) },
-                onClick = onNavigateToCashIn,
             )
             LoanActionCard(
                 text = stringResource(R.string.loan_info_button),
@@ -61,6 +62,7 @@ fun LoanScreen(
                 icon = { Icon(Icons.Default.CheckCircle, contentDescription = null) },
                 onClick = onNavigateToActiveLoan,
             )
+            }
         }
     }
 }

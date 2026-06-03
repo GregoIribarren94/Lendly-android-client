@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -29,10 +30,10 @@ fun HowItWorksCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        shape = MaterialTheme.shapes.medium,
+        shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = BaseLight),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-        modifier = modifier.heightIn(min = 180.dp),
+        modifier = modifier.heightIn(min = 252.dp),
     ) {
         Column(
             modifier = Modifier
@@ -46,7 +47,7 @@ fun HowItWorksCard(
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(72.dp),
+                    .height(112.dp),
             )
             Text(
                 text = title,

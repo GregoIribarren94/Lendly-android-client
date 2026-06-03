@@ -6,6 +6,7 @@ import com.lendly.fintech.data.common.safeApiCall
 import com.lendly.fintech.data.local.db.dao.UserDao
 import com.lendly.fintech.data.local.db.toDomain
 import com.lendly.fintech.data.local.db.toEntity
+import com.lendly.fintech.data.model.UpdateUserRequest
 import com.lendly.fintech.data.model.User
 
 /**
@@ -29,6 +30,29 @@ class UserRepositoryImpl(
             is Resource.Error -> {
                 val cached = userDao.getById(id)?.toDomain()
                 if (cached != null) Resource.Success(cached) else net
+            }
+            Resource.Loading -> net
+        }
+
+    override suspend fun updateProfile(id: String, request: UpdateUserRequest): Resource<User> =
+        when (val net = safeApiCall { api.updateUser(id, request) }) {
+            is Resource.Success -> {
+                userDao.upsert(net.data.toEntity())
+                net
+            }
+            is Resource.Error -> {
+                val cached = userDao.getById(id)?.toDomain()
+                if (cached != null) {
+                    val updated = cached.copy(
+                        name = request.name,
+                        lastName = request.lastName,
+                        phone = request.phone,
+                    )
+                    userDao.upsert(updated.toEntity())
+                    Resource.Success(updated)
+                } else {
+                    net
+                }
             }
             Resource.Loading -> net
         }

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.lendly.fintech.ui.components.navigation.LendlyTopBar
 import com.lendly.fintech.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,14 +32,13 @@ fun FilterScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("Filter", style = BodyEmphasis, color = ContentPrimary) },
-                navigationIcon = {
+            LendlyTopBar(
+                leading = {
                     IconButton(onClick = onBack) {
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = ContentPrimary)
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = BackgroundScreen),
+                title = { Text("Filter", style = BodyEmphasis, color = ContentPrimary) },
             )
         },
         bottomBar = {
