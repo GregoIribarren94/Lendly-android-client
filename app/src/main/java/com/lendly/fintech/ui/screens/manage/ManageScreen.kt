@@ -55,6 +55,7 @@ import com.lendly.fintech.ui.theme.TitleMedium
 fun ManageScreen(
     onNavigateToProfile: () -> Unit,
     onNavigateToCreditScore: () -> Unit,
+    onNavigateToEditProfile: () -> Unit,
     viewModel: ManageViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -72,6 +73,7 @@ fun ManageScreen(
         ProfileCard(
             profileInitials = state.profileInitials,
             profileImageUrl = state.profileImageUrl,
+            onEditClick = onNavigateToEditProfile,
         )
 
         Spacer(Modifier.height(Spacing.lg))
@@ -169,6 +171,7 @@ private fun ManageHeader() {
 private fun ProfileCard(
     profileInitials: String,
     profileImageUrl: String?,
+    onEditClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -239,7 +242,7 @@ private fun ProfileCard(
             modifier = Modifier
                 .clip(RoundedCornerShape(20.dp))
                 .background(InteractiveAccent)
-                .clickable {}
+                .clickable { onEditClick() }
                 .padding(horizontal = Spacing.md, vertical = Spacing.xs),
             contentAlignment = Alignment.Center,
         ) {

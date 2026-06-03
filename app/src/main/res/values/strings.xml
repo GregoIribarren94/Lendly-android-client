@@ -19,6 +19,15 @@
     <string name="profile_form_next">Next</string>
     <string name="profile_form_info_content_description">Profile information</string>
 
+    <!-- Edit Profile screen -->
+    <string name="edit_profile_save">Save</string>
+
+    <!-- Done page (post-save confirmation) -->
+    <string name="done_page_title">ALL DONE!</string>
+    <string name="done_page_subtitle">Your info was saved</string>
+    <string name="done_page_button">Done</string>
+    <string name="done_page_close_content_description">Close</string>
+
     <!-- Loan -->
     <string name="loan_heading">Loan</string>
     <string name="loan_cash_in_button">Cash-In</string>
