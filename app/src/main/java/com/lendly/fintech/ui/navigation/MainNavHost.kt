@@ -21,7 +21,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.SHOP,
+        startDestination = Routes.PROFILE,
         modifier = modifier,
     ) {
         // HOME TAB
