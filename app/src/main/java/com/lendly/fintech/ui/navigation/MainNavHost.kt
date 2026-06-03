@@ -26,7 +26,11 @@ fun MainNavHost(
     ) {
         // HOME TAB
         composable(Routes.HOME) {
-            HomeScreen()
+            HomeScreen(
+                onCashIn = { navController.navigate(Routes.CASH_IN) },
+                onSeeAllLoans = { navController.navigate(Routes.HISTORY) },
+                onSeeAllRecommended = { navController.navigate(Routes.SHOP) },
+            )
         }
 
         // LOAN TAB
