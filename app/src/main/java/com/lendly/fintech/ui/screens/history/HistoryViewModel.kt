@@ -1,12 +1,15 @@
 package com.lendly.fintech.ui.screens.history
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lendly.fintech.R
 import com.lendly.fintech.data.common.Resource
 import com.lendly.fintech.data.model.Transaction
 import com.lendly.fintech.data.model.TransactionType
 import com.lendly.fintech.data.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +19,7 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import javax.inject.Inject
 
-enum class HistoryFilter { ALL, LOANS, PAYMENTS, CASH_IN }
+enum class HistoryFilter { ALL, TYPE, BALANCE, PAID_BILLS, ADDED }
 
 data class HistorySection(val header: String, val transactions: List<Transaction>)
 
@@ -33,6 +36,7 @@ sealed class HistoryUiState {
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val repo: TransactionRepository,
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     private val _allTransactions = MutableStateFlow<List<Transaction>>(emptyList())
@@ -93,15 +97,16 @@ class HistoryViewModel @Inject constructor(
         query: String,
     ): List<Transaction> {
         var result = when (filter) {
-            HistoryFilter.ALL      -> txs
-            HistoryFilter.LOANS    -> txs.filter { it.type == TransactionType.LOAN_DISBURSEMENT }
-            HistoryFilter.PAYMENTS -> txs.filter { it.type == TransactionType.LOAN_PAYMENT }
-            HistoryFilter.CASH_IN  -> txs.filter { it.type == TransactionType.CASH_IN }
+            HistoryFilter.ALL        -> txs
+            HistoryFilter.TYPE       -> txs
+            HistoryFilter.BALANCE    -> txs.filter { it.type == TransactionType.LOAN_DISBURSEMENT }
+            HistoryFilter.PAID_BILLS -> txs.filter { it.type == TransactionType.LOAN_PAYMENT }
+            HistoryFilter.ADDED      -> txs.filter { it.type == TransactionType.CASH_IN }
         }
         if (query.isNotBlank()) {
             result = result.filter {
                 it.title.contains(query, ignoreCase = true) ||
-                    it.description.contains(query, ignoreCase = true)
+                        it.description.contains(query, ignoreCase = true)
             }
         }
         return result
@@ -114,8 +119,12 @@ class HistoryViewModel @Inject constructor(
                 .getOrDefault(false)
         }
         return buildList {
-            if (todayTxs.isNotEmpty()) add(HistorySection("Today", todayTxs))
-            if (olderTxs.isNotEmpty()) add(HistorySection("Older", olderTxs))
+            if (todayTxs.isNotEmpty()) {
+                add(HistorySection(context.getString(R.string.history_section_today), todayTxs))
+            }
+            if (olderTxs.isNotEmpty()) {
+                add(HistorySection(context.getString(R.string.history_section_recent_loans), olderTxs))
+            }
         }
     }
 }

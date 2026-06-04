@@ -139,7 +139,12 @@ fun MainNavHost(
                 monthlyFee = monthlyFee,
                 interest = interest,
                 installments = installments,
-                onDone = { navController.popBackStack(Routes.LOAN, inclusive = false) },
+                onDone = {
+                    navController.navigate(Routes.HOME) {
+                        // Esto limpia todo el flujo de Cash-In o préstamos acumulado en la pila
+                        popUpTo(Routes.HOME) { inclusive = true }
+                    }
+                },
             )
         }
         composable(Routes.LOAN_INFO) {
@@ -243,7 +248,7 @@ fun MainNavHost(
                 onBack = { navController.popBackStack() },
                 onSaved = {
                     navController.navigate(Routes.DONE_PAGE) {
-                        popUpTo(Routes.EDIT_PROFILE) { inclusive = true }
+                        popUpTo(Routes.DONE_PAGE) { inclusive = true }
                     }
                 },
             )
