@@ -109,6 +109,10 @@ fun HistoryScreen(onTxClick: (String) -> Unit) {
                         modifier = Modifier.padding(vertical = Spacing.xs),
                     )
                 }
+                // Divisor de extremo a extremo, separa los filtros del listado.
+                item {
+                    HorizontalDivider(color = BorderNeutral)
+                }
                 if (s.sections.isEmpty()) {
                     item {
                         EmptyState(
@@ -121,14 +125,21 @@ fun HistoryScreen(onTxClick: (String) -> Unit) {
                 } else {
                     s.sections.forEach { section ->
                         item {
-                            Text(
-                                text = section.header,
-                                style = CaptionMedium,
-                                color = ContentTertiary,
-                                modifier = Modifier
-                                    .padding(horizontal = Spacing.md)
-                                    .padding(top = Spacing.md, bottom = Spacing.xs),
-                            )
+                            Column {
+                                Text(
+                                    text = section.header,
+                                    style = CaptionMedium,
+                                    color = ContentTertiary,
+                                    modifier = Modifier
+                                        .padding(horizontal = Spacing.md)
+                                        .padding(top = Spacing.md, bottom = Spacing.xs),
+                                )
+                                // Divisor del header, con margen a los bordes de la pantalla.
+                                HorizontalDivider(
+                                    color = BorderNeutral,
+                                    modifier = Modifier.padding(horizontal = Spacing.md),
+                                )
+                            }
                         }
                         items(section.transactions, key = { it.id }) { tx ->
                             HistoryTransactionRow(
@@ -193,10 +204,11 @@ private fun FilterChipsRow(
     modifier: Modifier = Modifier,
 ) {
     val chips = listOf(
-        HistoryFilter.ALL      to stringResource(R.string.history_filter_all),
-        HistoryFilter.LOANS    to stringResource(R.string.history_filter_loans),
-        HistoryFilter.PAYMENTS to stringResource(R.string.history_filter_payments),
-        HistoryFilter.CASH_IN  to stringResource(R.string.history_filter_cash_in),
+        HistoryFilter.ALL        to stringResource(R.string.history_filter_all),
+        HistoryFilter.TYPE       to stringResource(R.string.history_filter_type),
+        HistoryFilter.BALANCE    to stringResource(R.string.history_filter_balance),
+        HistoryFilter.PAID_BILLS to stringResource(R.string.history_filter_paid_bills),
+        HistoryFilter.ADDED      to stringResource(R.string.history_filter_added),
     )
     LazyRow(
         modifier = modifier,
@@ -243,14 +255,9 @@ private fun Transaction.toDisplayTime(): String = runCatching {
         .format(DateTimeFormatter.ofPattern("HH:mm"))
 }.getOrDefault("")
 
-/** Acción, sin el comercio: "Loan Payment". */
 private fun Transaction.toDisplayTitle(): String = title.substringBefore("—").trim()
 
-/** Comercio, después del guión: "Nike Inc." ("" si no hay). */
 private fun Transaction.toDisplayCompany(): String = title.substringAfter("—", "").trim()
 
-/**
- * Monto fiel al Figma: sin signo (la dirección la indica el ícono),
- * con separador de miles y moneda. Ej: "1,000 PHP".
- */
+
 private fun Transaction.toDisplayAmount(): String = "%,.0f %s".format(abs(amount), currency)
